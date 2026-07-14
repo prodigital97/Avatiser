@@ -25,11 +25,9 @@
 </script>
 <style>
 /* ============================================================
-   FONTS — self-hosted variable fonts (no external requests).
-   Drop the brand OTF at assets/JayaGiriSans.otf and every
-   display headline upgrades to it automatically.
+   FONTS — self-hosted (no external requests).
    ============================================================ */
-@font-face { font-family:'JA Jayagiri Sans'; src:url('assets/JayaGiriSans.otf') format('opentype'); font-weight:100 900; font-display:swap; }
+@font-face { font-family:'JA Jayagiri Sans'; src:url('assets/fonts/JayaGiriSans.woff2') format('woff2'), url('assets/JayaGiriSans.otf') format('opentype'); font-weight:100 900; font-display:swap; }
 @font-face { font-family:'Archivo'; src:url('assets/fonts/Archivo-Variable.woff2') format('woff2'); font-weight:100 900; font-display:swap; }
 @font-face { font-family:'DM Sans'; src:url('assets/fonts/DMSans-Variable.woff2') format('woff2'); font-weight:100 1000; font-display:swap; }
 
@@ -144,9 +142,11 @@ section { scroll-margin-top:84px; }
 .hero-atmos::after { width:58vw; height:58vw; bottom:-18%; right:-12%; background:radial-gradient(circle, rgba(32,32,32,.6) 0%, rgba(16,16,16,.2) 42%, transparent 66%); animation:drift2 32s ease-in-out infinite; }
 @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(8%,6%) scale(1.08)} }
 @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-7%,-5%) scale(1.1)} }
-.hero-media { position:absolute; inset:0; }
-.hero-media video { width:100%; height:100%; object-fit:cover; opacity:0; filter:grayscale(.5) contrast(1.05); transition:opacity 1.4s ease; }
-.hero.has-media .hero-media video { opacity:.15; }
+.hero-media { position:absolute; inset:0; background:var(--black); }
+.hero-bg-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; filter:grayscale(.6) contrast(1.1) brightness(.62); transform:scale(1); transition:opacity 2.2s ease; will-change:opacity,transform; }
+.hero-bg-video.active { opacity:.34; animation:heroDrift 9s ease-in-out infinite alternate; }
+@keyframes heroDrift { from{transform:scale(1)} to{transform:scale(1.07)} }
+@media (prefers-reduced-motion: reduce) { .hero-bg-video { display:none; } }
 .hero-grid { position:absolute; inset:0; pointer-events:none; opacity:.55; background-image:linear-gradient(rgba(184,184,184,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(184,184,184,.028) 1px,transparent 1px); background-size:84px 84px; -webkit-mask-image:radial-gradient(ellipse at center,#000 26%,transparent 72%); mask-image:radial-gradient(ellipse at center,#000 26%,transparent 72%); }
 .hero-veil { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 55%, transparent 15%, rgba(8,8,8,.9) 88%), linear-gradient(to bottom, rgba(8,8,8,.75), transparent 30%), linear-gradient(to top, var(--black) 4%, transparent 38%); }
 .hero-inner { position:relative; z-index:2; max-width:980px; display:flex; flex-direction:column; align-items:center; }
@@ -507,7 +507,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:76
   <!-- ══════════════ HERO ══════════════ -->
   <header class="hero" id="hero">
     <div class="hero-atmos" aria-hidden="true"></div>
-    <div class="hero-media" aria-hidden="true"><video id="heroVideo" data-video="assets/videos/clip7.mp4" muted loop playsinline preload="none"></video></div>
+    <div class="hero-media" id="heroMedia" aria-hidden="true"></div>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-inner">
@@ -1047,13 +1047,52 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
     setTimeout(function () { strip.classList.remove('dragging'); }, 30);
   });
 
-  /* Hero background video — same graceful upgrade */
-  var hv = $('#heroVideo');
-  hv.src = hv.getAttribute('data-video');
-  hv.addEventListener('loadeddata', function () {
-    $('#hero').classList.add('has-media');
-    var p = hv.play(); if (p) p.catch(function () {});
+})();
+
+/* ── HERO MOTION — cycling multi-video ambient background ─── */
+
+(function heroMotion() {
+  if (reduceMotion) return; /* CSS already hides .hero-bg-video for reduced motion */
+  var HERO_CLIPS = ['assets/videos/clip2.mp4', 'assets/videos/clip8.mp4', 'assets/videos/clip5.mp4', 'assets/videos/clip7.mp4'];
+  var mount = $('#heroMedia');
+  var vids = HERO_CLIPS.map(function () {
+    var v = document.createElement('video');
+    v.className = 'hero-bg-video'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
+    mount.appendChild(v);
+    return v;
   });
+  var idx = 0, cycling = true;
+
+  var load = function (v, src) { if (!v.src) v.src = src; };
+  var activate = function (i) {
+    vids.forEach(function (v, vi) {
+      if (vi === i) {
+        load(v, HERO_CLIPS[vi]);
+        v.classList.add('active');
+        var p = v.play(); if (p) p.catch(function () {});
+      } else {
+        v.classList.remove('active');
+      }
+    });
+    /* preload the next clip just ahead of its turn so the crossfade doesn't stutter */
+    var nxt = (i + 1) % vids.length;
+    load(vids[nxt], HERO_CLIPS[nxt]);
+  };
+
+  activate(0);
+  var iv = setInterval(function () { idx = (idx + 1) % vids.length; activate(idx); }, 7000);
+
+  /* Pause everything off-screen to save battery/bandwidth once visitors scroll past the hero */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) {
+        if (!cycling) { cycling = true; activate(idx); }
+      } else if (cycling) {
+        cycling = false; vids.forEach(function (v) { v.pause(); });
+      }
+    });
+  }, { threshold: 0 });
+  io.observe($('#hero'));
 })();
 
 /* ── SERVICES ─────────────────────────────────────────────── */
