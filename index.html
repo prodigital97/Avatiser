@@ -96,6 +96,9 @@ section { scroll-margin-top:84px; }
 .wordmark { font-family:var(--display); font-weight:900; letter-spacing:-.04em; color:var(--white2); text-decoration:none; line-height:1; }
 .wordmark i { font-style:normal; color:var(--silver); }
 .nav .wordmark { font-size:24px; }
+.logo-link { display:inline-flex; text-decoration:none; }
+.logo-img { display:block; width:auto; }
+.nav .logo-img { height:36px; }
 .nav-right { display:flex; align-items:center; gap:20px; }
 .nav-cta { font-family:var(--display); font-size:13px; font-weight:800; letter-spacing:.02em; color:var(--black); background:var(--white2); border:none; padding:11px 24px; border-radius:100px; transition:background .25s; }
 .nav-cta:hover { background:var(--silver2); }
@@ -421,6 +424,7 @@ section { padding:clamp(72px,9vw,120px) var(--pad); position:relative; }
 footer { background:var(--black); border-top:1px solid var(--border); padding:76px var(--pad) 34px; overflow:hidden; }
 .foot-cols { display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:48px; margin-bottom:72px; }
 .foot-brand .wordmark { font-size:34px; }
+.foot-brand .logo-img { height:52px; }
 .foot-tagline { font-size:13px; color:var(--muted2); line-height:1.7; max-width:250px; margin-top:16px; }
 .foot-col-title { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted2); margin-bottom:20px; }
 .foot-links { list-style:none; display:flex; flex-direction:column; gap:12px; }
@@ -475,7 +479,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:76
 
 <!-- NAV -->
 <nav class="nav" id="nav" aria-label="Main">
-  <a class="wordmark" href="#top">avatiser<i>.</i></a>
+  <a class="logo-link" href="#top" aria-label="avatiser. studios — home"><img class="logo-img" src="assets/logo.png" alt="avatiser. studios" width="2400" height="746"></a>
   <div class="nav-right">
     <a class="nav-cta" href="#start" data-hover>get free samples</a>
     <button class="menu-btn" id="menuBtn" data-hover aria-label="Open menu" aria-expanded="false">
@@ -765,7 +769,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:76
 <footer>
   <div class="foot-cols">
     <div class="foot-brand">
-      <a class="wordmark" href="#top">avatiser<i>.</i></a>
+      <a class="logo-link" href="#top" aria-label="avatiser. studios — home"><img class="logo-img" src="assets/logo.png" alt="avatiser. studios" width="2400" height="746"></a>
       <p class="foot-tagline">The AI-powered creative studio for brands that move fast. Campaign-grade content, delivered worldwide.</p>
       <div class="foot-status"><i></i>worldwide · always on</div>
     </div>
