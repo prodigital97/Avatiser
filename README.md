@@ -54,13 +54,26 @@ titles, categories or formats.
 
 ### Hero motion background
 
-The hero cycles through four of your production clips (`clip2`, `clip8`,
-`clip5`, `clip7` — the widescreen ones) as a dark, desaturated, slow-panning
-backdrop, crossfading every 7 seconds — one clip visible at a time, next one
-preloading just ahead of its turn. It pauses automatically once the hero
-scrolls out of view, and is disabled entirely under
-`prefers-reduced-motion: reduce`. Change the `HERO_CLIPS` array in the
-`heroMotion()` function in `index.html` to pick different clips.
+The hero cycles through production clips (see the `HERO_CLIPS` array in the
+`heroMotion()` function) as a dark, desaturated, slow-panning backdrop,
+crossfading every 7 seconds — one clip visible at a time, next one preloading
+just ahead of its turn. Clips that fail to load are skipped automatically, so
+the list can safely reference files that haven't been uploaded yet. It pauses
+once the hero scrolls out of view, and is disabled entirely under
+`prefers-reduced-motion: reduce`.
+
+### Keeping new clips small
+
+Re-encode anything big before committing (GitHub's web upload cap is 25 MB,
+and visitors shouldn't download more than a few MB of video anyway):
+
+```
+ffmpeg -i input.mp4 -vf "scale=720:-2" -c:v libx264 -crf 26 -preset slow \
+       -pix_fmt yuv420p -movflags +faststart -an output.mp4
+```
+
+Use `scale=1280:-2` for 16:9 landscape clips. This typically lands 8–15s
+clips at 1–2 MB with no visible quality loss at site display sizes.
 
 ## Wiring the lead form
 

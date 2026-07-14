@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>avatiser. studios — The AI-Powered Creative Studio</title>
-<meta name="description" content="Avatiser is an AI-powered creative studio producing campaign-grade films, product photography and social content for brands worldwide — delivered in 48–72 hours, at a fraction of production cost.">
+<meta name="description" content="avatiser. studios is an AI-powered creative studio producing campaign-grade films, product photography and social content for brands worldwide — delivered in 48–72 hours, at a fraction of production cost.">
 <meta property="og:title" content="avatiser. studios — The AI-Powered Creative Studio">
 <meta property="og:description" content="Campaign-grade films, product visuals and social content, produced with AI and directed by humans. Get 3 free visuals made for your brand.">
 <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Avatiser Studios",
+  "name": "avatiser. studios",
   "url": "https://avatiser.com",
   "email": "hello@avatiser.com",
   "description": "AI-powered creative studio producing campaign-grade films, product photography and social content for brands worldwide.",
@@ -156,11 +156,14 @@ section { scroll-margin-top:84px; }
 .hero-eyebrow { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--border2); border-radius:100px; padding:8px 18px; font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--silver); margin-bottom:36px; background:rgba(8,8,8,.5); }
 .hero-eyebrow i { width:6px; height:6px; border-radius:50%; background:var(--live); animation:pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
-.hero-h1 { font-family:var(--display); font-size:clamp(46px,8.4vw,116px); font-weight:900; color:var(--white2); line-height:.98; letter-spacing:-.03em; margin-bottom:28px; }
-.hero-h1 em { font-style:normal; background:linear-gradient(180deg,#FFF,#8F8F8F); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-.hh-mask { display:block; overflow:hidden; padding-bottom:.08em; margin-bottom:-.08em; }
-.hh-word { display:inline-block; transform:translateY(112%); transition:transform 1.1s var(--ease); }
-body.loaded .hh-word { transform:none; }
+.hero-h1 { font-family:var(--display); font-size:clamp(44px,8vw,110px); font-weight:900; color:var(--white2); line-height:1.14; letter-spacing:-.03em; margin-bottom:28px; }
+.ht-line { display:block; position:relative; }
+.ht-ghost { visibility:hidden; } /* reserves the final line box so typing never shifts layout */
+.ht-typed { position:absolute; inset:0; } /* wraps exactly like its ghost, so typing never overflows on small screens */
+.ht-typed.grad { background:linear-gradient(180deg,#FFF,#8F8F8F); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.ht-caret { display:inline-block; width:.055em; height:.74em; background:var(--silver2); margin-left:.06em; transform:translateY(.06em); animation:caretBlink 1.05s steps(1) infinite; }
+@keyframes caretBlink { 0%,60%{opacity:1} 61%,100%{opacity:0} }
+.ht-caret.done { animation:none; opacity:0; transition:opacity .9s ease; }
 .hero-sub { font-size:clamp(16px,1.6vw,19px); font-weight:300; color:#909090; max-width:600px; line-height:1.7; margin-bottom:40px; }
 .hero-sub strong { color:var(--white); font-weight:500; }
 .hero-actions { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
@@ -516,11 +519,11 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:76
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow"><i></i>ai creative studio — now onboarding brands worldwide</div>
-      <h1 class="hero-h1">
-        <span class="hh-mask"><span class="hh-word" style="transition-delay:.05s">the photoshoot</span></span>
-        <span class="hh-mask"><span class="hh-word" style="transition-delay:.16s"><em>is over.</em></span></span>
+      <h1 class="hero-h1" aria-label="the photoshoot is over.">
+        <span class="ht-line"><span class="ht-ghost" aria-hidden="true">the photoshoot</span><span class="ht-typed" id="htTyped1" aria-hidden="true"></span></span>
+        <span class="ht-line"><span class="ht-ghost" aria-hidden="true">is over.</span><span class="ht-typed grad" id="htTyped2" aria-hidden="true"></span></span>
       </h1>
-      <p class="hero-sub">Avatiser produces <strong>campaign-grade films, product visuals and social content</strong> with AI — directed by humans, delivered in days, at a fraction of production cost.</p>
+      <p class="hero-sub">avatiser produces <strong>campaign-grade films, product visuals and social content</strong> with AI — directed by humans, delivered in days, at a fraction of production cost.</p>
       <div class="hero-actions">
         <a class="btn-primary xl" href="#start" data-hover>get 3 free visuals →</a>
         <a class="btn-ghost xl" href="#work" data-hover>see the work</a>
@@ -544,7 +547,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:76
   <!-- ══════════════ MANIFESTO ══════════════ -->
   <section class="manifesto" id="studio" aria-label="Manifesto">
     <div class="sec-label"><i></i><span>the studio</span></div>
-    <p class="manifesto-text" id="manifestoText" data-text="Extraordinary content used to demand extraordinary budgets. We ended that. Avatiser pairs editorial direction with generative AI to craft visuals that read as premium — shot nowhere, seen everywhere."></p>
+    <p class="manifesto-text" id="manifestoText" data-text="Extraordinary content used to demand extraordinary budgets. We ended that. avatiser pairs editorial direction with generative AI to craft visuals that read as premium — shot nowhere, seen everywhere."></p>
     <div class="manifesto-foot">
       <span>avatiser. studios</span>
       <span>operating worldwide</span>
@@ -831,10 +834,10 @@ var FORM_ENDPOINT = '';
 var TICKER_ITEMS = ['brand films', 'product photography', 'ai models & ugc', 'social content', 'packaging & key visuals', 'reels & ads'];
 
 var PRODUCTIONS = [
-  { n:'01', cat:'Beauty',          title:'Velvet Noir — Fragrance Film',   fmt:'9:16',  wide:false, ph1:'#232020', ph2:'#120F0F', phx:'26%', clip:'assets/videos/clip1.mp4', poster:'assets/videos/poster1.jpg' },
-  { n:'02', cat:'Automotive',      title:'Midnight Drive — Brand Film',    fmt:'16:9',  wide:true,  ph1:'#1B1E22', ph2:'#0E1013', phx:'70%', clip:'assets/videos/clip2.mp4', poster:'assets/videos/poster2.jpg' },
+  { n:'01', cat:'Beauty',          title:'Haircare — UGC Reel',            fmt:'9:16',  wide:false, ph1:'#232020', ph2:'#120F0F', phx:'26%', clip:'assets/videos/clip1.mp4', poster:'assets/videos/poster1.jpg' },
+  { n:'02', cat:'Beauty',          title:'Eyeliner — Product Film',        fmt:'16:9',  wide:true,  ph1:'#1B1E22', ph2:'#0E1013', phx:'70%', clip:'assets/videos/clip2.mp4', poster:'assets/videos/poster2.jpg' },
   { n:'03', cat:'Fashion',         title:'Atelier SS26 — Campaign',        fmt:'9:16',  wide:false, ph1:'#221E19', ph2:'#121009', phx:'40%', clip:'assets/videos/clip3.mp4', poster:'assets/videos/poster3.jpg' },
-  { n:'04', cat:'Product',         title:'Chrome Audio — Hero Reel',       fmt:'9:16',  wide:false, ph1:'#1D2321', ph2:'#0E1211', phx:'62%', clip:'assets/videos/clip4.mp4', poster:'assets/videos/poster4.jpg' },
+  { n:'04', cat:'Product',         title:'Hair Dryer — Hero Reel',         fmt:'9:16',  wide:false, ph1:'#1D2321', ph2:'#0E1211', phx:'62%', clip:'assets/videos/clip4.mp4', poster:'assets/videos/poster4.jpg' },
   { n:'05', cat:'Food & Beverage', title:'Slow Pour — Product Film',       fmt:'16:9',  wide:true,  ph1:'#242119', ph2:'#13110C', phx:'32%', clip:'assets/videos/clip5.mp4', poster:'assets/videos/poster5.jpg' },
   { n:'06', cat:'Beauty',          title:'Skin in Macro — Texture Study',  fmt:'9:16',  wide:false, ph1:'#20191E', ph2:'#100C0F', phx:'52%', clip:'assets/videos/clip6.mp4', poster:'assets/videos/poster6.jpg' },
   { n:'07', cat:'Tech',            title:'Foldable — Launch Teaser',       fmt:'9:16',  wide:false, ph1:'#191E24', ph2:'#0C0F13', phx:'48%', clip:'assets/videos/clip7.mp4', poster:'assets/videos/poster7.jpg' },
@@ -868,7 +871,7 @@ var PROCESS = [
 
 var QUOTES = [
   { q:'We replaced our entire quarterly shoot schedule. Same quality, ten times faster — and engagement is up 40%.', n:'Maya Rosen', c:'Founder, LUMÉ Boutique — Los Angeles' },
-  { q:'Avatiser delivered a full brand campaign in five days. Our old agency quoted six weeks.', n:'Daniel Okafor', c:'Marketing Director, Arbor & Oak — London' },
+  { q:'avatiser delivered a full brand campaign in five days. Our old agency quoted six weeks.', n:'Daniel Okafor', c:'Marketing Director, Arbor & Oak — London' },
   { q:'It doesn’t look AI-generated. It just looks expensive.', n:'Sophia Chen', c:'Brand Manager, Vessel Studios — New York' },
   { q:'The free sample pack sold us in 48 hours. Twelve campaigns later, they’re simply our studio.', n:'Elena Marchetti', c:'CMO, Solstice Skincare — Milan' }
 ];
@@ -893,6 +896,7 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
     el.classList.add('leave');
     document.body.classList.remove('locked');
     document.body.classList.add('loaded');
+    document.dispatchEvent(new CustomEvent('site:loaded'));
     setTimeout(function () { el.remove(); }, 1000);
   };
   if (reduceMotion) { done(); return; }
@@ -902,6 +906,37 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
     bar.style.width = p + '%';
     if (p >= 100) { clearInterval(iv); setTimeout(done, 220); }
   }, 90);
+})();
+
+/* ── HERO TYPEWRITER ──────────────────────────────────────── */
+
+(function heroTypewriter() {
+  var l1 = $('#htTyped1'), l2 = $('#htTyped2');
+  var t1 = 'the photoshoot', t2 = 'is over.';
+  if (reduceMotion) { l1.textContent = t1; l2.textContent = t2; return; }
+  var caret = document.createElement('span');
+  caret.className = 'ht-caret';
+  var started = false;
+  var start = function () {
+    if (started) return;
+    started = true;
+    l1.appendChild(caret);
+    var i = 0, j = -1;
+    var iv = setInterval(function () {
+      if (i < t1.length) {
+        l1.insertBefore(document.createTextNode(t1[i++]), caret);
+      } else if (j < 0) {
+        l2.appendChild(caret); j = 0;      /* caret hops to line two */
+      } else if (j < t2.length) {
+        l2.insertBefore(document.createTextNode(t2[j++]), caret);
+      } else {
+        clearInterval(iv);
+        setTimeout(function () { caret.classList.add('done'); }, 2200);
+      }
+    }, 68);
+  };
+  document.addEventListener('site:loaded', start);
+  if (document.body.classList.contains('loaded')) start();
 })();
 
 /* ── CUSTOM CURSOR ────────────────────────────────────────── */
@@ -1057,18 +1092,30 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
 
 (function heroMotion() {
   if (reduceMotion) return; /* CSS already hides .hero-bg-video for reduced motion */
-  var HERO_CLIPS = ['assets/videos/clip2.mp4', 'assets/videos/clip8.mp4', 'assets/videos/clip5.mp4', 'assets/videos/clip7.mp4'];
+  var HERO_CLIPS = ['assets/videos/clip2.mp4', 'assets/videos/clip4.mp4', 'assets/videos/clip1.mp4'];
   var mount = $('#heroMedia');
-  var vids = HERO_CLIPS.map(function () {
+  var dead = [];
+  var vids = HERO_CLIPS.map(function (_, i) {
     var v = document.createElement('video');
     v.className = 'hero-bg-video'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
+    v.addEventListener('error', function () { dead[i] = true; v.classList.remove('active'); });
     mount.appendChild(v);
     return v;
   });
   var idx = 0, cycling = true;
 
   var load = function (v, src) { if (!v.src) v.src = src; };
-  var activate = function (i) {
+  var nextAlive = function (from) {
+    for (var k = 0; k < vids.length; k++) {
+      var i = (from + k) % vids.length;
+      if (!dead[i]) return i;
+    }
+    return -1; /* nothing playable — atmos gradient carries the hero */
+  };
+  var activate = function (want) {
+    var i = nextAlive(want);
+    if (i < 0) return;
+    idx = i;
     vids.forEach(function (v, vi) {
       if (vi === i) {
         load(v, HERO_CLIPS[vi]);
@@ -1079,12 +1126,12 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
       }
     });
     /* preload the next clip just ahead of its turn so the crossfade doesn't stutter */
-    var nxt = (i + 1) % vids.length;
-    load(vids[nxt], HERO_CLIPS[nxt]);
+    var nxt = nextAlive(i + 1);
+    if (nxt >= 0) load(vids[nxt], HERO_CLIPS[nxt]);
   };
 
   activate(0);
-  var iv = setInterval(function () { idx = (idx + 1) % vids.length; activate(idx); }, 7000);
+  var iv = setInterval(function () { activate(idx + 1); }, 7000);
 
   /* Pause everything off-screen to save battery/bandwidth once visitors scroll past the hero */
   var io = new IntersectionObserver(function (entries) {
