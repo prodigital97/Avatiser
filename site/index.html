@@ -250,6 +250,9 @@ section { padding:clamp(72px,9vw,120px) var(--pad); position:relative; }
 .vc-meta { position:absolute; bottom:14px; left:16px; right:16px; z-index:3; }
 .vc-cat { font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--silver); margin-bottom:4px; }
 .vc-title { font-family:var(--display); font-size:14px; font-weight:700; color:var(--white2); }
+.vc-view { font-size:10px; font-weight:600; letter-spacing:.08em; color:var(--silver); opacity:0; transition:opacity .3s; margin-left:6px; }
+.vcard.linked:hover .vc-view { opacity:1; }
+.vcard.linked { cursor:pointer; }
 .vstrip-hint { margin:20px var(--pad) 0; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted2); }
 .showcase-cta { text-align:center; margin-top:46px; padding:0 var(--pad); }
 @media (max-width:768px) { .vcard { height:min(56vh,420px); } }
@@ -575,7 +578,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:76
       <div class="vstrip-track" id="vstripTrack"></div>
     </div>
     <div class="vstrip-hint rv">drag to explore ——</div>
-    <div class="showcase-cta rv"><a class="btn-primary xl" href="#start" data-hover>i want this for my brand →</a></div>
+    <div class="showcase-cta rv" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a class="btn-primary xl" href="#start" data-hover>i want this for my brand →</a><a class="btn-ghost xl" href="work/" data-hover>browse case studies</a></div>
   </section>
 
   <!-- ══════════════ COMPARE ══════════════ -->
@@ -841,10 +844,10 @@ var FORM_ENDPOINT = '';
 var TICKER_ITEMS = ['brand films', 'product photography', 'ai models & ugc', 'social content', 'packaging & key visuals', 'reels & ads'];
 
 var PRODUCTIONS = [
-  { n:'01', cat:'Beauty',          title:'Haircare — UGC Reel',            fmt:'9:16',  wide:false, ph1:'#232020', ph2:'#120F0F', phx:'26%', clip:'assets/videos/clip1.mp4', poster:'assets/videos/poster1.jpg' },
-  { n:'02', cat:'Beauty',          title:'Eyeliner — Product Film',        fmt:'16:9',  wide:true,  ph1:'#1B1E22', ph2:'#0E1013', phx:'70%', clip:'assets/videos/clip2.mp4', poster:'assets/videos/poster2.jpg' },
+  { n:'01', cat:'Beauty',          title:'Haircare — UGC Reel',            fmt:'9:16',  wide:false, ph1:'#232020', ph2:'#120F0F', phx:'26%', clip:'assets/videos/clip1.mp4', poster:'assets/videos/poster1.jpg', link:'work/haircare-ugc/' },
+  { n:'02', cat:'Beauty',          title:'Eyeliner — Product Film',        fmt:'16:9',  wide:true,  ph1:'#1B1E22', ph2:'#0E1013', phx:'70%', clip:'assets/videos/clip2.mp4', poster:'assets/videos/poster2.jpg', link:'work/eyeliner-film/' },
   { n:'03', cat:'Fashion',         title:'Atelier SS26 — Campaign',        fmt:'9:16',  wide:false, ph1:'#221E19', ph2:'#121009', phx:'40%', clip:'assets/videos/clip3.mp4', poster:'assets/videos/poster3.jpg' },
-  { n:'04', cat:'Product',         title:'Hair Dryer — Hero Reel',         fmt:'9:16',  wide:false, ph1:'#1D2321', ph2:'#0E1211', phx:'62%', clip:'assets/videos/clip4.mp4', poster:'assets/videos/poster4.jpg' },
+  { n:'04', cat:'Product',         title:'Hair Dryer — Hero Reel',         fmt:'9:16',  wide:false, ph1:'#1D2321', ph2:'#0E1211', phx:'62%', clip:'assets/videos/clip4.mp4', poster:'assets/videos/poster4.jpg', link:'work/dryer-hero/' },
   { n:'05', cat:'Food & Beverage', title:'Slow Pour — Product Film',       fmt:'16:9',  wide:true,  ph1:'#242119', ph2:'#13110C', phx:'32%', clip:'assets/videos/clip5.mp4', poster:'assets/videos/poster5.jpg' },
   { n:'06', cat:'Beauty',          title:'Skin in Macro — Texture Study',  fmt:'9:16',  wide:false, ph1:'#20191E', ph2:'#100C0F', phx:'52%', clip:'assets/videos/clip6.mp4', poster:'assets/videos/poster6.jpg' },
   { n:'07', cat:'Tech',            title:'Foldable — Launch Teaser',       fmt:'9:16',  wide:false, ph1:'#191E24', ph2:'#0C0F13', phx:'48%', clip:'assets/videos/clip7.mp4', poster:'assets/videos/poster7.jpg' },
@@ -1049,12 +1052,12 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
 (function showcase() {
   var track = $('#vstripTrack');
   track.innerHTML = PRODUCTIONS.map(function (p) {
-    return '<figure class="vcard ' + (p.wide ? 'landscape' : 'portrait') + '" data-video="' + p.clip + '" data-poster="' + p.poster + '">' +
+    return '<figure class="vcard ' + (p.wide ? 'landscape' : 'portrait') + (p.link ? ' linked" data-hover data-link="' + p.link : '') + '" data-video="' + p.clip + '" data-poster="' + p.poster + '">' +
       '<div class="vc-ph" style="--ph1:' + p.ph1 + ';--ph2:' + p.ph2 + ';--phx:' + p.phx + '"><span class="vc-num">' + p.n + '</span></div>' +
       '<video muted loop playsinline preload="none"></video>' +
       '<div class="vc-shade"></div>' +
       '<span class="vc-badge">' + p.fmt + '</span>' +
-      '<figcaption class="vc-meta"><div class="vc-cat">' + p.cat + '</div><div class="vc-title">' + p.title + '</div></figcaption>' +
+      '<figcaption class="vc-meta"><div class="vc-cat">' + p.cat + '</div><div class="vc-title">' + p.title + (p.link ? ' <span class="vc-view">view case →</span>' : '') + '</div></figcaption>' +
       '</figure>';
   }).join('');
 
@@ -1091,6 +1094,14 @@ var NEEDS  = ['Social media content','Video & reels','Product photography','Bran
   window.addEventListener('pointerup', function () {
     down = false;
     setTimeout(function () { strip.classList.remove('dragging'); }, 30);
+  });
+
+  /* click-through to case studies (ignored when the pointer was dragging) */
+  $$('.vcard.linked', track).forEach(function (card) {
+    card.addEventListener('click', function () {
+      if (moved) return;
+      window.location.href = card.getAttribute('data-link');
+    });
   });
 
 })();

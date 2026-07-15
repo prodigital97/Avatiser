@@ -1,0 +1,44 @@
+{
+  "_howto": "One entry per brand/product. Drop assets in site/assets/work/<slug>/ (or reuse existing paths), add the entry here, then run: node dashboard/build-work.js — it generates site/work/<slug>/index.html and refreshes site/work/index.html. media[].type is 'video' or 'image'; media[].tag is the content-type label shown on the item (hero shot, ugc reel, macro, packaging...). cover = src of the media item used on the index card.",
+  "brands": [
+    {
+      "slug": "haircare-ugc",
+      "name": "haircare — ugc campaign",
+      "industry": "beauty & personal care",
+      "blurb": "creator-style content for a haircare brand — an AI presenter in a real living room, zero casting calls, zero shoot days.",
+      "deliverables": ["ugc-style reel", "avatar presenter", "9:16 social cut"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip1.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip1.mp4", "poster": "/assets/videos/poster1.jpg", "tag": "ugc reel · 9:16" },
+        { "type": "image", "src": "/assets/videos/poster1.jpg", "tag": "frame still" }
+      ]
+    },
+    {
+      "slug": "eyeliner-film",
+      "name": "eyeliner — product film",
+      "industry": "beauty & cosmetics",
+      "blurb": "a macro product film for a precision eyeliner — penthouse light, skyline backdrop, editorial pacing. built for feed, web and retail screens.",
+      "deliverables": ["product film", "16:9 hero cut", "macro detail pass"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip2.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip2.mp4", "poster": "/assets/videos/poster2.jpg", "tag": "product film · 16:9" },
+        { "type": "image", "src": "/assets/videos/poster2.jpg", "tag": "frame still" }
+      ]
+    },
+    {
+      "slug": "dryer-hero",
+      "name": "hair dryer — hero reel",
+      "industry": "consumer tech",
+      "blurb": "an x-ray hero reel for a performance hair dryer — the motor rendered mid-flight, copper coils and airflow visible. a shot no camera could take.",
+      "deliverables": ["hero reel", "9:16 launch teaser", "engineering x-ray look"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip4.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip4.mp4", "poster": "/assets/videos/poster4.jpg", "tag": "hero reel · 9:16" },
+        { "type": "image", "src": "/assets/videos/poster4.jpg", "tag": "frame still" }
+      ]
+    }
+  ]
+}
