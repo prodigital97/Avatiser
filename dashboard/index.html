@@ -251,27 +251,29 @@ const DATA = {
   ],
 
   mainQuests: [
-    { t:"<b>Flip GitHub Pages source</b>", d:"repo Settings → Pages → Source: GitHub Actions (30 sec)", xp:150 },
-    { t:"<b>Add DNS records</b> at your registrar", d:"4× A records + www CNAME → avatiser.com goes live", xp:150 },
-    { t:"<b>Wire the lead form</b>", d:"create free Brevo account, send Claude the key — leads start flowing", xp:200 }
+    { t:"<b>Wire the lead form</b>", d:"create free Brevo account, send Claude the key — leads start flowing + recruits kai", xp:200 },
+    { t:"<b>Install analytics</b>", d:"create free GoatCounter account, send Claude the code — visits tile comes alive", xp:100 },
+    { t:"<b>Connect socials via Upload-Post</b>", d:"IG business + LinkedIn page → MCP connector → rhea fully recruited", xp:150 },
+    { t:"<b>Tick “Enforce HTTPS”</b>", d:"repo Settings → Pages, once the checkbox un-greys", xp:50 }
   ],
 
   checklist: [
     { t:"website built & verified (desktop + mobile)", s:"done", xp:200 },
     { t:"real brand font + logo integrated", s:"done", xp:100 },
-    { t:"portfolio clips in showcase & hero motion", d:"3 of 8 slots filled — +25 xp per clip", s:"progress", xp:120 },
+    { t:"portfolio clips in showcase & hero motion", d:"3 of 8 slots filled — founder's clips incoming, +25 xp per clip", s:"progress", xp:120 },
     { t:"deploy pipeline + SEO + OG share image", s:"done", xp:150 },
     { t:"business docs split from public site", s:"done", xp:60 },
-    { t:"github pages source setting", d:"main quest ⚔", s:"you" },
-    { t:"dns records at registrar", d:"main quest ⚔", s:"you" },
+    { t:"github pages source setting", s:"done", xp:150 },
+    { t:"dns records at registrar", d:"conflicting parking records found & removed — resolves to github", s:"done", xp:150 },
+    { t:"avatiser.com live with tls certificate", d:"confirmed rendering in a clean browser session", s:"done" },
     { t:"lead form endpoint (brevo)", d:"main quest ⚔ — recruits kai", s:"you" },
-    { t:"website analytics", d:"GoatCounter/Plausible → visits tile comes alive · +100 xp", s:"todo" },
-    { t:"social accounts + upload-post connected", d:"recruits rhea fully · +150 xp", s:"todo" },
+    { t:"website analytics", d:"main quest ⚔ — GoatCounter/Plausible", s:"you" },
+    { t:"social accounts + upload-post connected", d:"main quest ⚔ — recruits rhea fully", s:"you" },
     { t:"real testimonials on site", d:"requires first happy client · +200 xp", s:"todo" }
   ],
 
   roadmap: [
-    { name:"chapter 1 · open the doors", days:"days 1–14", pct:55, boss:"BOSS: THE LAUNCH — avatiser.com live + form capturing", goal:"site live · form wired · 5 spec packs · daily posting starts" },
+    { name:"chapter 1 · open the doors", days:"days 1–14", pct:80, boss:"BOSS: THE LAUNCH — avatiser.com live + form capturing", goal:"site live · form wired · 5 spec packs · daily posting starts" },
     { name:"chapter 2 · prove the machine", days:"days 15–45", pct:0, boss:"BOSS: FIRST BLOOD — 3 paying clients", goal:"25 packs shipped · 3 real testimonials", locked:true },
     { name:"chapter 3 · scale what worked", days:"days 46–90", pct:0, boss:"BOSS: THE MACHINE — $15–20k MRR, 8–10 clients", goal:"raise campaign floor to $1,950 · white-label talks", locked:true }
   ],
@@ -285,7 +287,7 @@ const DATA = {
     { ico:"🛰", name:"launch kit ready",  d:"deploy pipeline + SEO + share card", u:true },
     { ico:"🔐", name:"vault sealed",      d:"business docs split from public site", u:true },
     { ico:"🎮", name:"mission control",   d:"this dashboard exists", u:true },
-    { ico:"🌐", name:"we are live",       d:"avatiser.com resolves with HTTPS", u:false, xp:300 },
+    { ico:"🌐", name:"we are live",       d:"avatiser.com resolves with HTTPS", u:true, xp:300 },
     { ico:"🩸", name:"first blood",       d:"first lead captured by the form", u:false, xp:150 },
     { ico:"📦", name:"first delivery",    d:"first sample pack shipped in <48h", u:false, xp:200 },
     { ico:"🤝", name:"first client",      d:"first paying client signed", u:false, xp:500 },
@@ -328,7 +330,10 @@ const DATA = {
     { d:"jul 15", e:"launch kit shipped — deploy workflow, CNAME, OG card, SEO", xp:150 },
     { d:"jul 15", e:"brand voice + social prompt pack committed; higgsfield MCP live", xp:120 },
     { d:"jul 15", e:"vault sealed — public site split from private business docs", xp:60 },
-    { d:"jul 15", e:"mission control dashboard v1 → gamified v2", xp:100 }
+    { d:"jul 15", e:"mission control dashboard v1 → gamified v2", xp:100 },
+    { d:"jul 15", e:"⚔ main quests 1+2 down — pages source flipped, hostinger parking records purged, dns pointed at github", xp:300 },
+    { d:"jul 15", e:"🌐 AVATISER.COM IS LIVE — tls certificate issued, confirmed rendering worldwide", xp:0 },
+    { d:"jul 15", e:"live bug squashed — typewriter caret was wrapping onto a phantom line, root-caused and fixed in production", xp:40 }
   ]
 };
 /* ═══════════════════════ END OF DATA BLOCK ═══════════════════════ */
