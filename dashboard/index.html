@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>avatiser — mission control</title>
+<meta name="theme-color" content="#080808">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080808'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='40' font-weight='900' fill='%23F8F8F8' text-anchor='middle'%3Ea%3C/text%3E%3Ccircle cx='51' cy='44' r='4' fill='%23B8B8B8'/%3E%3C/svg%3E">
+<style>
+@font-face { font-family:'JA Jayagiri Sans'; src:url('../site/assets/fonts/JayaGiriSans.woff2') format('woff2'); font-weight:100 900; font-display:swap; }
+@font-face { font-family:'DM Sans'; src:url('../site/assets/fonts/DMSans-Variable.woff2') format('woff2'); font-weight:100 1000; font-display:swap; }
+
+:root {
+  --black:#080808; --black2:#0F0F0F; --black3:#161616;
+  --border:#242424; --border2:#2E2E2E;
+  --silver:#B8B8B8; --silver2:#D0D0D0; --white:#EFEFEF; --white2:#F8F8F8;
+  --muted:#6E6E6E; --muted2:#484848;
+  --good:#7CFC9B; --warn:#E8C268; --info:#8FB8E8;
+  --display:'JA Jayagiri Sans','DM Sans',sans-serif;
+  --body:'DM Sans',sans-serif;
+}
+* { margin:0; box-sizing:border-box; }
+html { background:var(--black); }
+body { background:var(--black); color:var(--silver); font-family:var(--body); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; padding-bottom:60px; }
+::selection { background:var(--white2); color:var(--black); }
+
+.wrap { max-width:1080px; margin:0 auto; padding:0 clamp(16px,3vw,32px); }
+
+/* header */
+header { padding:26px 0 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; border-bottom:1px solid var(--border); margin-bottom:22px; }
+.brand { font-family:var(--display); font-weight:900; font-size:21px; color:var(--white2); letter-spacing:-.03em; }
+.brand i { font-style:normal; color:var(--silver); }
+.brand small { font-family:var(--body); font-weight:600; font-size:10px; letter-spacing:.22em; color:var(--muted2); text-transform:uppercase; margin-left:10px; }
+.head-meta { display:flex; gap:8px; flex-wrap:wrap; }
+.chip { display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--silver); border:1px solid var(--border2); border-radius:100px; padding:6px 13px; background:var(--black2); }
+.chip i { width:6px; height:6px; border-radius:50%; background:var(--good); flex:none; }
+.chip.q i { background:var(--warn); }
+
+/* sections */
+section { margin-bottom:26px; }
+h2 { font-family:var(--display); font-size:16px; font-weight:800; color:var(--white); letter-spacing:-.01em; margin-bottom:12px; display:flex; align-items:baseline; gap:10px; }
+h2 span { font-size:10.5px; font-weight:600; font-family:var(--body); letter-spacing:.14em; text-transform:uppercase; color:var(--muted2); }
+
+/* kpi tiles */
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.kpi { background:var(--black2); padding:16px 16px 14px; }
+.kpi b { display:block; font-family:var(--display); font-size:clamp(22px,4vw,30px); font-weight:800; color:var(--white2); letter-spacing:-.02em; line-height:1.1; font-variant-numeric:tabular-nums; }
+.kpi b small { font-size:.55em; color:var(--muted); font-weight:600; }
+.kpi span { display:block; font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+.kpi .goal { font-size:10.5px; color:var(--muted2); letter-spacing:.02em; text-transform:none; font-weight:500; margin-top:2px; }
+.kpi.na b { color:var(--muted2); font-size:15px; padding-top:6px; }
+@media (max-width:760px) { .kpis { grid-template-columns:1fr 1fr; } }
+
+/* status pills */
+.pill { display:inline-flex; align-items:center; gap:6px; font-size:10.5px; font-weight:700; letter-spacing:.06em; border-radius:100px; padding:3px 10px; white-space:nowrap; }
+.pill.done { color:var(--good); background:rgba(124,252,155,.08); }
+.pill.progress { color:var(--info); background:rgba(143,184,232,.09); }
+.pill.you { color:var(--warn); background:rgba(232,194,104,.09); }
+.pill.todo { color:var(--muted); background:rgba(110,110,110,.1); }
+
+/* action callout */
+.callout { border:1px solid rgba(232,194,104,.35); border-left:3px solid var(--warn); background:rgba(232,194,104,.05); border-radius:8px; padding:14px 16px; }
+.callout h3 { font-family:var(--display); font-size:13.5px; font-weight:800; color:var(--warn); margin-bottom:6px; letter-spacing:.02em; }
+.callout ol { padding-left:20px; }
+.callout li { font-size:13.5px; color:var(--silver2); margin-bottom:4px; }
+.callout li b { color:var(--white); }
+
+/* checklist */
+.card { background:var(--black2); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 16px; border-bottom:1px solid var(--border); }
+.row:last-child { border-bottom:none; }
+.row .t { font-size:13.5px; color:var(--silver2); }
+.row .t small { display:block; font-size:11px; color:var(--muted); }
+
+/* roadmap */
+.phase { padding:13px 16px; border-bottom:1px solid var(--border); }
+.phase:last-child { border-bottom:none; }
+.phase-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:7px; }
+.phase-head b { font-family:var(--display); font-size:13.5px; font-weight:800; color:var(--white); }
+.phase-head span { font-size:11px; color:var(--muted); }
+.meter { height:6px; background:var(--black3); border-radius:4px; overflow:hidden; }
+.meter i { display:block; height:100%; border-radius:4px; background:linear-gradient(90deg,var(--muted),var(--silver)); min-width:2px; }
+.phase .goal { font-size:11.5px; color:var(--muted); margin-top:6px; }
+
+/* funnel */
+.funnel { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.fstage { background:var(--black2); padding:13px 14px; }
+.fstage b { display:block; font-family:var(--display); font-size:22px; font-weight:800; color:var(--white2); font-variant-numeric:tabular-nums; }
+.fstage span { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.fstage .goal { display:block; font-size:10.5px; color:var(--muted2); margin-top:3px; }
+@media (max-width:600px) { .funnel { grid-template-columns:1fr 1fr; } }
+
+/* content week */
+.cw { padding:12px 16px; border-bottom:1px solid var(--border); }
+.cw:last-child { border-bottom:none; }
+.cw-head { display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:6px; }
+.cw-head b { color:var(--white); font-weight:600; }
+.cw-head span { color:var(--muted); font-variant-numeric:tabular-nums; }
+
+/* employees */
+.emps { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.emp { background:var(--black2); border:1px solid var(--border); border-radius:10px; padding:12px 13px; }
+.emp b { display:block; font-family:var(--display); font-size:15px; font-weight:800; color:var(--white2); }
+.emp span { display:block; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:1px 0 7px; }
+@media (max-width:760px) { .emps { grid-template-columns:1fr 1fr; } }
+
+/* timeline */
+.tl { border-left:1px solid var(--border2); margin-left:6px; padding-left:18px; }
+.tl-item { position:relative; padding-bottom:14px; }
+.tl-item:last-child { padding-bottom:2px; }
+.tl-item::before { content:''; position:absolute; left:-22.5px; top:6px; width:8px; height:8px; border-radius:50%; background:var(--silver); border:2px solid var(--black); }
+.tl-item .d { font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted2); }
+.tl-item .e { font-size:13.5px; color:var(--silver2); }
+
+footer { margin-top:34px; padding-top:16px; border-top:1px solid var(--border); font-size:11.5px; color:var(--muted2); line-height:1.7; }
+footer b { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">avatiser<i>.</i><small>mission control</small></div>
+  <div class="head-meta">
+    <span class="chip" id="dayChip"><i></i>day 0</span>
+    <span class="chip q" id="updChip"><i></i>updated —</span>
+  </div>
+</header>
+
+<section>
+  <div class="kpis" id="kpis"></div>
+</section>
+
+<section id="actionsSec">
+  <div class="callout">
+    <h3>⚠ waiting on you — these unblock the launch</h3>
+    <ol id="youActions"></ol>
+  </div>
+</section>
+
+<section>
+  <h2>launch checklist <span id="checkCount"></span></h2>
+  <div class="card" id="checklist"></div>
+</section>
+
+<section>
+  <h2>90-day roadmap <span>from the playbook</span></h2>
+  <div class="card" id="roadmap"></div>
+</section>
+
+<section>
+  <h2>funnel — this week <span>targets from playbook §3</span></h2>
+  <div class="funnel" id="funnel"></div>
+</section>
+
+<section>
+  <h2>content engine — this week <span>brand voice §8</span></h2>
+  <div class="card" id="content"></div>
+</section>
+
+<section>
+  <h2>digital employees <span>hire order from playbook §1</span></h2>
+  <div class="emps" id="emps"></div>
+</section>
+
+<section>
+  <h2>journey log</h2>
+  <div class="tl" id="timeline"></div>
+</section>
+
+<footer>
+  <b>how this dashboard updates:</b> tell Claude the new numbers ("2 leads today, pack shipped to X") — the data block gets edited and this page republishes to the same URL. On your phone: open this link in the browser → share menu → <b>Add to Home Screen</b> for a full-screen app icon.<br>
+  source of truth lives in the repo at <b>dashboard/</b> · keep client names & revenue out of the public repo — they belong only in this private view.
+</footer>
+
+</div>
+
+<script>
+/* ═══════════════ EDIT THIS BLOCK TO UPDATE THE DASHBOARD ═══════════════ */
+const DATA = {
+  meta: { lastUpdated: "2026-07-15", journeyStart: "2026-07-14", phase: "days 1–14 · open the doors" },
+
+  kpis: [
+    { label:"mrr",                value:"$0",   goal:"target $15–20k by day 90" },
+    { label:"active clients",     value:"0",    goal:"target 8–10 by day 90" },
+    { label:"sample packs shipped", value:"0",  goal:"target 25 by day 45" },
+    { label:"leads captured",     value:"0",    goal:"form goes live at launch" },
+    { label:"social posts",       value:"0",    goal:"target 14/week (IG + LI)" },
+    { label:"site visits · 7d",   value:"n/a — analytics not installed", goal:"", na:true },
+    { label:"higgsfield credits", value:"755",  goal:"ultimate plan" },
+    { label:"tool spend / mo",    value:"$0",   goal:"budget $250 month 1" }
+  ],
+
+  waitingOnYou: [
+    "<b>Flip GitHub Pages source</b> — repo Settings → Pages → Source: GitHub Actions (30 sec). Site can't deploy without it.",
+    "<b>Add DNS records</b> at your domain registrar — 4× A records + www CNAME (table in the launch instructions).",
+    "<b>Pick the form backend</b> — create a free Brevo (or Formspree) account and send Claude the key; the site form is still in demo mode."
+  ],
+
+  checklist: [
+    { t:"website built & verified (desktop + mobile)", s:"done" },
+    { t:"real brand font + logo integrated", s:"done" },
+    { t:"portfolio clips in showcase & hero motion", d:"3 of 8 slots filled", s:"progress" },
+    { t:"deploy pipeline + SEO + OG share image", s:"done" },
+    { t:"business docs split from public site", s:"done" },
+    { t:"github pages source setting", d:"Settings → Pages → GitHub Actions", s:"you" },
+    { t:"dns records at registrar", d:"4× A + www CNAME → enforce HTTPS", s:"you" },
+    { t:"lead form endpoint (brevo)", d:"form is in demo mode — leads not captured", s:"you" },
+    { t:"website analytics", d:"GoatCounter or Plausible, then visits appear here", s:"todo" },
+    { t:"social accounts + upload-post connected", d:"IG business + LinkedIn page → MCP connector", s:"todo" },
+    { t:"real testimonials on site", d:"swap placeholders before paid traffic", s:"todo" }
+  ],
+
+  roadmap: [
+    { name:"days 1–14 · open the doors", pct:55, goal:"site live · form wired · 5 spec packs · daily posting starts" },
+    { name:"days 15–45 · prove the machine", pct:0, goal:"25 packs shipped · 3 paying clients · 3 real testimonials" },
+    { name:"days 46–90 · scale what worked", pct:0, goal:"8–10 clients · $15–20k MRR · raise campaign floor to $1,950" }
+  ],
+
+  funnel: [
+    { label:"leads", value:0, goal:"outbound reply ≥ 5%" },
+    { label:"packs shipped", value:0, goal:"48h delivery, always" },
+    { label:"calls booked", value:0, goal:"pack → call ≥ 30%" },
+    { label:"clients closed", value:0, goal:"call → paid ≥ 40%" }
+  ],
+
+  content: [
+    { platform:"instagram", done:0, target:7 },
+    { platform:"linkedin", done:0, target:7 }
+  ],
+
+  employees: [
+    { name:"kai",    role:"client concierge",    s:"todo", note:"next up — blocked on form endpoint" },
+    { name:"mira",   role:"sample pack producer", s:"progress", note:"generation half ready (higgsfield connected)" },
+    { name:"rhea",   role:"content marketer",    s:"progress", note:"brand voice + prompts written" },
+    { name:"scout",  role:"lead prospector",     s:"todo", note:"weeks 3–4" },
+    { name:"piper",  role:"outbound sdr",        s:"todo", note:"weeks 3–4" },
+    { name:"odin",   role:"producer / pm",       s:"todo", note:"month 2" },
+    { name:"ledger", role:"finance",             s:"todo", note:"month 2" },
+    { name:"echo",   role:"analyst",             s:"todo", note:"months 2–3" }
+  ],
+
+  timeline: [
+    { d:"jul 14", e:"full website built — cinematic brand site + conversion funnel merged, USD copy, zero dependencies" },
+    { d:"jul 14", e:"real JA Jayagiri Sans font + avatiser logo wired in; multi-video hero motion added" },
+    { d:"jul 14", e:"solo operating playbook written — 8 digital employees, funnel, 90-day roadmap" },
+    { d:"jul 15", e:"3 portfolio clips produced into the site (haircare, eyeliner, hair dryer); typewriter hero" },
+    { d:"jul 15", e:"launch kit shipped — deploy workflow, avatiser.com CNAME, OG share card, SEO files" },
+    { d:"jul 15", e:"brand voice + social prompt pack committed; higgsfield MCP confirmed live (755 credits)" },
+    { d:"jul 15", e:"repo split: public site/ separated from private business/ docs" },
+    { d:"jul 15", e:"mission control dashboard v1 launched" }
+  ]
+};
+/* ═══════════════════════ END OF DATA BLOCK ═══════════════════════ */
+
+const $ = (s) => document.querySelector(s);
+const PILL = { done:['done','✓ done'], progress:['progress','◐ in progress'], you:['you','⚠ waiting on you'], todo:['todo','○ pending'] };
+const pill = (s) => `<span class="pill ${PILL[s][0]}">${PILL[s][1]}</span>`;
+
+/* header chips */
+const days = Math.max(1, Math.floor((Date.now() - new Date(DATA.meta.journeyStart)) / 864e5) + 1);
+$('#dayChip').innerHTML = `<i></i>day ${days} · ${DATA.meta.phase.split('·')[1].trim()}`;
+$('#updChip').innerHTML = `<i></i>updated ${DATA.meta.lastUpdated}`;
+
+/* kpis */
+$('#kpis').innerHTML = DATA.kpis.map(k =>
+  `<div class="kpi${k.na ? ' na' : ''}"><b>${k.value}</b><span>${k.label}</span>${k.goal ? `<div class="goal">${k.goal}</div>` : ''}</div>`).join('');
+
+/* waiting on you */
+$('#youActions').innerHTML = DATA.waitingOnYou.map(a => `<li>${a}</li>`).join('');
+if (!DATA.waitingOnYou.length) $('#actionsSec').style.display = 'none';
+
+/* checklist */
+const doneCount = DATA.checklist.filter(c => c.s === 'done').length;
+$('#checkCount').textContent = `${doneCount} of ${DATA.checklist.length} complete`;
+$('#checklist').innerHTML = DATA.checklist.map(c =>
+  `<div class="row"><div class="t">${c.t}${c.d ? `<small>${c.d}</small>` : ''}</div>${pill(c.s)}</div>`).join('');
+
+/* roadmap */
+$('#roadmap').innerHTML = DATA.roadmap.map(p =>
+  `<div class="phase"><div class="phase-head"><b>${p.name}</b><span>${p.pct}%</span></div>
+   <div class="meter"><i style="width:${p.pct}%"></i></div>
+   <div class="goal">${p.goal}</div></div>`).join('');
+
+/* funnel */
+$('#funnel').innerHTML = DATA.funnel.map(f =>
+  `<div class="fstage"><b>${f.value}</b><span>${f.label}</span><span class="goal">${f.goal}</span></div>`).join('');
+
+/* content */
+$('#content').innerHTML = DATA.content.map(c => {
+  const pct = Math.min(100, Math.round(c.done / c.target * 100));
+  return `<div class="cw"><div class="cw-head"><b>${c.platform}</b><span>${c.done} / ${c.target} posts this week</span></div>
+    <div class="meter"><i style="width:${pct}%"></i></div></div>`;
+}).join('');
+
+/* employees */
+$('#emps').innerHTML = DATA.employees.map(e =>
+  `<div class="emp"><b>${e.name}</b><span>${e.role}</span>${pill(e.s)}${e.note ? `<div style="font-size:10.5px;color:var(--muted2);margin-top:6px;line-height:1.5">${e.note}</div>` : ''}</div>`).join('');
+
+/* timeline (newest first) */
+$('#timeline').innerHTML = [...DATA.timeline].reverse().map(t =>
+  `<div class="tl-item"><div class="d">${t.d}</div><div class="e">${t.e}</div></div>`).join('');
+</script>
+</body>
+</html>
