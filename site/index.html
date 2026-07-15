@@ -165,10 +165,10 @@ section { scroll-margin-top:84px; }
 @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
 .hero-h1 { font-family:var(--display); font-size:clamp(44px,8vw,110px); font-weight:900; color:var(--white2); line-height:1.14; letter-spacing:-.03em; margin-bottom:28px; }
 .ht-line { display:block; position:relative; }
-.ht-ghost { visibility:hidden; } /* reserves the final line box so typing never shifts layout */
-.ht-typed { position:absolute; inset:0; } /* wraps exactly like its ghost, so typing never overflows on small screens */
+.ht-ghost { visibility:hidden; padding-right:.15em; } /* reserves the final line box (+ caret width) so typing never shifts layout */
+.ht-typed { position:absolute; inset:0; white-space:nowrap; overflow:hidden; } /* nowrap: the inline-block caret must never wrap onto a phantom second line */
 .ht-typed.grad { background:linear-gradient(180deg,#FFF,#8F8F8F); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-.ht-caret { display:inline-block; width:.055em; height:.74em; background:var(--silver2); margin-left:.06em; transform:translateY(.06em); animation:caretBlink 1.05s steps(1) infinite; }
+.ht-caret { display:inline-block; vertical-align:text-bottom; width:.055em; height:.74em; background:var(--silver2); margin-left:.06em; animation:caretBlink 1.05s steps(1) infinite; }
 @keyframes caretBlink { 0%,60%{opacity:1} 61%,100%{opacity:0} }
 .ht-caret.done { animation:none; opacity:0; transition:opacity .9s ease; }
 .hero-sub { font-size:clamp(16px,1.6vw,19px); font-weight:300; color:#909090; max-width:600px; line-height:1.7; margin-bottom:40px; }
