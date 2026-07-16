@@ -56,14 +56,15 @@
     },
     {
       "slug": "olivia-suncare",
-      "name": "olivia — suncare film",
+      "name": "olivia — suncare campaign",
       "industry": "beauty & skincare",
-      "blurb": "a botanical product film for a chamomile-and-licorice suncare tube — daisies in soft focus, warm natural light, a lifestyle mood built to sell the ingredient story.",
-      "deliverables": ["product film", "16:9 hero cut", "lifestyle backdrop"],
+      "blurb": "a full content system for Olivia Ultra Protect+ sunscreen — a botanical hero film built on light and ingredient story, paired with a creator-style UGC ad for in-feed reach.",
+      "deliverables": ["product film", "16:9 hero cut", "ugc-style reel", "avatar presenter"],
       "turnaround": "48h",
       "cover": "/assets/videos/clip11.mp4",
       "media": [
         { "type": "video", "src": "/assets/videos/clip11.mp4", "poster": "/assets/videos/poster11.jpg", "tag": "product film · 16:9" },
+        { "type": "video", "src": "/assets/videos/clip3.mp4", "poster": "/assets/videos/poster3.jpg", "tag": "ugc reel · 9:16" },
         { "type": "image", "src": "/assets/videos/poster11.jpg", "tag": "frame still" }
       ]
     },
@@ -78,19 +79,6 @@
       "media": [
         { "type": "video", "src": "/assets/videos/clip7.mp4", "poster": "/assets/videos/poster7.jpg", "tag": "ugc review · 9:16" },
         { "type": "image", "src": "/assets/videos/poster7.jpg", "tag": "frame still" }
-      ]
-    },
-    {
-      "slug": "fine-jewelry-macro",
-      "name": "fine jewelry — macro study",
-      "industry": "fashion & accessories",
-      "blurb": "spec concept work: a macro study of a steel watch bracelet — engraved detail, mirror-polished light, the kind of frame-by-frame precision a single photograph can't capture.",
-      "deliverables": ["macro detail film", "9:16 social cut"],
-      "turnaround": "48h",
-      "cover": "/assets/videos/clip3.mp4",
-      "media": [
-        { "type": "video", "src": "/assets/videos/clip3.mp4", "poster": "/assets/videos/poster3.jpg", "tag": "macro study · 9:16" },
-        { "type": "image", "src": "/assets/videos/poster3.jpg", "tag": "frame still" }
       ]
     },
     {
