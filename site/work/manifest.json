@@ -39,6 +39,72 @@
         { "type": "video", "src": "/assets/videos/clip4.mp4", "poster": "/assets/videos/poster4.jpg", "tag": "hero reel · 9:16" },
         { "type": "image", "src": "/assets/videos/poster4.jpg", "tag": "frame still" }
       ]
+    },
+    {
+      "slug": "ikonic-professional",
+      "name": "ikonic professional — haircare tools",
+      "industry": "beauty & personal care tech",
+      "blurb": "a two-piece hero system for a professional haircare line — dryer and straightener, matte-black studio light, engineered-product pacing built for retail and e-commerce screens.",
+      "deliverables": ["hero reel", "16:9 product film", "studio macro detail"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip9.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip9.mp4", "poster": "/assets/videos/poster9.jpg", "tag": "hero reel · 16:9 · hair dryer" },
+        { "type": "video", "src": "/assets/videos/clip10.mp4", "poster": "/assets/videos/poster10.jpg", "tag": "hero reel · 16:9 · straightener" },
+        { "type": "image", "src": "/assets/videos/poster9.jpg", "tag": "frame still" }
+      ]
+    },
+    {
+      "slug": "olivia-suncare",
+      "name": "olivia — suncare film",
+      "industry": "beauty & skincare",
+      "blurb": "a botanical product film for a chamomile-and-licorice suncare tube — daisies in soft focus, warm natural light, a lifestyle mood built to sell the ingredient story.",
+      "deliverables": ["product film", "16:9 hero cut", "lifestyle backdrop"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip11.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip11.mp4", "poster": "/assets/videos/poster11.jpg", "tag": "product film · 16:9" },
+        { "type": "image", "src": "/assets/videos/poster11.jpg", "tag": "frame still" }
+      ]
+    },
+    {
+      "slug": "flextail-ugc",
+      "name": "flextail — ugc review",
+      "industry": "consumer tech",
+      "blurb": "a creator-style outdoor review comparing a compact power device to an iPhone for scale — handheld pacing, natural light, built to read as authentic in-feed content.",
+      "deliverables": ["ugc-style review", "9:16 social cut", "avatar presenter"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip7.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip7.mp4", "poster": "/assets/videos/poster7.jpg", "tag": "ugc review · 9:16" },
+        { "type": "image", "src": "/assets/videos/poster7.jpg", "tag": "frame still" }
+      ]
+    },
+    {
+      "slug": "fine-jewelry-macro",
+      "name": "fine jewelry — macro study",
+      "industry": "fashion & accessories",
+      "blurb": "spec concept work: a macro study of a steel watch bracelet — engraved detail, mirror-polished light, the kind of frame-by-frame precision a single photograph can't capture.",
+      "deliverables": ["macro detail film", "9:16 social cut"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip3.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip3.mp4", "poster": "/assets/videos/poster3.jpg", "tag": "macro study · 9:16" },
+        { "type": "image", "src": "/assets/videos/poster3.jpg", "tag": "frame still" }
+      ]
+    },
+    {
+      "slug": "signature-fragrance",
+      "name": "signature — fragrance macro film",
+      "industry": "beauty & cosmetics",
+      "blurb": "spec concept work: a slow-motion droplet study for a fragrance bottle — monochrome light, glass and liquid in motion, the atmosphere-first style fragrance launches are built on.",
+      "deliverables": ["macro detail film", "9:16 social cut"],
+      "turnaround": "48h",
+      "cover": "/assets/videos/clip6.mp4",
+      "media": [
+        { "type": "video", "src": "/assets/videos/clip6.mp4", "poster": "/assets/videos/poster6.jpg", "tag": "macro study · 9:16" },
+        { "type": "image", "src": "/assets/videos/poster6.jpg", "tag": "frame still" }
+      ]
     }
   ]
 }
