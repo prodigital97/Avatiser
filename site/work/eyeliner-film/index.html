@@ -47,6 +47,11 @@ h1 { font-family:var(--display); font-size:clamp(36px,6vw,72px); font-weight:900
 .g-item video, .g-item img { display:block; width:100%; height:auto; }
 .g-item video { background:var(--black3); }
 .g-tag { position:absolute; top:10px; left:10px; background:rgba(8,8,8,.82); border:1px solid var(--border2); padding:4px 10px; font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--silver); border-radius:4px; }
+.g-sound { position:absolute; bottom:10px; right:10px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; background:rgba(8,8,8,.72); border:1px solid var(--border2); border-radius:50%; color:var(--white2); cursor:pointer; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:background .2s var(--ease), transform .2s var(--ease); z-index:2; padding:0; }
+.g-sound:hover { background:rgba(8,8,8,.92); transform:scale(1.06); }
+.g-sound .ic-on { display:none; }
+.g-sound.is-on .ic-off { display:none; }
+.g-sound.is-on .ic-on { display:block; }
 .note { font-size:12px; color:var(--muted2); letter-spacing:.04em; padding:8px 0 46px; }
 .cta-band { border-top:1px solid var(--border); background:var(--black2); text-align:center; padding:clamp(56px,8vw,90px) var(--pad); }
 .cta-band h2 { font-family:var(--display); font-size:clamp(26px,4vw,46px); font-weight:900; color:var(--white2); letter-spacing:-.02em; line-height:1.1; margin-bottom:14px; }
@@ -89,7 +94,7 @@ footer a { color:var(--muted); text-decoration:none; }
       <div class="meta"><b>$0</b><span>studio · crew · travel</span></div>
     </div>
   </header>
-  <div class="gallery"><figure class="g-item"><span class="g-tag">product film · 16:9</span><video data-src="/assets/videos/clip2.mp4" poster="/assets/videos/poster2.jpg" muted loop playsinline preload="none"></video></figure>
+  <div class="gallery"><figure class="g-item"><span class="g-tag">product film · 16:9</span><video data-src="/assets/videos/clip2.mp4" poster="/assets/videos/poster2.jpg" muted loop playsinline preload="none"></video><button class="g-sound" type="button" aria-label="toggle sound" aria-pressed="false"><svg class="ic-off" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="22" y1="9" x2="16" y2="15"></line><line x1="16" y1="9" x2="22" y2="15"></line></svg><svg class="ic-on" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M18.36 5.64a9 9 0 0 1 0 12.73"></path></svg></button></figure>
 <figure class="g-item"><span class="g-tag">frame still</span><img src="/assets/videos/poster2.jpg" alt="frame still" loading="lazy"></figure></div>
   <p class="note">every frame above was produced in-studio with AI — no cameras, no sets, no crews.</p>
 </div>
@@ -107,11 +112,41 @@ document.getElementById('y').textContent = new Date().getFullYear();
 document.querySelectorAll('video[data-src]').forEach(function (v) {
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
-      if (e.isIntersecting) { if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p) p.catch(function(){}); }
-      else v.pause();
+      if (e.isIntersecting) {
+        if (!v.src) v.src = v.getAttribute('data-src');
+        var p = v.play(); if (p) p.catch(function(){});
+      } else {
+        v.pause();
+        if (!v.muted) {
+          v.muted = true;
+          var fig = v.closest('.g-item');
+          var btn = fig && fig.querySelector('.g-sound');
+          if (btn) { btn.classList.remove('is-on'); btn.setAttribute('aria-pressed', 'false'); }
+        }
+      }
     });
   }, { threshold: .2 });
   io.observe(v);
+});
+var soundBtns = Array.prototype.slice.call(document.querySelectorAll('.g-sound'));
+soundBtns.forEach(function (btn) {
+  var fig = btn.closest('.g-item');
+  var vid = fig && fig.querySelector('video');
+  if (!vid) return;
+  btn.addEventListener('click', function () {
+    var turningOn = vid.muted;
+    soundBtns.forEach(function (other) {
+      if (other === btn) return;
+      var oFig = other.closest('.g-item');
+      var oVid = oFig && oFig.querySelector('video');
+      if (oVid) oVid.muted = true;
+      other.classList.remove('is-on');
+      other.setAttribute('aria-pressed', 'false');
+    });
+    vid.muted = !turningOn;
+    btn.classList.toggle('is-on', turningOn);
+    btn.setAttribute('aria-pressed', String(turningOn));
+  });
 });
 </script>
 </body>
