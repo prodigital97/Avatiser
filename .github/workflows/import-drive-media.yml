@@ -19,13 +19,17 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      - name: Install gdown
-        run: pip install --quiet gdown
+      - name: Install gdown + ffmpeg (ffprobe ships with ffmpeg)
+        run: |
+          pip install --quiet gdown
+          sudo apt-get update -y -qq
+          sudo apt-get install -y -qq ffmpeg
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
 
       - name: Download the shared folder
         run: |
           mkdir -p /tmp/incoming
-          gdown --folder "${{ inputs.folder_url }}" -O /tmp/incoming --remaining-ok || \
           gdown --folder "${{ inputs.folder_url }}" -O /tmp/incoming
           echo "--- downloaded ---"
           find /tmp/incoming -type f -exec ls -la {} \;
@@ -43,6 +47,13 @@ jobs:
           VIDEO_EXT = {".mp4", ".mov", ".m4v", ".webm", ".avi", ".mkv"}
           IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 
+          # already integrated on an earlier pass (site/assets/videos/clip1,2,4) -- skip re-processing
+          ALREADY_DONE = {
+              "hf_20260415_231212_407a57e9-c464-4df3-a7df-5961fadaac21 (1).mp4",
+              "hf_20260417_082144_1af7bb5d-2af1-4e3b-865e-9a0d2fdf327b (1).mp4",
+              "hf_20260618_222800_4d7a1b82-daaa-415c-9573-21637e905c4f.mp4",
+          }
+
           def slug(name):
               base, ext = os.path.splitext(name)
               base = re.sub(r"[^a-zA-Z0-9]+", "-", base).strip("-").lower()
@@ -51,6 +62,9 @@ jobs:
           entries = []
           for root, _, files in os.walk(SRC):
               for f in files:
+                  if f in ALREADY_DONE:
+                      entries.append({"original": f, "type": "skipped-duplicate"})
+                      continue
                   path = os.path.join(root, f)
                   base, ext = slug(f)
                   if ext in VIDEO_EXT:
