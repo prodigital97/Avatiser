@@ -1,0 +1,11 @@
+{
+  "_howto": "Build with prompts/sheets/scene-sheet.md. One visual world for the whole campaign.",
+  "world": "",
+  "settings": [
+    { "id": "primary", "location": "", "time_of_day": "", "light": { "key": "", "fill": "", "practicals": "" }, "set_dressing": [], "imperfections": [] },
+    { "id": "secondary", "location": "" }
+  ],
+  "camera": { "stills_rig": "", "video_rig": "", "palette": [], "grade": "" },
+  "ugc_variant": { "note": "UGC breaks the cinema rig on purpose", "look": "" },
+  "banned": []
+}

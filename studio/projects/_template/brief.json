@@ -1,0 +1,13 @@
+{
+  "_howto": "Stage 1: INTAKE. Fill this from whatever the client gives you (product link, photos, a paragraph). Drop product photos in refs/product/. Then use prompts/sheets/*.md with your LLM of choice to build the three sheets from this brief. Then: node studio/studio.js compile <slug>",
+  "client": "",
+  "product_name": "",
+  "product_link": "",
+  "description": "everything known about the product, pasted raw — the sheet builders distill it",
+  "campaigns": ["full-campaign"],
+  "market": "who and where this will run (geo, platform, audience)",
+  "brand_voice": "3 adjectives max",
+  "mandatories": ["anything the client requires in-frame"],
+  "banned": ["anything the client forbids"],
+  "deadline": ""
+}

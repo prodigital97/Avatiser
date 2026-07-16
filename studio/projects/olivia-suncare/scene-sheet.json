@@ -1,0 +1,32 @@
+{
+  "world": "sun-washed late-morning apartment balcony garden — Mediterranean light, lived-in",
+  "settings": [
+    {
+      "id": "primary",
+      "location": "small terracotta-tiled balcony with potted chamomile and a weathered teak side table",
+      "time_of_day": "10:30am — sun high enough to be bright, low enough to rake",
+      "light": {
+        "key": "hard sun from upper left through a bamboo screen — dappled, warm",
+        "fill": "white plaster wall bounce from the right, soft and cool",
+        "practicals": "none needed — daylight scene"
+      },
+      "set_dressing": ["potted chamomile with two wilted blooms", "weathered teak table with water ring", "linen napkin creased from use", "half-full glass of water with condensation", "woven straw hat brim entering one corner"],
+      "imperfections": ["dust motes in the sun shaft", "one dropped chamomile petal on the table", "hairline crack in a terracotta pot"]
+    },
+    {
+      "id": "secondary",
+      "location": "just inside the balcony door — bathroom shelf corner with morning light spilling in"
+    }
+  ],
+  "camera": {
+    "stills_rig": "Sony A7 IV, 35mm f/1.8 for lifestyle, 100mm macro f/5.6 for detail",
+    "video_rig": "ARRI Alexa 35, 50mm Master Prime T2.8 on a slider — 20cm moves max",
+    "palette": ["terracotta", "chamomile yellow", "teal (product-owned)", "warm white", "sage"],
+    "grade": "Portra 400 warmth, highlights allowed to bloom 5%, blacks lifted slightly"
+  },
+  "ugc_variant": {
+    "note": "UGC breaks the cinema rig on purpose",
+    "look": "iPhone 15 Pro front camera on the same balcony, auto-exposure favoring the face, sky near-clipped behind"
+  },
+  "banned": ["teal-orange grade (teal belongs to the product only)", "beach clichés", "HDR glow", "clinical white lab"]
+}

@@ -1,0 +1,24 @@
+# AMAZON INFOGRAPHIC — HOW TO USE (1:1) — Olivia Ultra Protect+ Sunscreen SPF 40
+
+MODEL NOTE: typography-strong model. Product from approved hero-white
+reference; step photos may reference approved lifestyle renders.
+
+Three-step usage panel for Olivia Ultra Protect+ Sunscreen SPF 40. Steps derived from
+squeeze a pea-sized dot onto two fingers, dot onto cheekbones, blend outward — write them as 2-4 word imperatives ("Apply
+evenly", "Wait 15 min").
+
+Layout: three equal columns, numbered 1-2-3 in circles, small photo-real
+vignette per step (hands matching {
+  "age_range": "26-30",
+  "gender": "female",
+  "ethnicity_region": "South Asian",
+  "face_notes": "faint freckles across the nose, slightly asymmetric smile, one flyaway brow hair",
+  "hair": "dark brown, loose low bun with strands escaping at the temples",
+  "skin": "warm medium tone, visible pores on cheeks, natural T-zone sheen by mid-morning"
+} if hands appear),
+caption under each. Header strip: "HOW TO USE" in the campaign accent from
+terracotta, chamomile yellow, teal (product-owned), warm white, sage.
+
+Same typography system as the benefits panel — the PDP stack must read as one
+designer's work. No invented warnings, no fake seals, all text horizontal
+and legible at thumbnail size.

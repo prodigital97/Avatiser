@@ -1,15 +1,17 @@
 # avatiser. studios — repo overview
 
-This repo holds two things that are deliberately kept apart:
+This repo holds things that are deliberately kept apart:
 
 ```
 site/          the public website — this is what deploys to avatiser.com
 business/      internal strategy docs — never deployed, never public
+studio/        the content-production engine (prompts, pipelines, model
+               routing) — never deployed, see studio/README.md
 ```
 
 **Why the split matters:** the deploy workflow publishes the contents of
-`site/` only. Nothing in `business/` is ever uploaded to GitHub Pages or
-served on the live domain — it stays private to this repo.
+`site/` only. Nothing in `business/` or `studio/` is ever uploaded to GitHub
+Pages or served on the live domain — it stays private to this repo.
 
 ---
 

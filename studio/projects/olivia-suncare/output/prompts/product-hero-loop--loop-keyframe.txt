@@ -1,0 +1,132 @@
+# HERO KEYFRAME — Olivia Ultra Protect+ Sunscreen SPF 40
+
+REFERENCE IMAGES: refs/product/front.jpg (label fidelity is
+non-negotiable — reproduce the referenced packaging exactly).
+
+Cinematic hero frame of Olivia Ultra Protect+ Sunscreen SPF 40 (100ml soft-squeeze tube, teal flip-cap, standing on cap) in
+small terracotta-tiled balcony with potted chamomile and a weathered teak side table, 10:30am — sun high enough to be bright, low enough to rake.
+
+Product at its hero angle: three-quarter front, tilted back 10° — daisy artwork and SPF badge both catch light. Scale true to
+~15cm tall, fits fully in one hand with cap above thumb. Materials behave as they are: matte tube diffuses light softly with a gentle sheen along the cylinder; glossy cap takes one crisp specular highlight.
+
+LIGHT — hard sun from upper left through a bamboo screen — dappled, warm; fill white plaster wall bounce from the right, soft and cool.
+Every highlight on the product must trace back to this source.
+
+CAMERA — Sony A7 IV, 35mm f/1.8 for lifestyle, 100mm macro f/5.6 for detail. Product in the focus plane, background
+falls off naturally. Composition leaves negative space for a logo lockup
+(rule of thirds, product off-center).
+
+SET — potted chamomile with two wilted blooms, weathered teak table with water ring, linen napkin creased from use, half-full glass of water with condensation, woven straw hat brim entering one corner. Include imperfections:
+dust motes in the sun shaft, one dropped chamomile petal on the table, hairline crack in a terracotta pot.
+
+GRADE — palette terracotta, chamomile yellow, teal (product-owned), warm white, sage, Portra 400 warmth, highlights allowed to bloom 5%, blacks lifted slightly.
+
+This frame becomes the first-frame reference for the hero film — compose it
+as a shot that wants to move (a beam to drift through, fabric to settle).
+
+# REALISM CORE — injected into every Avatiser prompt
+
+Avatiser's entire brand is that our output cannot be clocked as AI. This block
+is appended to every compiled prompt AND used as the QC scorecard. A render
+that trips even one HARD FAIL below gets regenerated — we do not "fix it in
+grading," we re-roll until the tell is gone.
+
+---
+
+## 1. Camera physics — every frame must claim a real camera
+
+Never describe a look abstractly ("cinematic", "high quality", "8k"). Specify
+the rig, and the model will inherit its physics:
+
+- **Cinema / hero product:** "shot on ARRI Alexa 35, 50mm Master Prime at
+  T2.8, subtle halation in highlights, gentle sensor grain"
+- **Lifestyle stills:** "shot on Sony A7 IV, 35mm f/1.8, natural depth of
+  field, slight vignetting"
+- **Macro product detail:** "100mm macro at f/5.6, shallow focus plane,
+  visible micro-texture"
+- **UGC / creator:** "filmed on iPhone 15 Pro front camera, 24mm equivalent,
+  auto-exposure that breathes, slight rolling-shutter wobble, handheld"
+
+One focal length per shot. Mixed-focal looks inside a single frame is an AI
+tell.
+
+## 2. Light must be motivated
+
+Every light source in frame needs a reason to exist. Choose ONE lighting story
+per scene and name its source: window left, golden-hour sun low behind
+subject, single softbox overhead, practical lamps in background. Forbidden:
+"studio lighting" with no direction, rim light appearing from nowhere,
+shadows pointing two directions.
+
+## 3. Deliberate imperfection (the anti-render pass)
+
+Perfection is the loudest AI tell. Every prompt includes 2–3 of these,
+matched to the medium:
+
+- skin: visible pores, faint asymmetry, flyaway hairs, natural oil sheen on
+  T-zone — never "flawless skin"
+- surfaces: fingerprints near where a product is held, micro-scratches on
+  metal, slight dust in light beams
+- environment: cables, worn edges, an object slightly out of place
+- optics: subtle chromatic aberration at frame edges, breathing focus in
+  video, grain matched to ISO story
+- UGC specifically: clipped highlights out a window, imperfect framing,
+  a fingertip briefly shading the lens, compression artifacts
+
+## 4. Product label fidelity — HARD RULE
+
+The product's label, logo and packaging text are NEVER text-prompted. They are
+always supplied as an image reference (image-to-image / reference
+conditioning) from `refs/product/`. If a model cannot take a product
+reference, it does not render the product — it renders the scene, and the
+product is composited from a reference-conditioned pass. Hallucinated label
+text is the #1 instant campaign-killer on Amazon and retail.
+
+## 5. Faces — one identity, locked
+
+Characters are generated once as a Soul 2.0 identity (character-sheet.json
+stores the seed/identity id + reference set). Every subsequent appearance uses
+that identity reference. Never re-describe a face in words and hope — words
+drift, references don't.
+
+## 6. Motion rules (video)
+
+- Real-world physics only: fabric settles, liquid overshoots then rests, hair
+  has mass. If a motion could not be filmed with a gimbal, slider, or hand —
+  don't prompt it.
+- Camera moves: name the rig. "slow 20cm dolly-in", "handheld with natural
+  sway", "tripod locked-off". Forbidden: impossible orbit-through-object
+  moves, zero-inertia direction changes, speed-ramps inside a 5s clip.
+- 24fps for cinema, 30fps for UGC/social. Motion blur consistent with shutter
+  at 1/48 or 1/60 respectively.
+
+## 7. The negative block (append to every generation)
+
+```
+avoid: waxy or plastic skin, over-smooth surfaces, HDR glow, oversaturated
+teal-orange grade, symmetrical face perfection, floating shadows, double
+irises, malformed hands, extra fingers, warped or invented label text,
+gibberish typography, impossible reflections, light without source, oily
+sheen on everything, beauty-filter look, AI art style, illustration,
+3D render look, video-game lighting
+```
+
+## 8. QC scorecard (run per render before delivery)
+
+HARD FAILS — regenerate immediately:
+- [ ] any label/logo/text differs from the reference product
+- [ ] hands: wrong finger count, impossible grip
+- [ ] face drift from the locked identity
+- [ ] shadow/reflection physically impossible
+- [ ] motion that violates physics (video)
+
+SOFT FAILS — regenerate if 2+ present:
+- [ ] skin or surface reads "airbrushed"
+- [ ] lighting direction unclear or contradictory
+- [ ] depth of field inconsistent with stated lens
+- [ ] grade drifts from campaign palette (scene-sheet)
+- [ ] frame too clean — no trace of the imperfection pass
+
+Ship threshold: zero hard fails, ≤1 soft fail, and the "squint test" — at
+arm's length, would a media buyer flag this? If yes, re-roll.
+

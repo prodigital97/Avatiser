@@ -1,0 +1,7 @@
+# studio engine — never commit API keys or heavy generated media
+studio/.env
+studio/projects/*/renders/*
+!studio/projects/*/renders/.gitkeep
+
+node_modules/
+.DS_Store

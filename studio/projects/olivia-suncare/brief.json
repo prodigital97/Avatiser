@@ -1,0 +1,12 @@
+{
+  "client": "Olivia (worked demo — real past client product)",
+  "product_name": "Olivia Ultra Protect+ Sunscreen SPF 40",
+  "product_link": "",
+  "description": "Chamomile & licorice sunscreen in a 100ml squeeze tube. Teal cap and shoulder, orange body with white daisy artwork, SPF 40 badge. Botanical ingredient story: chamomile soothes, licorice brightens. Mid-premium pharmacy positioning.",
+  "campaigns": ["full-campaign"],
+  "market": "India + GCC, Instagram/Amazon, women 22-38 skincare-aware",
+  "brand_voice": "warm, botanical, trustworthy",
+  "mandatories": ["SPF 40 badge visible in hero shots", "daisy artwork readable"],
+  "banned": ["beach clichés with bikinis", "burnt-skin fear imagery"],
+  "deadline": "demo"
+}

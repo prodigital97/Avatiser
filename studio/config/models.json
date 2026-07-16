@@ -1,0 +1,72 @@
+{
+  "_howto": "Registry of every generation model + which job routes where. Adapters in lib/adapters/<adapter>.js read their key from the env var named here. Update 'model' version strings as providers ship new ones — routing ids stay stable.",
+  "models": {
+    "soul2": {
+      "provider": "higgsfield",
+      "model": "soul-2.0",
+      "adapter": "higgsfield",
+      "env_key": "HIGGSFIELD_API_KEY",
+      "type": "image",
+      "strengths": ["character identity", "photoreal faces", "fashion/beauty portraits"],
+      "supports_reference": true,
+      "notes": "Create identity once per character, store identity id in character-sheet.json, reference it everywhere after."
+    },
+    "nano-banana-pro": {
+      "provider": "google",
+      "model": "nano-banana-2-pro",
+      "adapter": "gemini-image",
+      "env_key": "GEMINI_API_KEY",
+      "type": "image",
+      "strengths": ["product fidelity with image reference", "backgrounds", "relighting", "compositing"],
+      "supports_reference": true,
+      "notes": "Primary for anything containing the physical product. Always pass refs/product/* as reference images."
+    },
+    "gpt-image-2": {
+      "provider": "openai",
+      "model": "gpt-image-2",
+      "adapter": "openai-image",
+      "env_key": "OPENAI_API_KEY",
+      "type": "image",
+      "strengths": ["legible typography", "infographics", "layout-aware statics", "instruction following"],
+      "supports_reference": true,
+      "notes": "Primary when the frame contains words (Amazon infographics, banners). Product label still comes from reference, never prompt text."
+    },
+    "seedance": {
+      "provider": "byteplus-ark",
+      "model": "seedance-1.5-pro",
+      "adapter": "seedance",
+      "env_key": "ARK_API_KEY",
+      "type": "video",
+      "strengths": ["fast turnarounds", "social/UGC realism", "image-to-video from locked stills"],
+      "supports_reference": true,
+      "notes": "Default for 9:16 social. Feed it the approved still as first frame for product consistency."
+    },
+    "kling": {
+      "provider": "kuaishou",
+      "model": "kling-2.5",
+      "adapter": "kling",
+      "env_key": "KLING_ACCESS_KEY",
+      "env_secret": "KLING_SECRET_KEY",
+      "type": "video",
+      "strengths": ["cinema physics", "liquid/fabric/hair simulation", "longer coherent shots"],
+      "supports_reference": true,
+      "notes": "Default for 16:9 cinematic. Auth is JWT signed from access+secret key pair."
+    }
+  },
+  "routing": {
+    "character.identity": { "primary": "soul2", "fallback": null },
+    "character.portrait": { "primary": "soul2", "fallback": null },
+    "character.in-scene": { "primary": "nano-banana-pro", "fallback": "gpt-image-2", "notes": "composite Soul identity ref + product ref into scene" },
+    "product.hero": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
+    "product.lifestyle": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
+    "product.detail": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
+    "product.white-bg": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
+    "static.infographic": { "primary": "gpt-image-2", "fallback": "nano-banana-pro" },
+    "static.social": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
+    "scene.background": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
+    "video.cinematic": { "primary": "kling", "fallback": "seedance" },
+    "video.social": { "primary": "seedance", "fallback": "kling" },
+    "video.ugc": { "primary": "seedance", "fallback": "kling" },
+    "video.hero-loop": { "primary": "kling", "fallback": "seedance" }
+  }
+}

@@ -1,0 +1,127 @@
+# UGC REEL B — "the routine" (9:16, 8s) — Olivia Ultra Protect+ Sunscreen SPF 40
+
+FIRST FRAME: approved creator-with-product still (alternate take). Same
+locked identity, same wardrobe (continuity_rules), DIFFERENT energy from
+Reel A — this one is the quiet, over-the-shoulder "come along" style.
+
+iPhone 15 Pro front camera on the same balcony, auto-exposure favoring the face, sky near-clipped behind, phone propped (not handheld this time): static
+frame like it's leaning against a mirror/shelf in
+just inside the balcony door — bathroom shelf corner with morning light spilling in.
+
+Beat sheet:
+- 0-3s: creator steps into the static frame mid-routine, not performing —
+  Olivia Ultra Protect+ Sunscreen SPF 40 already in hand
+- 3-6s: the application/use moment, real pacing (squeeze a pea-sized dot onto two fingers, dot onto cheekbones, blend outward,
+  white lightweight cream, medium-low viscosity, spreads to a satin finish with no cast), face relaxed, glances at camera once
+- final: they lean toward the lens to stop recording — hand grows large,
+  brief blur — the most human frame in the whole campaign
+
+Propped-phone truth: slight tilt to the frame, room reflections if
+mirror-set, autofocus hunting once when they approach.
+
+# REALISM CORE — injected into every Avatiser prompt
+
+Avatiser's entire brand is that our output cannot be clocked as AI. This block
+is appended to every compiled prompt AND used as the QC scorecard. A render
+that trips even one HARD FAIL below gets regenerated — we do not "fix it in
+grading," we re-roll until the tell is gone.
+
+---
+
+## 1. Camera physics — every frame must claim a real camera
+
+Never describe a look abstractly ("cinematic", "high quality", "8k"). Specify
+the rig, and the model will inherit its physics:
+
+- **Cinema / hero product:** "shot on ARRI Alexa 35, 50mm Master Prime at
+  T2.8, subtle halation in highlights, gentle sensor grain"
+- **Lifestyle stills:** "shot on Sony A7 IV, 35mm f/1.8, natural depth of
+  field, slight vignetting"
+- **Macro product detail:** "100mm macro at f/5.6, shallow focus plane,
+  visible micro-texture"
+- **UGC / creator:** "filmed on iPhone 15 Pro front camera, 24mm equivalent,
+  auto-exposure that breathes, slight rolling-shutter wobble, handheld"
+
+One focal length per shot. Mixed-focal looks inside a single frame is an AI
+tell.
+
+## 2. Light must be motivated
+
+Every light source in frame needs a reason to exist. Choose ONE lighting story
+per scene and name its source: window left, golden-hour sun low behind
+subject, single softbox overhead, practical lamps in background. Forbidden:
+"studio lighting" with no direction, rim light appearing from nowhere,
+shadows pointing two directions.
+
+## 3. Deliberate imperfection (the anti-render pass)
+
+Perfection is the loudest AI tell. Every prompt includes 2–3 of these,
+matched to the medium:
+
+- skin: visible pores, faint asymmetry, flyaway hairs, natural oil sheen on
+  T-zone — never "flawless skin"
+- surfaces: fingerprints near where a product is held, micro-scratches on
+  metal, slight dust in light beams
+- environment: cables, worn edges, an object slightly out of place
+- optics: subtle chromatic aberration at frame edges, breathing focus in
+  video, grain matched to ISO story
+- UGC specifically: clipped highlights out a window, imperfect framing,
+  a fingertip briefly shading the lens, compression artifacts
+
+## 4. Product label fidelity — HARD RULE
+
+The product's label, logo and packaging text are NEVER text-prompted. They are
+always supplied as an image reference (image-to-image / reference
+conditioning) from `refs/product/`. If a model cannot take a product
+reference, it does not render the product — it renders the scene, and the
+product is composited from a reference-conditioned pass. Hallucinated label
+text is the #1 instant campaign-killer on Amazon and retail.
+
+## 5. Faces — one identity, locked
+
+Characters are generated once as a Soul 2.0 identity (character-sheet.json
+stores the seed/identity id + reference set). Every subsequent appearance uses
+that identity reference. Never re-describe a face in words and hope — words
+drift, references don't.
+
+## 6. Motion rules (video)
+
+- Real-world physics only: fabric settles, liquid overshoots then rests, hair
+  has mass. If a motion could not be filmed with a gimbal, slider, or hand —
+  don't prompt it.
+- Camera moves: name the rig. "slow 20cm dolly-in", "handheld with natural
+  sway", "tripod locked-off". Forbidden: impossible orbit-through-object
+  moves, zero-inertia direction changes, speed-ramps inside a 5s clip.
+- 24fps for cinema, 30fps for UGC/social. Motion blur consistent with shutter
+  at 1/48 or 1/60 respectively.
+
+## 7. The negative block (append to every generation)
+
+```
+avoid: waxy or plastic skin, over-smooth surfaces, HDR glow, oversaturated
+teal-orange grade, symmetrical face perfection, floating shadows, double
+irises, malformed hands, extra fingers, warped or invented label text,
+gibberish typography, impossible reflections, light without source, oily
+sheen on everything, beauty-filter look, AI art style, illustration,
+3D render look, video-game lighting
+```
+
+## 8. QC scorecard (run per render before delivery)
+
+HARD FAILS — regenerate immediately:
+- [ ] any label/logo/text differs from the reference product
+- [ ] hands: wrong finger count, impossible grip
+- [ ] face drift from the locked identity
+- [ ] shadow/reflection physically impossible
+- [ ] motion that violates physics (video)
+
+SOFT FAILS — regenerate if 2+ present:
+- [ ] skin or surface reads "airbrushed"
+- [ ] lighting direction unclear or contradictory
+- [ ] depth of field inconsistent with stated lens
+- [ ] grade drifts from campaign palette (scene-sheet)
+- [ ] frame too clean — no trace of the imperfection pass
+
+Ship threshold: zero hard fails, ≤1 soft fail, and the "squint test" — at
+arm's length, would a media buyer flag this? If yes, re-roll.
+

@@ -1,0 +1,58 @@
+{
+  "_howto": "Each campaign = a deliverable matrix. brief.json lists campaign ids under 'campaigns'; compile expands every deliverable into a render-plan entry. 'route' must exist in models.json routing. 'template' points into studio/prompts/. 'count' = how many variants to generate for selection.",
+  "campaigns": {
+    "cinematic-ad-film": {
+      "name": "Cinematic Ad Film",
+      "positioning": "the flagship 16:9 hero film — broadcast-grade product cinema",
+      "deliverables": [
+        { "id": "keyframe-hero", "type": "image", "route": "product.hero", "aspect": "16:9", "count": 4, "template": "image/keyframe-hero.md", "notes": "approve ONE, it becomes first-frame ref for the film" },
+        { "id": "hero-film", "type": "video", "route": "video.cinematic", "aspect": "16:9", "duration_s": 8, "count": 2, "template": "video/cinematic-film.md", "depends_on": "keyframe-hero" },
+        { "id": "cutdown-9x16", "type": "video", "route": "video.social", "aspect": "9:16", "duration_s": 6, "count": 1, "template": "video/cinematic-cutdown.md", "depends_on": "keyframe-hero" }
+      ]
+    },
+    "ugc-reels": {
+      "name": "UGC Creator Reels",
+      "positioning": "creator-style 9:16 content with a locked Soul character — reads as real in-feed",
+      "requires_character": true,
+      "deliverables": [
+        { "id": "creator-identity", "type": "image", "route": "character.identity", "aspect": "3:4", "count": 1, "template": "image/character-identity.md", "notes": "run once; stores identity in character-sheet" },
+        { "id": "creator-holding-product", "type": "image", "route": "character.in-scene", "aspect": "9:16", "count": 4, "template": "image/creator-with-product.md", "depends_on": "creator-identity" },
+        { "id": "ugc-reel-a", "type": "video", "route": "video.ugc", "aspect": "9:16", "duration_s": 8, "count": 2, "template": "video/ugc-reel.md", "depends_on": "creator-holding-product" },
+        { "id": "ugc-reel-b", "type": "video", "route": "video.ugc", "aspect": "9:16", "duration_s": 8, "count": 2, "template": "video/ugc-reel-alt.md", "depends_on": "creator-holding-product" }
+      ]
+    },
+    "amazon-listing-pack": {
+      "name": "Amazon Listing Pack",
+      "positioning": "the full PDP image stack — hero on white through infographics",
+      "deliverables": [
+        { "id": "hero-white", "type": "image", "route": "product.white-bg", "aspect": "1:1", "count": 3, "template": "image/amazon-hero-white.md" },
+        { "id": "lifestyle-1", "type": "image", "route": "product.lifestyle", "aspect": "1:1", "count": 2, "template": "image/amazon-lifestyle.md" },
+        { "id": "lifestyle-2", "type": "image", "route": "product.lifestyle", "aspect": "1:1", "count": 2, "template": "image/amazon-lifestyle.md", "variant": "second setting from scene-sheet" },
+        { "id": "detail-macro", "type": "image", "route": "product.detail", "aspect": "1:1", "count": 2, "template": "image/detail-macro.md" },
+        { "id": "infographic-benefits", "type": "image", "route": "static.infographic", "aspect": "1:1", "count": 2, "template": "image/amazon-infographic.md" },
+        { "id": "infographic-howto", "type": "image", "route": "static.infographic", "aspect": "1:1", "count": 2, "template": "image/amazon-infographic-howto.md" }
+      ]
+    },
+    "social-static-pack": {
+      "name": "Social Static Pack",
+      "positioning": "feed + story statics in the campaign's visual world",
+      "deliverables": [
+        { "id": "feed-static", "type": "image", "route": "static.social", "aspect": "4:5", "count": 3, "template": "image/social-feed.md" },
+        { "id": "story-static", "type": "image", "route": "static.social", "aspect": "9:16", "count": 2, "template": "image/social-story.md" }
+      ]
+    },
+    "product-hero-loop": {
+      "name": "Product Hero Loop",
+      "positioning": "one seamless 5–8s loop for web hero sections and retail screens",
+      "deliverables": [
+        { "id": "loop-keyframe", "type": "image", "route": "product.hero", "aspect": "16:9", "count": 3, "template": "image/keyframe-hero.md" },
+        { "id": "hero-loop", "type": "video", "route": "video.hero-loop", "aspect": "16:9", "duration_s": 6, "count": 2, "template": "video/hero-loop.md", "depends_on": "loop-keyframe" }
+      ]
+    },
+    "full-campaign": {
+      "name": "Full Campaign",
+      "positioning": "one product, one visual world, every deliverable above",
+      "includes": ["cinematic-ad-film", "ugc-reels", "amazon-listing-pack", "social-static-pack", "product-hero-loop"]
+    }
+  }
+}

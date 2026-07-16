@@ -1,0 +1,27 @@
+{
+  "role": "creator",
+  "identity": { "soul_identity_id": "", "reference_images": ["renders/creator-identity/approved.jpg"] },
+  "casting": {
+    "age_range": "26-30",
+    "gender": "female",
+    "ethnicity_region": "South Asian",
+    "face_notes": "faint freckles across the nose, slightly asymmetric smile, one flyaway brow hair",
+    "hair": "dark brown, loose low bun with strands escaping at the temples",
+    "skin": "warm medium tone, visible pores on cheeks, natural T-zone sheen by mid-morning"
+  },
+  "wardrobe": {
+    "style": "off-duty linen shirt over ribbed tank — someone's actual Sunday clothes",
+    "palette": "cream and sand, sits inside the campaign palette",
+    "details": "creased sleeve roll, thin gold everyday chain, no statement jewelry"
+  },
+  "performance": {
+    "energy": "calm and confiding, like recommending to a younger sister",
+    "gestures": ["taps the cap twice before opening", "back of hand to cheek after applying"],
+    "relationship_to_product": "daily user since summer — casual authority, not a launch-day hype"
+  },
+  "continuity_rules": [
+    "same identity reference in every appearance — never re-describe the face",
+    "same wardrobe within a single campaign day",
+    "hands must match casting in hands-only shots"
+  ]
+}

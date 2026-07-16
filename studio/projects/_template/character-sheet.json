@@ -1,0 +1,13 @@
+{
+  "_howto": "Build with prompts/sheets/character-sheet.md. Only needed for campaigns with requires_character (ugc-reels). soul_identity_id gets filled after the identity render is approved.",
+  "role": "creator",
+  "identity": { "soul_identity_id": "", "reference_images": [] },
+  "casting": { "age_range": "", "gender": "", "ethnicity_region": "", "face_notes": "", "hair": "", "skin": "" },
+  "wardrobe": { "style": "", "palette": "", "details": "" },
+  "performance": { "energy": "", "gestures": [], "relationship_to_product": "" },
+  "continuity_rules": [
+    "same identity reference in every appearance — never re-describe the face",
+    "same wardrobe within a single campaign day",
+    "hands must match casting in hands-only shots"
+  ]
+}

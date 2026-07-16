@@ -1,0 +1,22 @@
+{
+  "name": "Olivia Ultra Protect+ Sunscreen SPF 40",
+  "brand": "Olivia",
+  "category": "suncare / skincare",
+  "form_factor": "100ml soft-squeeze tube, teal flip-cap, standing on cap",
+  "dimensions": "~15cm tall, fits fully in one hand with cap above thumb",
+  "materials": ["soft-touch matte plastic tube", "glossy teal polypropylene cap"],
+  "finish_behavior": "matte tube diffuses light softly with a gentle sheen along the cylinder; glossy cap takes one crisp specular highlight",
+  "label": {
+    "reference_images": ["refs/product/front.jpg"],
+    "colors": ["teal #2AB3B1", "warm orange", "white", "daisy yellow"],
+    "must_read_text": ["Olivia", "ULTRA PROTECT +", "SPF 40"],
+    "rule": "label is ALWAYS image-referenced, never text-prompted"
+  },
+  "hero_angle": "three-quarter front, tilted back 10° — daisy artwork and SPF badge both catch light",
+  "avoid_angles": "straight-on top-down (cap hides label), extreme side (artwork wraps out of view)",
+  "usage_gesture": "squeeze a pea-sized dot onto two fingers, dot onto cheekbones, blend outward",
+  "contents_behavior": "white lightweight cream, medium-low viscosity, spreads to a satin finish with no cast",
+  "claims": ["SPF 40 broad spectrum", "chamomile soothes", "licorice brightens"],
+  "audience": "skincare-aware women 22-38 who read ingredient lists",
+  "competitor_look": "either clinical white-lab or loud beach party — we take the third door: warm botanical morning light"
+}

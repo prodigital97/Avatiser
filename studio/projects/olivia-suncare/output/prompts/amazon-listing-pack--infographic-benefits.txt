@@ -1,0 +1,19 @@
+# AMAZON INFOGRAPHIC — BENEFITS (1:1) — Olivia Ultra Protect+ Sunscreen SPF 40
+
+MODEL NOTE: routed to the typography-strong model. Product cutout comes from
+the approved hero-white render as reference — never regenerate the product
+inside an infographic.
+
+Clean benefit panel: Olivia Ultra Protect+ Sunscreen SPF 40 at right third (referenced image),
+three benefit callouts left, each = short bold headline (3-4 words) + one
+thin-line icon. Benefits from: SPF 40 broad spectrum, chamomile soothes, licorice brightens.
+
+Layout: generous whitespace, single accent color from terracotta, chamomile yellow, teal (product-owned), warm white, sage
+on #FAFAFA. Typography: one modern grotesk family, two weights only. Thin
+leader lines from callouts to the product zones they describe.
+
+Text rules: ONLY the headline words specified — no invented copy, no lorem, no
+fake certification badges. All text horizontal, min 40px equivalent legibility
+at 1000×1000.
+
+Tone: premium pharmacy-brand clarity, not discount-seller clutter.

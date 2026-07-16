@@ -1,0 +1,23 @@
+{
+  "_howto": "Build with prompts/sheets/product-sheet.md. Every field feeds prompt templates — unfilled fields surface as ⚠MISSING in compiled prompts.",
+  "name": "",
+  "brand": "",
+  "category": "",
+  "form_factor": "",
+  "dimensions": "",
+  "materials": [],
+  "finish_behavior": "",
+  "label": {
+    "reference_images": ["refs/product/front.jpg"],
+    "colors": [],
+    "must_read_text": [],
+    "rule": "label is ALWAYS image-referenced, never text-prompted"
+  },
+  "hero_angle": "",
+  "avoid_angles": "",
+  "usage_gesture": "",
+  "contents_behavior": "",
+  "claims": [],
+  "audience": "",
+  "competitor_look": ""
+}
