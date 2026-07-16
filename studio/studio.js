@@ -4,7 +4,10 @@
    new <slug>     start a project from projects/_template
    compile <slug> sheets + templates -> output/prompts + render-plan.json
    render <slug>  execute the plan through lib/adapters (needs API keys in studio/.env)
-   status <slug>  show plan progress */
+   status <slug>  show plan progress
+   dashboard      build studio/dashboard.html; with STUDIO_PASSPHRASE (or
+                  HQ_PASSPHRASE) set, also encrypt it to site/studio/ for
+                  password-protected viewing at avatiser.com/studio */
 const fs = require('fs');
 const path = require('path');
 const { compile, STUDIO } = require('./lib/pipeline');
@@ -79,6 +82,36 @@ const commands = {
       adapter.describe(a); // adapters are scaffolds: they print the exact call to wire
     }
     console.log(`\n${ready} ready, ${blocked} waiting on keys. Adapters in studio/lib/adapters/ document each provider's request shape — wire the fetch call and re-run.`);
+  },
+
+  dashboard() {
+    const { buildHtml } = require('./lib/dashboard');
+    const html = buildHtml();
+    const localPath = path.join(STUDIO, 'dashboard.html');
+    fs.writeFileSync(localPath, html);
+    console.log(`✓ built studio/dashboard.html (${Math.round(html.length / 1024)} KB) — open it in any browser`);
+
+    const pass = process.env.STUDIO_PASSPHRASE || process.env.HQ_PASSPHRASE;
+    if (!pass) {
+      console.log('  (set STUDIO_PASSPHRASE to also build the encrypted page for avatiser.com/studio)');
+      return;
+    }
+    /* encrypt exactly like dashboard/build-hq.js: AES-256-GCM, PBKDF2-SHA256,
+       blob = salt|iv|ct|tag, decrypted in-browser by the lock shell */
+    const crypto = require('crypto');
+    const ITER = 250000;
+    const salt = crypto.randomBytes(16);
+    const iv = crypto.randomBytes(12);
+    const key = crypto.pbkdf2Sync(pass, salt, ITER, 32, 'sha256');
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+    const ct = Buffer.concat([cipher.update(html, 'utf8'), cipher.final()]);
+    const BLOB = Buffer.concat([salt, iv, ct, cipher.getAuthTag()]).toString('base64');
+    const shellTpl = fs.readFileSync(path.join(STUDIO, 'lib/lock-shell.html'), 'utf8');
+    const shell = shellTpl.replace('__ITER__', String(ITER)).replace('__BLOB__', BLOB);
+    const outDir = path.join(STUDIO, '../site/studio');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.join(outDir, 'index.html'), shell);
+    console.log(`✓ built site/studio/index.html (${Math.round(shell.length / 1024)} KB, payload encrypted) — deploys to avatiser.com/studio`);
   },
 
   status() {

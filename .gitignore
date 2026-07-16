@@ -5,3 +5,4 @@ studio/projects/*/renders/*
 
 node_modules/
 .DS_Store
+studio/dashboard.html

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /hq/
+Disallow: /studio/
 
 Sitemap: https://avatiser.com/sitemap.xml
