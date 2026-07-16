@@ -1,0 +1,67 @@
+{
+  "imported": [
+    {
+      "original": "hf_20260417_082144_1af7bb5d-2af1-4e3b-865e-9a0d2fdf327b (1).mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260417-082144-1af7bb5d-2af1-4e3b-865e-9a0d2fdf327b-1.mp4",
+      "poster": "/assets/work/_incoming/hf-20260417-082144-1af7bb5d-2af1-4e3b-865e-9a0d2fdf327b-1-poster.jpg",
+      "orientation": "portrait"
+    },
+    {
+      "original": "hf_20260418_000012_1640045e-c725-4305-b617-0845c929c355 (2).mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260418-000012-1640045e-c725-4305-b617-0845c929c355-2.mp4",
+      "poster": "/assets/work/_incoming/hf-20260418-000012-1640045e-c725-4305-b617-0845c929c355-2-poster.jpg",
+      "orientation": "portrait"
+    },
+    {
+      "original": "hf_20260520_141352_3a8306d2-f025-4197-b0d4-e5b5bdcaebba.mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260520-141352-3a8306d2-f025-4197-b0d4-e5b5bdcaebba.mp4",
+      "poster": "/assets/work/_incoming/hf-20260520-141352-3a8306d2-f025-4197-b0d4-e5b5bdcaebba-poster.jpg",
+      "orientation": "portrait"
+    },
+    {
+      "original": "hf_20260618_211003_3331ad0b-ecc2-43cd-9f39-2422dcfe82e2.mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260618-211003-3331ad0b-ecc2-43cd-9f39-2422dcfe82e2.mp4",
+      "poster": "/assets/work/_incoming/hf-20260618-211003-3331ad0b-ecc2-43cd-9f39-2422dcfe82e2-poster.jpg",
+      "orientation": "landscape"
+    },
+    {
+      "original": "hf_20260618_205334_13c72cdc-9c05-4f96-ace7-940318a3a3e0.mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260618-205334-13c72cdc-9c05-4f96-ace7-940318a3a3e0.mp4",
+      "poster": "/assets/work/_incoming/hf-20260618-205334-13c72cdc-9c05-4f96-ace7-940318a3a3e0-poster.jpg",
+      "orientation": "landscape"
+    },
+    {
+      "original": "hf_20260520_142526_be8cf932-c274-4319-b7ac-5072e0df6d18.mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260520-142526-be8cf932-c274-4319-b7ac-5072e0df6d18.mp4",
+      "poster": "/assets/work/_incoming/hf-20260520-142526-be8cf932-c274-4319-b7ac-5072e0df6d18-poster.jpg",
+      "orientation": "portrait"
+    },
+    {
+      "original": "hf_20260618_222800_4d7a1b82-daaa-415c-9573-21637e905c4f.mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260618-222800-4d7a1b82-daaa-415c-9573-21637e905c4f.mp4",
+      "poster": "/assets/work/_incoming/hf-20260618-222800-4d7a1b82-daaa-415c-9573-21637e905c4f-poster.jpg",
+      "orientation": "landscape"
+    },
+    {
+      "original": "hf_20260415_231212_407a57e9-c464-4df3-a7df-5961fadaac21 (1).mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260415-231212-407a57e9-c464-4df3-a7df-5961fadaac21-1.mp4",
+      "poster": "/assets/work/_incoming/hf-20260415-231212-407a57e9-c464-4df3-a7df-5961fadaac21-1-poster.jpg",
+      "orientation": "portrait"
+    },
+    {
+      "original": "hf_20260618_211746_b6208b86-36b5-4a2d-abd9-6354fba8b6d9.mp4",
+      "type": "video",
+      "src": "/assets/work/_incoming/hf-20260618-211746-b6208b86-36b5-4a2d-abd9-6354fba8b6d9.mp4",
+      "poster": "/assets/work/_incoming/hf-20260618-211746-b6208b86-36b5-4a2d-abd9-6354fba8b6d9-poster.jpg",
+      "orientation": "landscape"
+    }
+  ]
+}
