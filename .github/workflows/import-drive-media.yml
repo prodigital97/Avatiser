@@ -47,12 +47,8 @@ jobs:
           VIDEO_EXT = {".mp4", ".mov", ".m4v", ".webm", ".avi", ".mkv"}
           IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 
-          # already integrated on an earlier pass (site/assets/videos/clip1,2,4) -- skip re-processing
-          ALREADY_DONE = {
-              "hf_20260415_231212_407a57e9-c464-4df3-a7df-5961fadaac21 (1).mp4",
-              "hf_20260417_082144_1af7bb5d-2af1-4e3b-865e-9a0d2fdf327b (1).mp4",
-              "hf_20260618_222800_4d7a1b82-daaa-415c-9573-21637e905c4f.mp4",
-          }
+          # re-processing every clip this pass to recover real audio (previous pass stripped it with -an)
+          ALREADY_DONE = set()
 
           def slug(name):
               base, ext = os.path.splitext(name)
@@ -85,7 +81,7 @@ jobs:
                       subprocess.run(["ffmpeg","-y","-i", path, "-vf", scale,
                                        "-c:v","libx264","-crf","26","-preset","slow",
                                        "-pix_fmt","yuv420p","-movflags","+faststart",
-                                       "-an", out_path], check=True)
+                                       "-c:a","aac","-b:a","128k", out_path], check=True)
                       poster_name = base + "-poster.jpg"
                       poster_path = os.path.join(DEST, poster_name)
                       subprocess.run(["ffmpeg","-y","-ss","1","-i", out_path,
