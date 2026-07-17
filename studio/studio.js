@@ -7,7 +7,9 @@
    status <slug>  show plan progress
    dashboard      build studio/dashboard.html; with STUDIO_PASSPHRASE (or
                   HQ_PASSPHRASE) set, also encrypt it to site/studio/ for
-                  password-protected viewing at avatiser.com/studio */
+                  password-protected viewing at avatiser.com/studio
+   flow           encrypt the node-canvas app (studio/flow/flow.html) to
+                  site/flow/ for password-protected use at avatiser.com/flow */
 const fs = require('fs');
 const path = require('path');
 const { compile, STUDIO } = require('./lib/pipeline');
@@ -112,6 +114,30 @@ const commands = {
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.join(outDir, 'index.html'), shell);
     console.log(`✓ built site/studio/index.html (${Math.round(shell.length / 1024)} KB, payload encrypted) — deploys to avatiser.com/studio`);
+  },
+
+  flow() {
+    const src = path.join(STUDIO, 'flow/flow.html');
+    const html = fs.readFileSync(src, 'utf8');
+    console.log(`✓ source app: studio/flow/flow.html (${Math.round(html.length / 1024)} KB) — opens locally in any browser`);
+    const pass = process.env.STUDIO_PASSPHRASE || process.env.HQ_PASSPHRASE;
+    if (!pass) { console.log('  (set STUDIO_PASSPHRASE to build the encrypted page for avatiser.com/flow)'); return; }
+    const crypto = require('crypto');
+    const ITER = 250000;
+    const salt = crypto.randomBytes(16);
+    const iv = crypto.randomBytes(12);
+    const key = crypto.pbkdf2Sync(pass, salt, ITER, 32, 'sha256');
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+    const ct = Buffer.concat([cipher.update(html, 'utf8'), cipher.final()]);
+    const BLOB = Buffer.concat([salt, iv, ct, cipher.getAuthTag()]).toString('base64');
+    const shell = fs.readFileSync(path.join(STUDIO, 'lib/lock-shell.html'), 'utf8')
+      .replace('__ITER__', String(ITER)).replace('__BLOB__', BLOB)
+      .replace('<div class="sub">studio engine</div>', '<div class="sub">flow — node studio</div>')
+      .replace('avatiser — studio</title>', 'avatiser — flow</title>');
+    const outDir = path.join(STUDIO, '../site/flow');
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.join(outDir, 'index.html'), shell);
+    console.log(`✓ built site/flow/index.html (${Math.round(shell.length / 1024)} KB, encrypted) — deploys to avatiser.com/flow`);
   },
 
   status() {

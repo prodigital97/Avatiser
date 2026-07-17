@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>avatiser — flow</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#080808">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080808'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='40' font-weight='900' fill='%23F8F8F8' text-anchor='middle'%3Ea%3C/text%3E%3Ccircle cx='51' cy='44' r='4' fill='%23B8B8B8'/%3E%3C/svg%3E">
+<style>
+:root { --bg:#080808; --bg2:#101010; --bg3:#181818; --line:#262626; --line2:#333;
+  --mut:#6E6E6E; --sil:#B8B8B8; --wht:#EFEFEF; --wht2:#F8F8F8;
+  --img:#8FB6D6; --txt:#C9B98A; --agent:#B48FD6; --gen:#7FB8A4; --util:#D68F8F; }
+* { margin:0; box-sizing:border-box; }
+html,body { height:100%; overflow:hidden; }
+body { background:var(--bg); color:var(--sil); font:13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; -webkit-font-smoothing:antialiased; }
+/* ── topbar ── */
+.top { position:fixed; inset:0 0 auto 0; z-index:50; display:flex; align-items:center; gap:10px; height:52px; padding:0 14px; background:rgba(8,8,8,.94); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+.mark { font-weight:900; font-size:17px; letter-spacing:-.03em; color:var(--wht2); white-space:nowrap; }
+.mark i { font-style:normal; color:var(--mut); font-weight:600; font-size:10px; letter-spacing:.25em; margin-left:8px; vertical-align:1px; }
+.top .sp { flex:1; }
+.tbtn { background:var(--bg3); border:1px solid var(--line2); color:var(--sil); font:inherit; font-weight:700; font-size:12px; padding:7px 13px; border-radius:8px; cursor:pointer; white-space:nowrap; }
+.tbtn:hover { color:var(--wht2); border-color:var(--mut); }
+.tbtn.pri { background:var(--wht2); color:var(--bg); border-color:var(--wht2); }
+.tbtn.pri:disabled { opacity:.55; cursor:default; }
+/* ── canvas ── */
+#viewport { position:absolute; inset:52px 0 0 0; overflow:hidden; cursor:grab; touch-action:none;
+  background-image:radial-gradient(circle, #1a1a1a 1px, transparent 1px); background-size:26px 26px; }
+#viewport.panning { cursor:grabbing; }
+#world { position:absolute; top:0; left:0; transform-origin:0 0; }
+#wires { position:absolute; top:0; left:0; overflow:visible; pointer-events:none; }
+#wires path { fill:none; stroke-width:2; pointer-events:stroke; cursor:pointer; }
+#wires path.w { stroke:#3d3d3d; } #wires path.w:hover { stroke:var(--util); }
+#wires path.temp { stroke:var(--mut); stroke-dasharray:5 4; }
+/* ── nodes ── */
+.node { position:absolute; width:270px; background:var(--bg2); border:1px solid var(--line2); border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,.5); user-select:none; }
+.node.sel { border-color:var(--mut); }
+.node.running { border-color:var(--gen); }
+.node.err { border-color:#c96a6a; }
+.nh { display:flex; align-items:center; gap:8px; padding:9px 12px; border-bottom:1px solid var(--line); cursor:grab; border-radius:12px 12px 0 0; }
+.nh b { font-size:12.5px; color:var(--wht); font-weight:800; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.nh .dot { width:8px; height:8px; border-radius:50%; flex:none; }
+.nh .x { color:var(--mut); cursor:pointer; font-size:15px; padding:0 2px; line-height:1; }
+.nh .x:hover { color:#c96a6a; }
+.nb { padding:10px 12px; }
+.nb textarea, .nb input[type=text], .nb select { width:100%; background:var(--bg); border:1px solid var(--line); color:var(--wht); font:inherit; font-size:12px; padding:7px 9px; border-radius:7px; outline:none; resize:vertical; }
+.nb textarea:focus, .nb input:focus { border-color:var(--line2); }
+.nb label { display:block; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin:8px 0 4px; }
+.nb label:first-child { margin-top:0; }
+.row2 { display:flex; gap:6px; }
+.row2 > * { flex:1; }
+.runb { width:100%; margin-top:10px; background:var(--bg3); border:1px solid var(--line2); color:var(--wht); font:inherit; font-weight:800; font-size:12px; padding:8px; border-radius:8px; cursor:pointer; }
+.runb:hover { border-color:var(--gen); color:var(--gen); }
+.runb:disabled { opacity:.5; cursor:default; }
+.out { margin-top:10px; }
+.out pre { background:var(--bg); border:1px solid var(--line); border-radius:7px; padding:8px 9px; font:10.5px/1.5 ui-monospace,Menlo,monospace; color:var(--sil); max-height:150px; overflow:auto; white-space:pre-wrap; word-break:break-word; }
+.thumbs { display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; }
+.thumbs img { width:56px; height:56px; object-fit:cover; border-radius:6px; border:1px solid var(--line2); cursor:pointer; }
+.thumbs img.big { width:100%; height:auto; max-height:220px; object-fit:contain; background:var(--bg); }
+.gal { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px; }
+.gal figure { position:relative; }
+.gal img { width:100%; border-radius:7px; border:1px solid var(--line2); display:block; }
+.gal a { position:absolute; bottom:5px; right:5px; background:rgba(8,8,8,.8); color:var(--wht); font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px; text-decoration:none; }
+.hintxt { font-size:10.5px; color:var(--mut); margin-top:7px; line-height:1.5; }
+.errtxt { font-size:11px; color:#d08080; margin-top:7px; word-break:break-word; }
+/* ports */
+.ports-in, .ports-out { position:absolute; top:38px; display:flex; flex-direction:column; gap:14px; }
+.ports-in { left:-7px; } .ports-out { right:-7px; }
+.port { width:14px; height:14px; border-radius:50%; background:var(--bg3); border:2px solid var(--mut); cursor:crosshair; position:relative; }
+.port.on { border-color:var(--gen); background:var(--gen); }
+.port.hot { transform:scale(1.4); border-color:var(--wht2); }
+.port .plabel { position:absolute; top:-2px; font-size:9px; font-weight:700; letter-spacing:.06em; color:var(--mut); white-space:nowrap; pointer-events:none; }
+.ports-in .plabel { left:19px; } .ports-out .plabel { right:19px; }
+/* ── palette / drawers ── */
+.drawer { position:fixed; z-index:60; top:52px; bottom:0; right:0; width:min(400px,100vw); background:var(--bg2); border-left:1px solid var(--line); padding:20px; overflow-y:auto; transform:translateX(105%); transition:transform .25s cubic-bezier(.16,1,.3,1); }
+.drawer.open { transform:none; }
+.drawer h3 { font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--wht); margin-bottom:14px; }
+.drawer label { display:block; font-size:9.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin:12px 0 4px; }
+.drawer input, .drawer textarea { width:100%; background:var(--bg); border:1px solid var(--line); color:var(--wht); font:inherit; font-size:12px; padding:8px 10px; border-radius:7px; outline:none; }
+.drawer .hintxt { margin-bottom:4px; }
+.addgrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.addbtn { background:var(--bg3); border:1px solid var(--line2); border-radius:9px; padding:11px 12px; text-align:left; cursor:pointer; color:var(--sil); font:inherit; }
+.addbtn:hover { border-color:var(--mut); color:var(--wht); }
+.addbtn b { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--wht); margin-bottom:3px; }
+.addbtn span { font-size:10px; color:var(--mut); line-height:1.4; display:block; }
+.addbtn .dot { width:8px; height:8px; border-radius:50%; }
+#toast { position:fixed; z-index:99; bottom:22px; left:50%; transform:translateX(-50%); background:var(--bg3); border:1px solid var(--line2); color:var(--wht); font-size:12.5px; font-weight:600; padding:10px 18px; border-radius:10px; opacity:0; transition:opacity .25s; pointer-events:none; max-width:90vw; }
+#toast.show { opacity:1; }
+@media (max-width:640px){ .top { gap:6px; padding:0 8px; } .tbtn { padding:7px 9px; font-size:11px; } .mark i{display:none;} }
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="mark">avatiser<i>FLOW</i></div>
+  <div class="sp"></div>
+  <button class="tbtn" id="bAdd">+ node</button>
+  <button class="tbtn" id="bTpl">campaign template</button>
+  <button class="tbtn" id="bKeys">keys</button>
+  <button class="tbtn" id="bExp">export</button>
+  <button class="tbtn" id="bImp">import</button>
+  <button class="tbtn pri" id="bRun">▶ run all</button>
+</div>
+
+<div id="viewport"><div id="world"><svg id="wires"></svg><div id="nodes"></div></div></div>
+
+<div class="drawer" id="dAdd">
+  <h3>add node <span style="float:right;cursor:pointer" onclick="closeDrawers()">✕</span></h3>
+  <div class="addgrid" id="addGrid"></div>
+</div>
+
+<div class="drawer" id="dKeys">
+  <h3>api keys &amp; models <span style="float:right;cursor:pointer" onclick="closeDrawers()">✕</span></h3>
+  <p class="hintxt">Keys live only in THIS browser (localStorage) — never in the repo, never on a server. Model ids are editable everywhere they appear; update them as providers ship new versions.</p>
+  <label>Gemini API key (agents + image gen)</label><input type="password" id="kGemini">
+  <label>OpenAI API key (agents + image gen)</label><input type="password" id="kOpenai">
+  <label>Anthropic API key (agents)</label><input type="password" id="kAnthropic">
+  <label>default text model — gemini</label><input type="text" id="mGemini">
+  <label>default text model — openai</label><input type="text" id="mOpenai">
+  <label>default text model — anthropic</label><input type="text" id="mAnthropic">
+  <label>default image model — gemini</label><input type="text" id="mGeminiImg">
+  <label>default image model — openai</label><input type="text" id="mOpenaiImg">
+  <button class="tbtn pri" style="margin-top:16px;width:100%" onclick="saveKeys()">save</button>
+  <p class="hintxt" style="margin-top:14px">Video models (Kling / Seedance) don't allow browser calls — video nodes compile the prompt for you to paste into their apps, or wire the studio CLI adapters later.</p>
+</div>
+
+<div id="toast"></div>
+<input type="file" id="fileImp" accept=".json" style="display:none">
+
+<script>
+'use strict';
+/* ════════════════════ avatiser flow — node canvas engine ════════════════════
+   Graph model: state.nodes = [{id,type,x,y,data:{...},out:{...}}]
+                state.edges = [{f:[nodeId,outIdx], t:[nodeId,inIdx]}]
+   Values on wires: {kind:'text', text} | {kind:'image', mime, b64}
+                    | {kind:'list', items:[text,...]}
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── agent system prompts (Avatiser doctrine baked in) ── */
+var REALISM_TAIL = "\n\nREALISM RULES (Avatiser doctrine — non-negotiable): name a real camera+lens per shot, one focal length per frame; every light source must be motivated and directional; include 2-3 deliberate imperfections (pores, flyaways, dust motes, worn edges, fingerprints); product label/text is NEVER invented — it comes only from the reference images supplied; end every prompt with this negative block: 'avoid: waxy skin, HDR glow, teal-orange grade, symmetrical face perfection, floating shadows, malformed hands, warped or invented label text, gibberish typography, impossible reflections, beauty-filter look, 3D render look, AI art style.'";
+
+var PROMPTS = {
+  visualDna: "ROLE: You are Avatiser's Visual DNA agent — an elite visual trend forecaster and creative director for high-end editorial work. You decode micro-trends, subcultures and nuanced aesthetics. You never describe what is merely IN an image; you decode its vibe, attitude and cultural references.\n\nOBJECTIVE: You receive a moodboard (single grid image) plus optional notes. Produce a VISUAL DNA brief that finds the specific flavor of this aesthetic — the edge, the irony, the technical choices.\n\nRULES:\n1. Banned words: cinematic, moody, high-quality, stunning, beautiful, aesthetic (as adjective).\n2. Be culturally precise — name photographers, eras, subcultures, film stocks.\n3. Keep it under 350 words. This feeds the next agent verbatim.\n\nOUTPUT FORMAT:\n1. PALETTE & TEMPERATURE — exact tones, what time/weather it feels like\n2. LIGHTING & TECHNICALITY — sources, hardness, flash vs available, grain story\n3. TEXTURES & MATERIALS — what things are made of, how worn\n4. CULTURAL REFERENCES — photographers, movements, micro-cultures\n5. EMOTIONAL TONE — the feeling in one sharp sentence\n6. THE EDGE — the one non-obvious thing that makes this world specific",
+
+  stylist: "ROLE: You are Avatiser's Model & Stylist agent — casting director and wardrobe stylist combined. Different brands need different energy; your job is to cast the person who BELONGS in this brand world, then dress them from their own wardrobe, not a costume department.\n\nINPUTS: Visual DNA brief + brand + product + scenario (wired in below).\n\nCASTING DOCTRINE (Avatiser realism): cast against AI-cliché. Real-person features are the casting — slight asymmetry, visible pores, a gap tooth, flyaway hairs. Never 'flawless'. The model must read like someone a UGC agency would actually book for this exact brand.\n\nOUTPUT FORMAT — 'CAMPAIGN BIBLE' (under 400 words, feeds next agents verbatim):\n## THE MODEL\n- Age range / gender / region\n- Skin (tone + texture truth)\n- Face (2-3 defining REAL features)\n- Hair (style + how it misbehaves)\n- Build & posture\n## THE STYLING\n- Wardrobe (specific garments, worn-in details, palette that sits inside the Visual DNA)\n- Hair & makeup treatment\n## THE CARRY\n- How they move / their energy on camera\n- Their relationship to the product (daily user? convert? skeptic?)",
+
+  director: "ROLE: You are Avatiser's Creative Director — you create campaigns that define brand culture. You have taste: you know what to CUT, not just what to add. Your concepts must belong TOGETHER as one campaign and belong to THIS brand — not just look cool.\n\nINPUTS: Visual DNA + Campaign Bible + brand + product + scenario (wired in below).\n\nTASK: Generate exactly 10 shot concepts for one cohesive campaign, mapped to Avatiser's deliverable system — a client must be able to ship this straight to their channels:\n1. HERO-WHITE (1:1) — product on pure white, PDP main image\n2. LIFESTYLE-A (1:1) — product in the world, mid-use\n3. LIFESTYLE-B (1:1) — second setting, same world\n4. MACRO-DETAIL (1:1) — the tactile zoom-in a skeptical buyer wants\n5. CREATOR-MOMENT (9:16) — model with product, phone-shot UGC energy\n6. CREATOR-CANDID (9:16) — model mid-routine, not performing\n7. FEED-STATIC (4:5) — the scroll-stopper, one bold visual idea\n8. STORY-STATIC (9:16) — full-bleed vertical, atmosphere-led\n9. FILM-KEYFRAME (16:9) — composed to become the hero film's first frame: a shot that wants to move\n10. WILDCARD (any) — break the pattern, keep the world\n\nEACH CONCEPT (60-90 words):\nSHOT n — [deliverable name] — ASPECT n:n\n- THE MOMENT: what is happening\n- THE FRAME: composition, distance, angle\n- THE HOOK: why a thumb stops scrolling\n- THE BRAND: why this belongs to this brand specifically\n\nSEPARATOR RULE: after every concept output a line containing only: →→\n(The splitter node depends on this. No other use of that symbol anywhere.)",
+
+  aoc: "ROLE: You are Avatiser's A.O.C. Architect — a specialized photographic prompt engineer. You do not write generic descriptions; you build technical imaging blueprints using the Anchor / Optics / Chemistry protocol.\n\nINPUTS: the 10 shot concepts + Campaign Bible + Visual DNA (wired in below).\n\nCAMPAIGN LOCK (do internally, never output separately): extract the constants — model description, product physical truth, palette, world — and EMBED them inside every single prompt so each one stands alone.\n\nFOR EACH of the 10 concepts output one generation-ready prompt:\n**ASPECT** — carry the concept's aspect ratio forward, exactly like: **ASPECT** 9:16\n**ANCHOR** — subject + location: who/what + where, physical micro-detail, 2-3 deliberate imperfections, how the product sits in frame (label always from the supplied reference images — never describe label text as if inventing it)\n**OPTICS** — camera body, lens mm, aperture, shutter, ISO, angle/height, distance\n**CHEMISTRY** — film stock or grade, light quality + direction + source, grain, the feeling in 5 words\nEnd each prompt with the Avatiser negative block: avoid: waxy skin, HDR glow, teal-orange grade, symmetrical face perfection, floating shadows, malformed hands, warped or invented label text, gibberish typography, impossible reflections, beauty-filter look, 3D render look, AI art style.\n\nSEPARATOR RULE: after every prompt output a line containing only: →→",
+
+  qc: "ROLE: You are Avatiser's Realism Auditor — the last gate before anything ships. Avatiser's entire brand is output that cannot be clocked as AI; you are paid to be ruthless about that. You receive rendered campaign images plus the reference grids (model face grid, product angle grid).\n\nFOR EACH image, score against the Avatiser QC scorecard:\nHARD FAILS (any one = REROLL):\n- label/logo/text differs from the product reference in any way\n- hands: wrong finger count, impossible grip\n- face drifts from the model reference grid\n- shadow or reflection physically impossible\nSOFT FAILS (two or more = REROLL):\n- skin or surface reads airbrushed/waxy\n- lighting direction unclear or contradictory\n- depth of field inconsistent with a real lens\n- frame too clean — no trace of deliberate imperfection\n- grade drifts from the campaign palette\n\nOUTPUT per image:\nIMAGE n — VERDICT: SHIP / REROLL\n- fails found (be specific: 'left hand 6 fingers', 'label says OLIVA')\n- if REROLL: one-line fix instruction to append to the regeneration prompt\nEnd with: SHIP LIST: [numbers] · REROLL LIST: [numbers]"
+};
+
+/* ── defaults (all editable in keys drawer / per node) ── */
+var DEF = {
+  mGemini: 'gemini-2.5-flash', mOpenai: 'gpt-5.1', mAnthropic: 'claude-sonnet-5',
+  mGeminiImg: 'gemini-3-pro-image-preview', mOpenaiImg: 'gpt-image-1'
+};
+
+/* ── node type registry ── */
+var TYPES = {
+  images: { name:'Images In', color:'var(--img)', ins:[], outs:['images'],
+    desc:'Upload product shots / moodboard refs' },
+  text: { name:'Text In', color:'var(--txt)', ins:[], outs:['text'],
+    desc:'Brand, product, scenario, notes' },
+  grid: { name:'Grid Maker', color:'var(--img)', ins:['images'], outs:['grid image'],
+    desc:'Composite refs into one grid (offline, instant)' },
+  agent: { name:'LLM Agent', color:'var(--agent)', ins:['text','images'], outs:['text'],
+    desc:'Visual DNA / Stylist / Director / AOC' },
+  imagegen: { name:'Image Gen', color:'var(--gen)', ins:['prompt','references'], outs:['image'],
+    desc:'One frame via Gemini/OpenAI image models' },
+  splitter: { name:'Splitter', color:'var(--util)', ins:['text'], outs:['list'],
+    desc:'Split →→ separated block into N prompts' },
+  batchgen: { name:'Batch Gen', color:'var(--gen)', ins:['prompts (list)','references'], outs:['images'],
+    desc:'One render per prompt in the list' },
+  gallery: { name:'Gallery', color:'var(--util)', ins:['images'], outs:[],
+    desc:'Collect + download final outputs' },
+  videoprompt: { name:'Video Prompt', color:'var(--gen)', ins:['text','keyframe'], outs:[],
+    desc:'Compile copy-paste prompt for Kling/Seedance' }
+};
+
+/* ═══ state ═══ */
+var state = { nodes: [], edges: [], nid: 1 };
+var view = { x: 40, y: 30, z: 1 };
+var KEYS = {};
+try { KEYS = JSON.parse(localStorage.getItem('af_keys') || '{}'); } catch(e) {}
+
+var $ = function(s){ return document.querySelector(s); };
+var worldEl = $('#world'), nodesEl = $('#nodes'), wiresEl = $('#wires'), vpEl = $('#viewport');
+
+function toast(m, ms){ var t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');}, ms||2600); }
+function uid(){ return 'n' + (state.nid++); }
+function nodeById(id){ return state.nodes.find(function(n){ return n.id===id; }); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+/* ═══ persistence ═══ */
+function serialize(){ return JSON.stringify({ nodes: state.nodes, edges: state.edges, nid: state.nid, view: view }); }
+function save(){
+  try { localStorage.setItem('af_graph', serialize()); }
+  catch(e) { toast('graph too big for autosave (images) — use export to keep it'); }
+}
+function load(){
+  try {
+    var raw = localStorage.getItem('af_graph'); if (!raw) return false;
+    var g = JSON.parse(raw);
+    state.nodes = g.nodes||[]; state.edges = g.edges||[]; state.nid = g.nid||100;
+    if (g.view) view = g.view;
+    return state.nodes.length > 0;
+  } catch(e){ return false; }
+}
+
+/* ═══ rendering ═══ */
+function applyView(){ worldEl.style.transform = 'translate('+view.x+'px,'+view.y+'px) scale('+view.z+')'; }
+
+function portPos(nodeId, side, idx){
+  var el = document.querySelector('[data-node="'+nodeId+'"] .ports-'+side+' .port[data-idx="'+idx+'"]');
+  var n = nodeById(nodeId);
+  if (!el || !n) return {x:0,y:0};
+  return { x: n.x + el.offsetLeft + (el.offsetParent===el.parentElement ? el.parentElement.offsetLeft : 0) + 7,
+           y: n.y + el.parentElement.offsetTop + el.offsetTop + 7 };
+}
+function drawWires(tempWire){
+  var d = '';
+  var html = '';
+  state.edges.forEach(function(e, i){
+    var a = portPos(e.f[0],'out',e.f[1]), b = portPos(e.t[0],'in',e.t[1]);
+    var dx = Math.max(40, Math.abs(b.x-a.x)/2);
+    html += '<path class="w" data-e="'+i+'" d="M'+a.x+' '+a.y+' C'+(a.x+dx)+' '+a.y+' '+(b.x-dx)+' '+b.y+' '+b.x+' '+b.y+'"/>';
+  });
+  if (tempWire) html += '<path class="temp" d="M'+tempWire.x1+' '+tempWire.y1+' C'+(tempWire.x1+60)+' '+tempWire.y1+' '+(tempWire.x2-60)+' '+tempWire.y2+' '+tempWire.x2+' '+tempWire.y2+'"/>';
+  wiresEl.innerHTML = html;
+  wiresEl.style.pointerEvents='none';
+}
+
+function nodeBodyHtml(n){
+  var d = n.data, h = '';
+  if (n.type==='text'){
+    h += '<label>'+esc(d.label||'text')+'</label><textarea rows="3" data-bind="value">'+esc(d.value||'')+'</textarea>'
+       + '<label>label</label><input type="text" data-bind="label" value="'+esc(d.label||'')+'">';
+  }
+  if (n.type==='images'){
+    h += '<input type="file" accept="image/*" multiple data-act="upload" style="font-size:11px">'
+       + '<div class="thumbs">'+(d.images||[]).map(function(im,i){ return '<img src="data:'+im.mime+';base64,'+im.b64+'" data-rm="'+i+'" title="tap to remove">'; }).join('')+'</div>'
+       + (d.images&&d.images.length ? '<div class="hintxt">'+d.images.length+' image(s) · tap a thumb to remove</div>' : '<div class="hintxt">product refs / moodboard images</div>');
+  }
+  if (n.type==='grid'){
+    h += '<div class="hintxt">Composites every connected image into one 2K grid — better context for the DNA agent than separate files. Runs offline.</div>';
+    if (n.out && n.out.kind==='image') h += '<div class="thumbs"><img class="big" src="data:'+n.out.mime+';base64,'+n.out.b64+'"></div>';
+  }
+  if (n.type==='agent'){
+    h += '<label>preset</label><select data-bind="preset">'
+       + ['custom','visualDna','stylist','director','aoc','qc'].map(function(p){ return '<option'+(d.preset===p?' selected':'')+'>'+p+'</option>'; }).join('') + '</select>'
+       + '<div class="row2"><div><label>provider</label><select data-bind="provider">'
+       + ['gemini','openai','anthropic'].map(function(p){ return '<option'+(d.provider===p?' selected':'')+'>'+p+'</option>'; }).join('')
+       + '</select></div><div><label>model</label><input type="text" data-bind="model" value="'+esc(d.model||'')+'" placeholder="default"></div></div>'
+       + '<label>system prompt</label><textarea rows="4" data-bind="system">'+esc(d.system||'')+'</textarea>';
+    if (n.out && n.out.kind==='text') h += '<div class="out"><pre>'+esc(n.out.text)+'</pre></div>';
+    h += '<button class="runb" data-act="run">▶ run</button>';
+  }
+  if (n.type==='imagegen'){
+    h += '<div class="row2"><div><label>provider</label><select data-bind="provider">'
+       + ['gemini','openai'].map(function(p){ return '<option'+(d.provider===p?' selected':'')+'>'+p+'</option>'; }).join('')
+       + '</select></div><div><label>model</label><input type="text" data-bind="model" value="'+esc(d.model||'')+'" placeholder="default"></div></div>'
+       + '<div class="row2"><div><label>aspect</label><select data-bind="aspect">'
+       + ['1:1','16:9','9:16','4:5','3:4'].map(function(a){ return '<option'+(d.aspect===a?' selected':'')+'>'+a+'</option>'; }).join('')
+       + '</select></div><div><label>extra prompt</label><input type="text" data-bind="extra" value="'+esc(d.extra||'')+'"></div></div>';
+    if (n.out && n.out.kind==='image') h += '<div class="thumbs"><img class="big" src="data:'+n.out.mime+';base64,'+n.out.b64+'"></div>';
+    h += '<button class="runb" data-act="run">▶ generate</button>';
+  }
+  if (n.type==='splitter'){
+    h += '<label>separator</label><input type="text" data-bind="sep" value="'+esc(d.sep||'→→')+'">';
+    if (n.out && n.out.kind==='list') h += '<div class="hintxt">'+n.out.items.length+' prompts split ✓</div>';
+    h += '<button class="runb" data-act="run">▶ split</button>';
+  }
+  if (n.type==='batchgen'){
+    h += '<div class="row2"><div><label>provider</label><select data-bind="provider">'
+       + ['gemini','openai'].map(function(p){ return '<option'+(d.provider===p?' selected':'')+'>'+p+'</option>'; }).join('')
+       + '</select></div><div><label>model</label><input type="text" data-bind="model" value="'+esc(d.model||'')+'" placeholder="default"></div></div>'
+       + '<label>aspect</label><select data-bind="aspect">'
+       + ['1:1','16:9','9:16','4:5','3:4'].map(function(a){ return '<option'+(d.aspect===a?' selected':'')+'>'+a+'</option>'; }).join('') + '</select>';
+    if (d.progress) h += '<div class="hintxt">'+esc(d.progress)+'</div>';
+    if (n.out && n.out.kind==='imagelist') h += '<div class="gal">'+n.out.images.map(function(im,i){
+      return '<figure><img src="data:'+im.mime+';base64,'+im.b64+'"><a download="avatiser-shot-'+(i+1)+'.png" href="data:'+im.mime+';base64,'+im.b64+'">↓</a></figure>'; }).join('')+'</div>';
+    h += '<button class="runb" data-act="run">▶ generate all</button>';
+  }
+  if (n.type==='gallery'){
+    var ims = collectInputImages(n);
+    h += ims.length
+      ? '<div class="gal">'+ims.map(function(im,i){ return '<figure><img src="data:'+im.mime+';base64,'+im.b64+'"><a download="avatiser-'+(i+1)+'.png" href="data:'+im.mime+';base64,'+im.b64+'">↓</a></figure>'; }).join('')+'</div>'
+      : '<div class="hintxt">wire finished images here to review + download</div>';
+  }
+  if (n.type==='videoprompt'){
+    h += '<label>target</label><select data-bind="target"><option'+(d.target==='kling'?' selected':'')+'>kling</option><option'+(d.target==='seedance'?' selected':'')+'>seedance</option></select>';
+    if (n.out && n.out.kind==='text') h += '<div class="out"><pre>'+esc(n.out.text)+'</pre></div><button class="runb" data-act="copy">copy for '+esc(d.target||'kling')+'</button>';
+    h += '<button class="runb" data-act="run">▶ compile</button>';
+  }
+  if (n.err) h += '<div class="errtxt">'+esc(n.err)+'</div>';
+  return h;
+}
+
+function render(){
+  nodesEl.innerHTML = state.nodes.map(function(n){
+    var t = TYPES[n.type];
+    var ins = t.ins.map(function(l,i){ return '<div class="port'+(hasEdgeTo(n.id,i)?' on':'')+'" data-port="in" data-idx="'+i+'"><span class="plabel">'+l+'</span></div>'; }).join('');
+    var outs = t.outs.map(function(l,i){ return '<div class="port'+(n.out?' on':'')+'" data-port="out" data-idx="'+i+'"><span class="plabel">'+l+'</span></div>'; }).join('');
+    return '<div class="node'+(n.running?' running':'')+(n.err?' err':'')+'" data-node="'+n.id+'" style="left:'+n.x+'px;top:'+n.y+'px">'
+      + '<div class="nh"><span class="dot" style="background:'+t.color+'"></span><b>'+esc(n.data.title||t.name)+'</b><span class="x" data-act="del">✕</span></div>'
+      + '<div class="ports-in">'+ins+'</div><div class="ports-out">'+outs+'</div>'
+      + '<div class="nb">'+nodeBodyHtml(n)+'</div></div>';
+  }).join('');
+  drawWires();
+  applyView();
+}
+
+function hasEdgeTo(id, idx){ return state.edges.some(function(e){ return e.t[0]===id && e.t[1]===idx; }); }
+
+/* ═══ graph value resolution ═══ */
+function inputValues(n, portIdx){
+  var vals = [];
+  state.edges.forEach(function(e){
+    if (e.t[0]!==n.id || e.t[1]!==portIdx) return;
+    var src = nodeById(e.f[0]);
+    if (src && src.out) vals.push({ node: src, val: src.out });
+  });
+  return vals;
+}
+function collectInputImages(n){
+  var ims = [];
+  TYPES[n.type].ins.forEach(function(_, pi){
+    inputValues(n, pi).forEach(function(v){
+      if (v.val.kind==='image') ims.push(v.val);
+      if (v.val.kind==='imagelist') ims = ims.concat(v.val.images);
+      if (v.val.kind==='images') ims = ims.concat(v.val.images);
+    });
+  });
+  return ims;
+}
+
+/* ═══ providers ═══ */
+function model(n, textOrImg){
+  if (n.data.model) return n.data.model;
+  var p = n.data.provider;
+  if (textOrImg==='img') return p==='openai' ? (KEYS.mOpenaiImg||DEF.mOpenaiImg) : (KEYS.mGeminiImg||DEF.mGeminiImg);
+  if (p==='openai') return KEYS.mOpenai||DEF.mOpenai;
+  if (p==='anthropic') return KEYS.mAnthropic||DEF.mAnthropic;
+  return KEYS.mGemini||DEF.mGemini;
+}
+async function jfetch(url, opts){
+  var r = await fetch(url, opts);
+  var j = await r.json().catch(function(){ return {}; });
+  if (!r.ok) throw new Error((j.error && (j.error.message||JSON.stringify(j.error))) || ('HTTP '+r.status));
+  return j;
+}
+async function llm(provider, mdl, system, text, images){
+  images = images||[];
+  if (provider==='gemini'){
+    if (!KEYS.gemini) throw new Error('add your Gemini key (keys drawer)');
+    var parts = [{text:text}].concat(images.map(function(im){ return {inline_data:{mime_type:im.mime, data:im.b64}}; }));
+    var j = await jfetch('https://generativelanguage.googleapis.com/v1beta/models/'+mdl+':generateContent?key='+KEYS.gemini,
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ system_instruction:{parts:[{text:system}]}, contents:[{role:'user',parts:parts}] }) });
+    var p = j.candidates && j.candidates[0] && j.candidates[0].content.parts;
+    var out = (p||[]).map(function(x){ return x.text||''; }).join('');
+    if (!out) throw new Error('empty response');
+    return out;
+  }
+  if (provider==='openai'){
+    if (!KEYS.openai) throw new Error('add your OpenAI key (keys drawer)');
+    var content = [{type:'text', text:text}].concat(images.map(function(im){ return {type:'image_url', image_url:{url:'data:'+im.mime+';base64,'+im.b64}}; }));
+    var j2 = await jfetch('https://api.openai.com/v1/chat/completions',
+      { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+KEYS.openai},
+        body: JSON.stringify({ model: mdl, messages:[{role:'system',content:system},{role:'user',content:content}] }) });
+    return j2.choices[0].message.content;
+  }
+  if (provider==='anthropic'){
+    if (!KEYS.anthropic) throw new Error('add your Anthropic key (keys drawer)');
+    var content2 = images.map(function(im){ return {type:'image', source:{type:'base64', media_type:im.mime, data:im.b64}}; });
+    content2.push({type:'text', text:text});
+    var j3 = await jfetch('https://api.anthropic.com/v1/messages',
+      { method:'POST', headers:{'Content-Type':'application/json','x-api-key':KEYS.anthropic,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body: JSON.stringify({ model: mdl, max_tokens: 4096, system: system, messages:[{role:'user', content: content2}] }) });
+    return j3.content.map(function(c){ return c.text||''; }).join('');
+  }
+  throw new Error('unknown provider');
+}
+async function genImage(provider, mdl, prompt, refs, aspect){
+  refs = refs||[];
+  if (provider==='gemini'){
+    if (!KEYS.gemini) throw new Error('add your Gemini key (keys drawer)');
+    var parts = [{text:prompt}].concat(refs.map(function(im){ return {inline_data:{mime_type:im.mime, data:im.b64}}; }));
+    var j = await jfetch('https://generativelanguage.googleapis.com/v1beta/models/'+mdl+':generateContent?key='+KEYS.gemini,
+      { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ contents:[{role:'user',parts:parts}], generationConfig:{ responseModalities:['IMAGE'], imageConfig:{ aspectRatio: aspect||'1:1' } } }) });
+    var ps = j.candidates && j.candidates[0] && j.candidates[0].content.parts || [];
+    for (var i=0;i<ps.length;i++) if (ps[i].inlineData) return { kind:'image', mime: ps[i].inlineData.mimeType||'image/png', b64: ps[i].inlineData.data };
+    for (var k=0;k<ps.length;k++) if (ps[k].inline_data) return { kind:'image', mime: ps[k].inline_data.mime_type||'image/png', b64: ps[k].inline_data.data };
+    throw new Error('no image in response' + (ps[0]&&ps[0].text ? ' — '+ps[0].text.slice(0,120) : ''));
+  }
+  if (provider==='openai'){
+    if (!KEYS.openai) throw new Error('add your OpenAI key (keys drawer)');
+    if (refs.length) prompt += '\n(Note: reference conditioning unavailable on this route — prefer the gemini provider for product-reference shots.)';
+    var size = aspect==='16:9' ? '1536x1024' : aspect==='9:16' ? '1024x1536' : '1024x1024';
+    var j2 = await jfetch('https://api.openai.com/v1/images/generations',
+      { method:'POST', headers:{'Content-Type':'application/json','Authorization':'Bearer '+KEYS.openai},
+        body: JSON.stringify({ model: mdl, prompt: prompt, size: size }) });
+    return { kind:'image', mime:'image/png', b64: j2.data[0].b64_json };
+  }
+  throw new Error('unknown provider');
+}
+
+/* ═══ node runners ═══ */
+function gatherAgentInput(n){
+  var texts = [], images = [];
+  inputValues(n, 0).forEach(function(v){
+    if (v.val.kind==='text') texts.push('--- '+(v.node.data.label||v.node.data.title||v.node.type).toUpperCase()+' ---\n'+v.val.text);
+    if (v.val.kind==='list') texts.push(v.val.items.join('\n→→\n'));
+  });
+  inputValues(n, 1).forEach(function(v){
+    if (v.val.kind==='image') images.push(v.val);
+    if (v.val.kind==='images' || v.val.kind==='imagelist') images = images.concat(v.val.images);
+  });
+  return { text: texts.join('\n\n') || '(no text inputs wired)', images: images };
+}
+/* per-prompt aspect: AOC prompts carry '**ASPECT** 9:16' — honor it per shot */
+function aspectOf(prompt, fallback){
+  var m = prompt.match(/\*?\*?ASPECT\*?\*?[\s:—-]*([0-9]+:[0-9]+)/i);
+  return m ? m[1] : fallback;
+}
+
+var RUN = {
+  images: async function(n){ n.out = { kind:'images', images: n.data.images||[] }; },
+  text: async function(n){ n.out = { kind:'text', text: n.data.value||'' }; },
+  grid: async function(n){
+    var ims = collectInputImages(n);
+    if (!ims.length) throw new Error('wire an Images node in first');
+    var cols = Math.ceil(Math.sqrt(ims.length));
+    var rows = Math.ceil(ims.length/cols);
+    var cell = Math.floor(2048/cols);
+    var cv = document.createElement('canvas'); cv.width = cell*cols; cv.height = cell*rows;
+    var ctx = cv.getContext('2d'); ctx.fillStyle = '#111'; ctx.fillRect(0,0,cv.width,cv.height);
+    for (var i=0;i<ims.length;i++){
+      var img = new Image();
+      await new Promise(function(res,rej){ img.onload=res; img.onerror=rej; img.src='data:'+ims[i].mime+';base64,'+ims[i].b64; });
+      var r = Math.min(cell/img.width, cell/img.height);
+      var w = img.width*r, hh = img.height*r;
+      ctx.drawImage(img, (i%cols)*cell+(cell-w)/2, Math.floor(i/cols)*cell+(cell-hh)/2, w, hh);
+    }
+    n.out = { kind:'image', mime:'image/jpeg', b64: cv.toDataURL('image/jpeg', .88).split(',')[1] };
+  },
+  agent: async function(n){
+    var inp = gatherAgentInput(n);
+    var sys = n.data.system || PROMPTS[n.data.preset] || 'You are a helpful creative assistant.';
+    var out = await llm(n.data.provider||'gemini', model(n,'text'), sys, inp.text, inp.images);
+    n.out = { kind:'text', text: out };
+  },
+  imagegen: async function(n){
+    var ptexts = inputValues(n,0).filter(function(v){return v.val.kind==='text';}).map(function(v){return v.val.text;});
+    var prompt = (ptexts.join('\n\n') + '\n' + (n.data.extra||'')).trim();
+    if (!prompt) throw new Error('wire a prompt (text) in, or set extra prompt');
+    var refs = [];
+    inputValues(n,1).forEach(function(v){
+      if (v.val.kind==='image') refs.push(v.val);
+      if (v.val.kind==='images') refs = refs.concat(v.val.images);
+    });
+    n.out = await genImage(n.data.provider||'gemini', model(n,'img'), prompt + REALISM_TAIL, refs, n.data.aspect);
+  },
+  splitter: async function(n){
+    var t = inputValues(n,0).filter(function(v){return v.val.kind==='text';}).map(function(v){return v.val.text;}).join('\n');
+    if (!t) throw new Error('wire the AOC agent output in');
+    var items = t.split(n.data.sep||'→→').map(function(s){ return s.trim(); }).filter(function(s){ return s.length>40; });
+    if (!items.length) throw new Error('nothing to split — check the separator');
+    n.out = { kind:'list', items: items };
+  },
+  batchgen: async function(n){
+    var list = null;
+    inputValues(n,0).forEach(function(v){ if (v.val.kind==='list') list = v.val.items; });
+    if (!list) throw new Error('wire the Splitter output in');
+    var refs = [];
+    inputValues(n,1).forEach(function(v){
+      if (v.val.kind==='image') refs.push(v.val);
+      if (v.val.kind==='images') refs = refs.concat(v.val.images);
+    });
+    var outs = [];
+    for (var i=0;i<list.length;i++){
+      n.data.progress = 'generating '+(i+1)+' / '+list.length+'…'; render();
+      try {
+        outs.push(await genImage(n.data.provider||'gemini', model(n,'img'), list[i] + REALISM_TAIL, refs, aspectOf(list[i], n.data.aspect)));
+      } catch(e) { n.data.progress = 'shot '+(i+1)+' failed: '+e.message+' — continuing'; render(); }
+    }
+    n.data.progress = outs.length+' / '+list.length+' rendered';
+    if (!outs.length) throw new Error('every generation failed — check key/model');
+    n.out = { kind:'imagelist', images: outs };
+  },
+  gallery: async function(n){ n.out = { kind:'imagelist', images: collectInputImages(n) }; },
+  videoprompt: async function(n){
+    var t = '';
+    inputValues(n,0).forEach(function(v){
+      if (v.val.kind==='text') t += v.val.text + '\n\n';
+      if (v.val.kind==='list'){ // prefer the film-keyframe prompt if the splitter is wired straight in
+        var kf = v.val.items.find(function(s){ return /keyframe|16:9/i.test(s); }) || v.val.items[0];
+        t += kf + '\n\n';
+      }
+    });
+    if (!t.trim()) throw new Error('wire a prompt text (or the splitter) in');
+    var hasKey = inputValues(n,1).some(function(v){ return v.val.kind==='image'; });
+    n.out = { kind:'text', text: '[IMAGE-TO-VIDEO — first frame = the wired keyframe'+(hasKey?' (connected ✓)':' (NOT WIRED — attach the approved still!)')+']\n\n'
+      + t.trim()
+      + '\n\nMOTION (Avatiser doctrine): one shot, one named move — slow 20-30cm dolly-in OR handheld breathing, nothing else. 24fps cinema (shutter 1/48) or 30fps UGC (1/60). Motion inside the frame: atmosphere drifting through the key light, contents/fabric obeying real physics, product moves last and least. Label stays pixel-exact; if motion would warp it, reduce the move, not the fidelity. End on a settled frame that could hold a logo for 1s. No speed ramps, no direction changes, no orbit.' };
+  }
+};
+
+async function runNode(n){
+  n.err = null; n.running = true; render();
+  try { await RUN[n.type](n); }
+  catch(e){ n.err = e.message; n.out = n.out||null; }
+  n.running = false; render(); save();
+}
+
+/* topological run-all */
+async function runAll(){
+  var order = [], seen = {};
+  function visit(id, stack){
+    if (seen[id]) return; if (stack[id]) return; stack[id]=1;
+    state.edges.forEach(function(e){ if (e.t[0]===id) visit(e.f[0], stack); });
+    seen[id]=1; order.push(id);
+  }
+  state.nodes.forEach(function(n){ visit(n.id, {}); });
+  $('#bRun').disabled = true;
+  for (var i=0;i<order.length;i++){
+    var n = nodeById(order[i]);
+    if (!n) continue;
+    toast('running: '+(n.data.title||TYPES[n.type].name)+' ('+(i+1)+'/'+order.length+')', 60000);
+    await runNode(n);
+    if (n.err) { toast('stopped at "'+(n.data.title||n.type)+'": '+n.err, 6000); $('#bRun').disabled=false; return; }
+  }
+  $('#bRun').disabled = false;
+  toast('✓ graph complete');
+}
+
+/* ═══ interactions ═══ */
+var drag = null; // {kind:'node'|'pan'|'wire', ...}
+function evPos(ev){ return { x: (ev.clientX - view.x)/view.z, y: (ev.clientY - 52 - view.y)/view.z }; }
+
+vpEl.addEventListener('pointerdown', function(ev){
+  var portEl = ev.target.closest('.port');
+  var nodeEl = ev.target.closest('.node');
+  if (portEl && nodeEl){
+    var nid = nodeEl.dataset.node, side = portEl.dataset.port, idx = +portEl.dataset.idx;
+    if (side==='out'){
+      var p = portPos(nid,'out',idx);
+      drag = { kind:'wire', from:[nid,idx], x1:p.x, y1:p.y };
+    } else {
+      // drag off an existing edge end to delete it
+      var ei = state.edges.findIndex(function(e){ return e.t[0]===nid && e.t[1]===idx; });
+      if (ei>=0){ var e = state.edges.splice(ei,1)[0]; var p2 = portPos(e.f[0],'out',e.f[1]); drag = { kind:'wire', from:e.f, x1:p2.x, y1:p2.y }; render(); }
+    }
+    ev.preventDefault(); return;
+  }
+  if (nodeEl && ev.target.closest('.nh') && !ev.target.closest('.x')){
+    var n = nodeById(nodeEl.dataset.node);
+    var p3 = evPos(ev);
+    drag = { kind:'node', n:n, ox:p3.x-n.x, oy:p3.y-n.y };
+    ev.preventDefault(); return;
+  }
+  if (!nodeEl){
+    drag = { kind:'pan', sx:ev.clientX-view.x, sy:ev.clientY-view.y };
+    vpEl.classList.add('panning');
+  }
+});
+window.addEventListener('pointermove', function(ev){
+  if (!drag) return;
+  if (drag.kind==='pan'){ view.x = ev.clientX-drag.sx; view.y = ev.clientY-drag.sy; applyView(); }
+  if (drag.kind==='node'){ var p = evPos(ev); drag.n.x = Math.round(p.x-drag.ox); drag.n.y = Math.round(p.y-drag.oy);
+    var el = document.querySelector('[data-node="'+drag.n.id+'"]'); el.style.left = drag.n.x+'px'; el.style.top = drag.n.y+'px'; drawWires(); }
+  if (drag.kind==='wire'){ var p2 = evPos(ev); drawWires({x1:drag.x1,y1:drag.y1,x2:p2.x,y2:p2.y});
+    document.querySelectorAll('.port.hot').forEach(function(x){x.classList.remove('hot');});
+    var t = document.elementFromPoint(ev.clientX, ev.clientY);
+    var pe = t && t.closest && t.closest('.port');
+    if (pe && pe.dataset.port==='in') pe.classList.add('hot');
+  }
+});
+window.addEventListener('pointerup', function(ev){
+  if (!drag) return;
+  if (drag.kind==='wire'){
+    var t = document.elementFromPoint(ev.clientX, ev.clientY);
+    var pe = t && t.closest && t.closest('.port');
+    var ne = t && t.closest && t.closest('.node');
+    if (pe && ne && pe.dataset.port==='in'){
+      var to = [ne.dataset.node, +pe.dataset.idx];
+      if (to[0] !== drag.from[0]){
+        state.edges = state.edges.filter(function(e){ return !(e.t[0]===to[0] && e.t[1]===to[1] && e.f[0]===drag.from[0] && e.f[1]===drag.from[1]); });
+        state.edges.push({ f: drag.from, t: to });
+      }
+    }
+  }
+  if (drag.kind==='pan') vpEl.classList.remove('panning');
+  drag = null; render(); save();
+});
+/* wheel zoom */
+vpEl.addEventListener('wheel', function(ev){
+  ev.preventDefault();
+  var z = Math.min(1.6, Math.max(.3, view.z * (ev.deltaY>0 ? .92 : 1.08)));
+  var mx = ev.clientX, my = ev.clientY-52;
+  view.x = mx - (mx-view.x)*(z/view.z); view.y = my - (my-view.y)*(z/view.z); view.z = z;
+  applyView();
+}, { passive:false });
+/* delete wires by click */
+wiresEl.addEventListener('click', function(ev){
+  var p = ev.target.closest('path.w'); if (!p) return;
+  state.edges.splice(+p.dataset.e, 1); render(); save();
+});
+
+/* node body events (delegated) */
+nodesEl.addEventListener('change', function(ev){
+  var nodeEl = ev.target.closest('.node'); if (!nodeEl) return;
+  var n = nodeById(nodeEl.dataset.node);
+  var bind = ev.target.dataset.bind;
+  if (bind){
+    n.data[bind] = ev.target.value;
+    if (bind==='preset' && ev.target.value!=='custom'){ n.data.system = PROMPTS[ev.target.value]||''; render(); }
+    save(); return;
+  }
+  if (ev.target.dataset.act==='upload'){
+    var files = Array.prototype.slice.call(ev.target.files);
+    Promise.all(files.map(function(f){
+      return new Promise(function(res){ var r = new FileReader(); r.onload = function(){ var m = r.result.match(/^data:(.*?);base64,(.*)$/); res({mime:m[1], b64:m[2]}); }; r.readAsDataURL(f); });
+    })).then(function(ims){
+      n.data.images = (n.data.images||[]).concat(ims);
+      n.out = { kind:'images', images: n.data.images };
+      render(); save();
+    });
+  }
+});
+nodesEl.addEventListener('click', function(ev){
+  var nodeEl = ev.target.closest('.node'); if (!nodeEl) return;
+  var n = nodeById(nodeEl.dataset.node);
+  if (ev.target.dataset.act==='del'){
+    state.nodes = state.nodes.filter(function(x){ return x.id!==n.id; });
+    state.edges = state.edges.filter(function(e){ return e.f[0]!==n.id && e.t[0]!==n.id; });
+    render(); save(); return;
+  }
+  if (ev.target.dataset.act==='run'){ runNode(n); return; }
+  if (ev.target.dataset.act==='copy'){ navigator.clipboard.writeText(n.out.text).then(function(){ toast('copied — paste into '+(n.data.target||'kling')); }); return; }
+  if (ev.target.dataset.rm !== undefined && n.type==='images'){
+    n.data.images.splice(+ev.target.dataset.rm, 1);
+    n.out = { kind:'images', images: n.data.images };
+    render(); save();
+  }
+});
+
+/* ═══ drawers, keys, add ═══ */
+function closeDrawers(){ document.querySelectorAll('.drawer').forEach(function(d){ d.classList.remove('open'); }); }
+$('#bKeys').onclick = function(){
+  closeDrawers(); $('#dKeys').classList.add('open');
+  $('#kGemini').value = KEYS.gemini||''; $('#kOpenai').value = KEYS.openai||''; $('#kAnthropic').value = KEYS.anthropic||'';
+  $('#mGemini').value = KEYS.mGemini||DEF.mGemini; $('#mOpenai').value = KEYS.mOpenai||DEF.mOpenai;
+  $('#mAnthropic').value = KEYS.mAnthropic||DEF.mAnthropic; $('#mGeminiImg').value = KEYS.mGeminiImg||DEF.mGeminiImg;
+  $('#mOpenaiImg').value = KEYS.mOpenaiImg||DEF.mOpenaiImg;
+};
+function saveKeys(){
+  KEYS = { gemini:$('#kGemini').value.trim(), openai:$('#kOpenai').value.trim(), anthropic:$('#kAnthropic').value.trim(),
+    mGemini:$('#mGemini').value.trim(), mOpenai:$('#mOpenai').value.trim(), mAnthropic:$('#mAnthropic').value.trim(),
+    mGeminiImg:$('#mGeminiImg').value.trim(), mOpenaiImg:$('#mOpenaiImg').value.trim() };
+  localStorage.setItem('af_keys', JSON.stringify(KEYS));
+  closeDrawers(); toast('saved to this browser only');
+}
+$('#bAdd').onclick = function(){
+  closeDrawers();
+  $('#addGrid').innerHTML = Object.keys(TYPES).map(function(t){
+    return '<button class="addbtn" data-t="'+t+'"><b><span class="dot" style="background:'+TYPES[t].color+'"></span>'+TYPES[t].name+'</b><span>'+TYPES[t].desc+'</span></button>';
+  }).join('');
+  $('#dAdd').classList.add('open');
+};
+$('#addGrid') && ($('#dAdd').onclick = function(ev){
+  var b = ev.target.closest('.addbtn'); if (!b) return;
+  addNode(b.dataset.t, (-view.x+80)/view.z + Math.random()*60, (-view.y+90)/view.z + Math.random()*60);
+  closeDrawers();
+});
+function addNode(type, x, y, data){
+  var n = { id: uid(), type: type, x: Math.round(x), y: Math.round(y), data: Object.assign({ provider: type==='agent'?'gemini':'gemini', preset:'custom' }, data||{}), out: null };
+  if (type==='agent' && n.data.preset!=='custom' && !n.data.system) n.data.system = PROMPTS[n.data.preset]||'';
+  state.nodes.push(n); render(); save(); return n;
+}
+$('#bRun').onclick = runAll;
+$('#bExp').onclick = function(){
+  var a = document.createElement('a');
+  a.href = 'data:application/json;charset=utf-8,'+encodeURIComponent(serialize());
+  a.download = 'avatiser-flow.json'; a.click();
+};
+$('#bImp').onclick = function(){ $('#fileImp').click(); };
+$('#fileImp').addEventListener('change', function(){
+  var f = this.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function(){
+    try { var g = JSON.parse(r.result); state.nodes=g.nodes; state.edges=g.edges; state.nid=g.nid||500; if (g.view) view=g.view; render(); save(); toast('imported'); }
+    catch(e){ toast('bad file'); }
+  };
+  r.readAsText(f);
+});
+
+/* ═══ the campaign template — the whole 9-step workflow pre-wired ═══ */
+function buildTemplate(){
+  state.nodes = []; state.edges = []; state.nid = 1;
+  var mood = addNode('images', 40, 60, { title:'Moodboard refs' });
+  var prod = addNode('images', 40, 420, { title:'Product photos' });
+  var grid = addNode('grid', 380, 60, { title:'Moodboard grid' });
+  var brand = addNode('text', 380, 330, { title:'Brand', label:'brand', value:'' });
+  var product = addNode('text', 380, 520, { title:'Product', label:'product', value:'' });
+  var scen = addNode('text', 380, 710, { title:'Scenario', label:'scenario', value:'' });
+  var dna = addNode('agent', 720, 60, { title:'1 · Visual DNA', preset:'visualDna', system:PROMPTS.visualDna, provider:'gemini' });
+  var sty = addNode('agent', 1060, 200, { title:'2 · Model & Stylist', preset:'stylist', system:PROMPTS.stylist, provider:'anthropic' });
+  var face = addNode('imagegen', 1400, 40, { title:'3 · Face grid lock', provider:'gemini', aspect:'1:1', extra:'Create a casting reference grid of THIS model: front, 3/4 left, 3/4 right, profile. Same person, same light, plain backdrop. Photoreal, visible pores, natural asymmetry.' });
+  var pgrid = addNode('imagegen', 1400, 460, { title:'4 · Product grid lock', provider:'gemini', aspect:'1:1', extra:'Create a product reference grid from the attached photos: front, side, top, macro detail. Exact label reproduction from references. Neutral studio light.' });
+  var cd = addNode('agent', 1740, 200, { title:'5 · Creative Director', preset:'director', system:PROMPTS.director, provider:'gemini' });
+  var aoc = addNode('agent', 2080, 200, { title:'6 · AOC Architect', preset:'aoc', system:PROMPTS.aoc, provider:'openai' });
+  var split = addNode('splitter', 2420, 240, { title:'7 · Split ×10', sep:'→→' });
+  var batch = addNode('batchgen', 2760, 160, { title:'8 · Generate ×10', provider:'gemini', aspect:'4:5' });
+  var gal = addNode('gallery', 3120, 200, { title:'9 · Campaign' });
+  var qc = addNode('agent', 3120, 620, { title:'10 · Realism Auditor', preset:'qc', system:PROMPTS.qc, provider:'gemini' });
+  var vid = addNode('videoprompt', 3460, 620, { title:'bonus · video prompt', target:'kling' });
+
+  state.edges = [
+    { f:[mood.id,0], t:[grid.id,0] },
+    { f:[grid.id,0], t:[dna.id,1] },
+    { f:[brand.id,0], t:[dna.id,0] },
+    { f:[dna.id,0], t:[sty.id,0] }, { f:[brand.id,0], t:[sty.id,0] }, { f:[product.id,0], t:[sty.id,0] }, { f:[scen.id,0], t:[sty.id,0] },
+    { f:[sty.id,0], t:[face.id,0] },
+    { f:[prod.id,0], t:[pgrid.id,1] },
+    { f:[dna.id,0], t:[cd.id,0] }, { f:[sty.id,0], t:[cd.id,0] }, { f:[brand.id,0], t:[cd.id,0] }, { f:[product.id,0], t:[cd.id,0] }, { f:[scen.id,0], t:[cd.id,0] },
+    { f:[cd.id,0], t:[aoc.id,0] }, { f:[sty.id,0], t:[aoc.id,0] }, { f:[dna.id,0], t:[aoc.id,0] },
+    { f:[aoc.id,0], t:[split.id,0] },
+    { f:[split.id,0], t:[batch.id,0] },
+    { f:[face.id,0], t:[batch.id,1] }, { f:[pgrid.id,0], t:[batch.id,1] },
+    { f:[batch.id,0], t:[gal.id,0] },
+    { f:[batch.id,0], t:[qc.id,1] }, { f:[face.id,0], t:[qc.id,1] }, { f:[pgrid.id,0], t:[qc.id,1] },
+    { f:[split.id,0], t:[vid.id,0] }, { f:[face.id,0], t:[vid.id,1] }
+  ];
+  view = { x: 30, y: 20, z: .62 };
+  render(); save();
+  toast('campaign template loaded — fill brand/product/scenario, upload refs, then ▶ run all');
+}
+$('#bTpl').onclick = function(){
+  if (state.nodes.length && !confirm('Replace the current canvas with the campaign template?')) return;
+  buildTemplate();
+};
+
+/* ═══ boot ═══ */
+if (!load()) buildTemplate(); else render();
+window.closeDrawers = closeDrawers; window.saveKeys = saveKeys;
+</script>
+</body>
+</html>

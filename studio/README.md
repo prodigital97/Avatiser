@@ -1,5 +1,14 @@
 # avatiser. studio engine
 
+> **avatiser FLOW** — the node-canvas studio (`flow/flow.html`, deployed
+> encrypted at avatiser.com/flow) is the visual way to drive this engine:
+> a Weavy/n8n-style graph where Moodboard → Visual DNA → Model & Stylist →
+> face/product consistency grids → Creative Director (10 deliverable-mapped
+> concepts) → AOC Architect (Anchor/Optics/Chemistry prompts) → Splitter →
+> Batch Generate (per-shot aspect ratios) → Gallery + Realism Auditor QC.
+> API keys are entered in the app and stored only in the browser.
+> Rebuild the deployed copy with: `STUDIO_PASSPHRASE=... node studio/studio.js flow`
+
 The internal content-production system behind avatiser. studios — the machine
 that turns **one product** into **a full campaign** of photoreal images and
 films. Think Higgsfield Cinema Studio / Marketing Studio, but built around one
