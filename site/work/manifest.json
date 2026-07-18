@@ -45,12 +45,12 @@
       "name": "ikonic professional — haircare tools",
       "industry": "beauty & personal care tech",
       "blurb": "a two-piece hero system for a professional haircare line — dryer and straightener, matte-black studio light, engineered-product pacing built for retail and e-commerce screens.",
-      "deliverables": ["hero reel", "16:9 product film", "studio macro detail"],
+      "deliverables": ["hero film", "16:9 product film", "studio macro detail"],
       "turnaround": "48h",
       "cover": "/assets/videos/clip9.mp4",
       "media": [
-        { "type": "video", "src": "/assets/videos/clip9.mp4", "poster": "/assets/videos/poster9.jpg", "tag": "hero reel · 16:9 · hair dryer" },
-        { "type": "video", "src": "/assets/videos/clip10.mp4", "poster": "/assets/videos/poster10.jpg", "tag": "hero reel · 16:9 · straightener" },
+        { "type": "video", "src": "/assets/videos/clip9.mp4", "poster": "/assets/videos/poster9.jpg", "tag": "hero film · 16:9 · hair dryer" },
+        { "type": "video", "src": "/assets/videos/clip10.mp4", "poster": "/assets/videos/poster10.jpg", "tag": "hero film · 16:9 · straightener" },
         { "type": "image", "src": "/assets/videos/poster9.jpg", "tag": "frame still" }
       ]
     },
@@ -82,15 +82,15 @@
       ]
     },
     {
-      "slug": "signature-fragrance",
-      "name": "signature — fragrance macro film",
-      "industry": "beauty & cosmetics",
-      "blurb": "spec concept work: a slow-motion droplet study for a fragrance bottle — monochrome light, glass and liquid in motion, the atmosphere-first style fragrance launches are built on.",
-      "deliverables": ["macro detail film", "9:16 social cut"],
+      "slug": "timepiece-strap-collection",
+      "name": "timepiece — strap collection film",
+      "industry": "fashion & accessories",
+      "blurb": "spec concept work: a monochrome reveal for a steel watch and its interchangeable leather straps — droplet-transition open, macro light on brushed metal, the versatility story a strap collection is built to sell.",
+      "deliverables": ["macro reveal film", "9:16 social cut"],
       "turnaround": "48h",
       "cover": "/assets/videos/clip6.mp4",
       "media": [
-        { "type": "video", "src": "/assets/videos/clip6.mp4", "poster": "/assets/videos/poster6.jpg", "tag": "macro study · 9:16" },
+        { "type": "video", "src": "/assets/videos/clip6.mp4", "poster": "/assets/videos/poster6.jpg", "tag": "macro reveal · 9:16" },
         { "type": "image", "src": "/assets/videos/poster6.jpg", "tag": "frame still" }
       ]
     }
