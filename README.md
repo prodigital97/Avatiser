@@ -7,11 +7,17 @@ site/          the public website — this is what deploys to avatiser.com
 business/      internal strategy docs — never deployed, never public
 studio/        the content-production engine (prompts, pipelines, model
                routing) — never deployed, see studio/README.md
+agents/        library of specialized AI agent personas (marketing, sales,
+               finance, engineering, design, strategy...) for running the
+               agency — never deployed. Pulled in from
+               github.com/msitarzewski/agency-agents; SOURCE_README.md,
+               divisions.json and tools.json are that project's own index.
 ```
 
 **Why the split matters:** the deploy workflow publishes the contents of
-`site/` only. Nothing in `business/` or `studio/` is ever uploaded to GitHub
-Pages or served on the live domain — it stays private to this repo.
+`site/` only. Nothing in `business/`, `studio/` or `agents/` is ever
+uploaded to GitHub Pages or served on the live domain — it stays private
+to this repo.
 
 ---
 
