@@ -1,6 +1,6 @@
 {
   "project": "salt-court",
-  "compiled_at": "2026-11-18T12:03:33.009Z",
+  "compiled_at": "2026-11-18T12:23:04.721Z",
   "assets": [
     {
       "campaign": "fashion-editorial",
@@ -103,8 +103,7 @@
       "duration_s": null,
       "count": 2,
       "depends_on": [
-        "style-support-1",
-        "hero"
+        "style-support-1"
       ],
       "prompt_file": "output/prompts/fashion-editorial--support-1.txt",
       "status": "compiled"

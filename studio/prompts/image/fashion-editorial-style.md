@@ -9,6 +9,6 @@ REFERENCES: {{deliverable.reference_rule}}
 
 PROMPT (send verbatim):
 
-{{shot.prompt}}
+{{shot.style_prompt}}
 
 {{realism_core}}

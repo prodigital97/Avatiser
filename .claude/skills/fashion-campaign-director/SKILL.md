@@ -208,6 +208,10 @@ In the Avatiser repo this skill is the front end of the studio engine's `fashion
 - A last bullet giving priority when references conflict: garments, then faces, then style.
 - In single-person shots, name what she is *not* wearing from the other looks ("Nothing else: no scarf").
 
+**Scale shots: plate first, people second.** For a wide frame with small figures, give the shot its own `*Style frame:*` block after the main prompt: the same landscape rendered empty on Soul 2.0. The main prompt is then a Seedream insert: "add two tiny … into @image_1, change nothing else", sized against something in the frame, and lit to match the plate's sun direction, shadows, mist and grain. Attach only the look boards. Never attach the hero or the casting photos to a scale shot: they pull the figures to hero size, and the result looks pasted in.
+
+**Name what isn't there.** When a generator keeps adding a motif the product doesn't have (stems and red flowers on a scarf, a second charm), say so in the garment line ("periwinkle only, no stems, leaves or red"). For vehicles, objects and buildings with a modern substitute, describe the old one physically and rule out the substitute ("a tiny blue saddle-tank steam locomotive with a tall black chimney, a steam engine and not a diesel"). Steam coming out of a diesel is a physics hard fail.
+
 **Locations the model might reinvent.** Soul in particular fills gaps with its own defaults: "toy train" became a miniature model and "station" a European building. Describe real places physically ("a small Indian hill-station halt with grey stone walls and a corrugated tin canopy"; "a real narrow-gauge steam locomotive no taller than a man"), and keep name boards out of frame.
 
 **Where it goes.** Save the campaign to `studio/projects/<slug>/campaign.md`, where `<slug>` is the campaign title in kebab-case. Create the project with `node studio/studio.js new <slug> fashion` first, then compile with `node studio/studio.js compile <slug>`. The `/campaign` command does all of this.

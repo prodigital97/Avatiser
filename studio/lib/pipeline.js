@@ -80,6 +80,10 @@ function parseCampaign(md, label = 'campaign.md') {
       /* optional: a *References:* line followed by "- " bullets, one per attached image */
       references: ((body.match(/^\*References:\*[ \t]*\n((?:[ \t]*- .*(?:\n|$))+)/m) || [])[1] || '').trim(),
       prompt: prompt.trim(),
+      /* optional: a "*Style frame:*" line + its own fenced block, after the main
+         prompt, for when the Soul pass must differ (e.g. an empty plate for a
+         scale shot, people added in the final pass). Defaults to the prompt. */
+      style_prompt: ((body.match(/^\*Style frame:\*[^\n]*\n```[^\n]*\n([\s\S]*?)\n```/m) || [])[1] || prompt).trim(),
       aspect,
     });
   });
