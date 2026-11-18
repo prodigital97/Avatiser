@@ -79,6 +79,11 @@ Or choose from the core jobs below. Every campaign needs at least one product-in
 Give each frame one clear action. Each supporting shot must differ from the hero in at least two variables: distance, angle, number of people, presence of product.
 
 ### 5. Direct skin, hands and faces
+- **Cast one person by default.** Skincare sells one face's result, and self-application is how most products are used. Two faces also double identity drift and invite hand-to-face errors (tested). Add a second person only when the idea needs them:
+  - a professional treatment given by a practitioner (a salon facial kit);
+  - age or shade range shown side by side;
+  - a relationship that is the concept.
+  Give that person only the frames where their role is real.
 - **Name nationality or region, city, age and skin depth for every person**, worded identically in every prompt (§10). Plan a casting headshot per person.
 - **Expressions:** describe the mechanics. Beauty favours inward pleasure and calm: eyes closed, chin lifted to the light, lips softly parted; or a level, assured gaze. A real smile is allowed when the idea is joy, but describe the face, never just "smiling".
 - **Hands:** clean, natural nails, true skin tone, knuckle creases kept, a correct grip. The label stays uncovered.

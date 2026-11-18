@@ -8,7 +8,7 @@ REFERENCES: @image_1 the approved final render, then the real product photo or r
 
 PROMPT (send verbatim):
 
-Edit @image_1: replace the jar in the older woman's hand with the exact product in @image_2, keeping its label, logo, colours and blue capsule fill exactly as photographed, at the same size (about 7 cm across, sitting in her palm) and the same angle. Recolour the single capsule between her fingertips to match the capsules in @image_2. Relight it to match the scene: bright sun from high camera left, rippling caustic light from the pool, a few water droplets on the jar, her fingers casting a soft shadow on it. Keep everything else in @image_1 exactly as it is: hands, fingers, faces, skin, water, light and grade. No other text.
+Edit @image_1: replace the jar in the woman's left hand with the exact product in @image_2, keeping its label, logo, colours and blue capsule fill exactly as photographed, at the same size (about 7 cm across, sitting in her palm) and the same angle. Recolour the gel on her right fingertips to match the capsules in @image_2. Relight the jar to match the scene: bright sun from high camera left, rippling caustic light from the pool, a few water droplets on the jar, her fingers casting a soft shadow on it. Keep everything else in @image_1 exactly as it is: hands, fingers, face, skin, water, light and grade. No other text.
 
 QC: zoom to 100% on every label. Any letter that differs from the product photo
 is a hard fail; re-run the lock, never ship it.

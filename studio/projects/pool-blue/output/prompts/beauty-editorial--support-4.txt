@@ -1,0 +1,127 @@
+# FASHION EDITORIAL — Pool Blue / The Facial (4:5)
+
+PURPOSE: Optional, the professional kit story: the one frame where a second person belongs, because the Hydracloud facial is given by a beautician.
+
+REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+Attach in this order and paste this key at the top of the prompt:
+- @image_1 — face of the woman from Jaipur (the beautician).
+- @image_2 — face of the woman from Kochi (lying back).
+- @image_3 — product photo: Hydracloud Infusion facial kit. Shape, size and colour only; the label is fixed in the product-lock pass.
+- When references conflict: the box's shape from @image_3 wins, then the faces from @image_1–2.
+
+PROMPT (key above, then this, verbatim):
+
+Editorial beauty photograph of two Indian women, close three-quarter crop from slightly above, Hasselblad X2D 100C with 80mm lens. Faces as in the attached casting photos; the box as in the attached product photo. On a white-towelled lounger at the edge of an old Bombay public pool with crystal-clear turquoise water and small square white and turquoise tiles, a Malayali Indian woman from Kochi in her early twenties, deep brown skin, shoulder-length black hair slicked back wet, small gold stud earrings, lies back in a white towel wrap, eyes closed, face completely relaxed, her damp hair spread on the towel. Seated beside her, a Rajasthani Indian woman from Jaipur in her late forties, warm brown skin with fine lines at the eyes, silver-streaked black hair in a low knot, a small gold nose ring, in an ivory cotton tunic with its sleeves pushed above the elbow, a professional beautician, smooths a cool, clear gel mask across the younger woman's forehead and cheeks with a flat fan brush, keeping clear of the eyes; eyes lowered on her work, brows level, lips closed, absorbed. On a small white side table beside them, a flat lavender facial-kit box stands upright with its front to camera, next to a small white ceramic bowl of the clear gel. STRICT PRODUCT SCALE LOCK: the box is about 20 cm tall and 3 cm deep, a little taller than the beautician's spread hand, and the bowl is the size of a teacup; neither grows or shrinks. This box and the bowl are the only products in frame. Behind them, out of focus, the turquoise water; no other people. No signs, painted depth numbers or lettering anywhere. Bright clear morning sun from high camera left glitters on the water and throws rippling caustic light across skin and tile, with soft fill bouncing off the white tile. Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box. Clean, crisp medium-format digital, neutral-cool grade, fine natural detail, no heavy grain; skin unretouched and dewy, with visible pores, fine vellus hair and beaded water droplets, never oily or airbrushed; the brush bristles damp with gel, a fold in the towel. No text, logos or watermarks other than the product's own label.
+
+CONTINUITY LOCK (identical in every frame of this campaign; reject any render
+that drifts from it):
+Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box · Light: bright clear morning sun from high camera left, rippling caustic light across skin and tile, soft fill off the white tile · Medium: Hasselblad X2D 100C, clean crisp medium-format digital, neutral-cool grade, no heavy grain · Hair & makeup: Kochi model's hair slicked back wet, small gold studs, bare dewy skin; Jaipur model's silver-streaked hair in a low knot, small gold nose ring, bare skin; both unretouched
+
+Controlling idea: Hydration made literal: the jar's own aqua becomes the whole world. An old Bombay public pool on a bright winter morning, crystal-clear turquoise water and white tile, one woman and the capsule cream at the water's edge, skin wet, dewy and close enough to see.
+
+# REALISM CORE — injected into every Avatiser prompt
+
+Avatiser's entire brand is that our output cannot be clocked as AI. This block
+is appended to every compiled prompt AND used as the QC scorecard. A render
+that trips even one HARD FAIL below gets regenerated — we do not "fix it in
+grading," we re-roll until the tell is gone.
+
+---
+
+## 1. Camera physics — every frame must claim a real camera
+
+Never describe a look abstractly ("cinematic", "high quality", "8k"). Specify
+the rig, and the model will inherit its physics:
+
+- **Cinema / hero product:** "shot on ARRI Alexa 35, 50mm Master Prime at
+  T2.8, subtle halation in highlights, gentle sensor grain"
+- **Lifestyle stills:** "shot on Sony A7 IV, 35mm f/1.8, natural depth of
+  field, slight vignetting"
+- **Macro product detail:** "100mm macro at f/5.6, shallow focus plane,
+  visible micro-texture"
+- **UGC / creator:** "filmed on iPhone 15 Pro front camera, 24mm equivalent,
+  auto-exposure that breathes, slight rolling-shutter wobble, handheld"
+
+One focal length per shot. Mixed-focal looks inside a single frame is an AI
+tell.
+
+## 2. Light must be motivated
+
+Every light source in frame needs a reason to exist. Choose ONE lighting story
+per scene and name its source: window left, golden-hour sun low behind
+subject, single softbox overhead, practical lamps in background. Forbidden:
+"studio lighting" with no direction, rim light appearing from nowhere,
+shadows pointing two directions.
+
+## 3. Deliberate imperfection (the anti-render pass)
+
+Perfection is the loudest AI tell. Every prompt includes 2–3 of these,
+matched to the medium:
+
+- skin: visible pores, faint asymmetry, flyaway hairs, natural oil sheen on
+  T-zone — never "flawless skin"
+- surfaces: fingerprints near where a product is held, micro-scratches on
+  metal, slight dust in light beams
+- environment: cables, worn edges, an object slightly out of place
+- optics: subtle chromatic aberration at frame edges, breathing focus in
+  video, grain matched to ISO story
+- UGC specifically: clipped highlights out a window, imperfect framing,
+  a fingertip briefly shading the lens, compression artifacts
+
+## 4. Product label fidelity — HARD RULE
+
+The product's label, logo and packaging text are NEVER text-prompted. They are
+always supplied as an image reference (image-to-image / reference
+conditioning) from `refs/product/`. If a model cannot take a product
+reference, it does not render the product — it renders the scene, and the
+product is composited from a reference-conditioned pass. Hallucinated label
+text is the #1 instant campaign-killer on Amazon and retail.
+
+## 5. Faces — one identity, locked
+
+Characters are generated once as a Soul 2.0 identity (character-sheet.json
+stores the seed/identity id + reference set). Every subsequent appearance uses
+that identity reference. Never re-describe a face in words and hope — words
+drift, references don't.
+
+## 6. Motion rules (video)
+
+- Real-world physics only: fabric settles, liquid overshoots then rests, hair
+  has mass. If a motion could not be filmed with a gimbal, slider, or hand —
+  don't prompt it.
+- Camera moves: name the rig. "slow 20cm dolly-in", "handheld with natural
+  sway", "tripod locked-off". Forbidden: impossible orbit-through-object
+  moves, zero-inertia direction changes, speed-ramps inside a 5s clip.
+- 24fps for cinema, 30fps for UGC/social. Motion blur consistent with shutter
+  at 1/48 or 1/60 respectively.
+
+## 7. The negative block (append to every generation)
+
+```
+avoid: waxy or plastic skin, over-smooth surfaces, HDR glow, oversaturated
+teal-orange grade, symmetrical face perfection, floating shadows, double
+irises, malformed hands, extra fingers, warped or invented label text,
+gibberish typography, impossible reflections, light without source, oily
+sheen on everything, beauty-filter look, AI art style, illustration,
+3D render look, video-game lighting
+```
+
+## 8. QC scorecard (run per render before delivery)
+
+HARD FAILS — regenerate immediately:
+- [ ] any label/logo/text differs from the reference product
+- [ ] hands: wrong finger count, impossible grip
+- [ ] face drift from the locked identity
+- [ ] shadow/reflection physically impossible
+- [ ] motion that violates physics (video)
+
+SOFT FAILS — regenerate if 2+ present:
+- [ ] skin or surface reads "airbrushed"
+- [ ] lighting direction unclear or contradictory
+- [ ] depth of field inconsistent with stated lens
+- [ ] grade drifts from campaign palette (scene-sheet)
+- [ ] frame too clean — no trace of the imperfection pass
+
+Ship threshold: zero hard fails, ≤1 soft fail, and the "squint test" — at
+arm's length, would a media buyer flag this? If yes, re-roll.
+

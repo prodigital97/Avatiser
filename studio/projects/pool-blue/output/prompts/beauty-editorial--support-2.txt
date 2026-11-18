@@ -15,9 +15,9 @@ Editorial beauty portrait of an Indian woman, tight head-and-shoulders, camera a
 
 CONTINUITY LOCK (identical in every frame of this campaign; reject any render
 that drifts from it):
-Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box · Light: bright clear morning sun from high camera left, rippling caustic light across skin and tile, soft fill off the white tile · Medium: Hasselblad X2D 100C, clean crisp medium-format digital, neutral-cool grade, no heavy grain · Hair & makeup: Jaipur model's silver-streaked hair in a low knot, small gold nose ring, bare skin; Kochi model's hair slicked back wet, small gold studs, bare dewy skin; both unretouched
+Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box · Light: bright clear morning sun from high camera left, rippling caustic light across skin and tile, soft fill off the white tile · Medium: Hasselblad X2D 100C, clean crisp medium-format digital, neutral-cool grade, no heavy grain · Hair & makeup: Kochi model's hair slicked back wet, small gold studs, bare dewy skin; Jaipur model's silver-streaked hair in a low knot, small gold nose ring, bare skin; both unretouched
 
-Controlling idea: Hydration made literal: the jar's own aqua becomes the whole world. An old Bombay public pool on a bright winter morning, crystal-clear turquoise water and white tile, two women and the capsule cream at the water's edge, skin wet, dewy and close enough to see.
+Controlling idea: Hydration made literal: the jar's own aqua becomes the whole world. An old Bombay public pool on a bright winter morning, crystal-clear turquoise water and white tile, one woman and the capsule cream at the water's edge, skin wet, dewy and close enough to see.
 
 # REALISM CORE — injected into every Avatiser prompt
 

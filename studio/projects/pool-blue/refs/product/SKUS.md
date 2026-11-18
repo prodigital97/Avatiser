@@ -20,9 +20,10 @@ Note: the site lists the brightening kit as "Lunniglow" but its box reads "Lumig
 
 ## What to attach per shot
 
-| Shot | Soul style frame | Final (Seedream) | Product lock (Nano Banana) |
-|---|---|---|---|
-| Hero: At the Edge | — | Jaipur face, Kochi face, HBC photo | approved final, HBC photo |
-| Supporting 1: Float | empty overhead plate, no refs | the approved plate only | — |
-| Supporting 2: Surface | shot prompt + Kochi face | style frame, Kochi face | — |
-| Supporting 3: Poolside | — | HBC, Hydracloud, Face Scrub photos | approved final, HBC, Hydracloud, Face Scrub photos |
+| Shot | Soul style frame | Final (Seedream) | Product lock (Nano Banana) | Motion (Seedance) |
+|---|---|---|---|---|
+| Hero: At the Edge | — | Kochi face, HBC photo | approved final, HBC photo | locked hero still |
+| Supporting 1: Float | empty overhead plate, no refs | the approved plate only | — | — |
+| Supporting 2: Surface | shot prompt + Kochi face | style frame, Kochi face | — | — |
+| Supporting 3: Poolside | — | HBC, Hydracloud, Face Scrub photos | approved final, HBC, Hydracloud, Face Scrub photos | — |
+| Supporting 4: The Facial (optional) | — | Jaipur face, Kochi face, Hydracloud photo | approved final, Hydracloud photo | — |

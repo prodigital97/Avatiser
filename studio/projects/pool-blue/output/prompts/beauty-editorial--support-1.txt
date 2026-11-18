@@ -1,21 +1,21 @@
 # FASHION EDITORIAL — Pool Blue / Float (4:5)
 
-PURPOSE: Scale and graphic. The pool as a turquoise field from above, the two women small inside it.
+PURPOSE: Scale and graphic. The pool as a turquoise field from above, one woman small inside it.
 
 REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
 Attach in this order and paste this key at the top of the prompt:
-- @image_1 — base plate (the approved Soul style frame, rendered empty): keep it exactly, including the pool, tile, light and grade. Only add the two women.
-- Attach nothing else: at this size faces and products don't read, and extra references pull the figures too large.
+- @image_1 — base plate (the approved Soul style frame, rendered empty): keep it exactly, including the pool, tile, light and grade. Only add the woman.
+- Attach nothing else: at this size the face and products don't read, and extra references pull the figure too large.
 
 PROMPT (key above, then this, verbatim):
 
-Add two tiny Indian women into @image_1 and change nothing else in the image. Near the lower right corner, the woman from Jaipur in her late forties, silver-streaked hair in a low knot, in an ivory waffle-cotton robe, sits on the tile edge beside the folded towel with her feet in the water. In the middle of the pool, the woman from Kochi in her early twenties, deep brown skin, in a plain white swimsuit, floats on her back with her arms spread wide and her eyes closed. Each woman is about a tenth of the frame's height. Light them exactly as @image_1 is lit: bright sun from high camera left, the same caustic ripples crossing the floating woman's body, a small sharp shadow on the pool floor beneath her. Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box. Clean, crisp medium-format digital, neutral-cool grade, fine natural detail, no heavy grain; the figures small but crisp, caustics rippling over the floating woman. No text, logos or watermarks.
+Add one small Indian woman into @image_1 and change nothing else in the image. In the middle of the pool, a Malayali Indian woman from Kochi in her early twenties, deep brown skin, shoulder-length black hair slicked back wet, small gold stud earrings, in a plain white swimsuit, floats on her back with her arms spread wide and her eyes closed. She is about a tenth of the frame's height. Light her exactly as @image_1 is lit: bright sun from high camera left, the same caustic ripples crossing her body, a small sharp shadow on the pool floor beneath her. Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box. Clean, crisp medium-format digital, neutral-cool grade, fine natural detail, no heavy grain; the figure small but crisp, caustics rippling over her. No text, logos or watermarks.
 
 CONTINUITY LOCK (identical in every frame of this campaign; reject any render
 that drifts from it):
-Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box · Light: bright clear morning sun from high camera left, rippling caustic light across skin and tile, soft fill off the white tile · Medium: Hasselblad X2D 100C, clean crisp medium-format digital, neutral-cool grade, no heavy grain · Hair & makeup: Jaipur model's silver-streaked hair in a low knot, small gold nose ring, bare skin; Kochi model's hair slicked back wet, small gold studs, bare dewy skin; both unretouched
+Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box · Light: bright clear morning sun from high camera left, rippling caustic light across skin and tile, soft fill off the white tile · Medium: Hasselblad X2D 100C, clean crisp medium-format digital, neutral-cool grade, no heavy grain · Hair & makeup: Kochi model's hair slicked back wet, small gold studs, bare dewy skin; Jaipur model's silver-streaked hair in a low knot, small gold nose ring, bare skin; both unretouched
 
-Controlling idea: Hydration made literal: the jar's own aqua becomes the whole world. An old Bombay public pool on a bright winter morning, crystal-clear turquoise water and white tile, two women and the capsule cream at the water's edge, skin wet, dewy and close enough to see.
+Controlling idea: Hydration made literal: the jar's own aqua becomes the whole world. An old Bombay public pool on a bright winter morning, crystal-clear turquoise water and white tile, one woman and the capsule cream at the water's edge, skin wet, dewy and close enough to see.
 
 # REALISM CORE — injected into every Avatiser prompt
 
