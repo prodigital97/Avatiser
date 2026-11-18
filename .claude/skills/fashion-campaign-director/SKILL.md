@@ -186,6 +186,7 @@ In the Avatiser repo this skill is the front end of the studio engine's `fashion
 **Realism doctrine.** Every prompt must also satisfy `studio/prompts/realism-core.md`, the house rule that output must never read as AI. Read it once per session. In practice:
 - *Claim a real camera.* Put the body and lens in the framing line, not just a focal length ("shot on a Hasselblad 500C/M, 80mm", "Leica M6, 35mm Summicron"). One focal length per frame.
 - *Imperfection pass.* Every prompt carries 2–3 concrete traces of reality matched to the medium (visible pores and flyaway hairs, a crease in the linen, dust in the light beam, slight halation, grain) instead of a single sign of life.
+- *Casting.* Name each model's nationality or region in every prompt ("a South Indian woman", "a Darjeeling-born Indian woman"), matched to the market the campaign runs in. Skin tone and hair alone are not enough: without a nationality the generator falls back to its own default and may cast someone the audience won't recognise as one of them. If the brief gives no nationality, cast for the brand's market and say so under *Assumed*.
 - *Faces.* Words still describe each model in every prompt (generators need it), but the engine locks identity from the approved hero render. Keep each model's description worded identically across prompts so it agrees with that reference.
 - Never type brand names, logos or label text into a prompt. If the brief includes a product, say it is supplied as a reference image.
 
