@@ -2,7 +2,7 @@
 
 PURPOSE: The slowness made bodily. An overhead portrait where the expression carries the mood.
 
-REFERENCES: the approved hero render, for face identity, wardrobe, palette and light; plus refs/product/* if the brief includes a product.
+REFERENCES: the approved hero render (wardrobe, palette, light) and the casting headshots in refs/models/ (faces), plus refs/product/* when the brief has real products.
 
 PROMPT (send verbatim; it is self-contained by design):
 

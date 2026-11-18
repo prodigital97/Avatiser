@@ -2,7 +2,7 @@
 
 PURPOSE: The thesis. Two women, the salt, the sceptre, the light.
 
-REFERENCES: none on the first run (or the Soul identity of each model, if already locked). If the brief includes a product, pass refs/product/* and never type its label.
+REFERENCES: the approved casting headshots in refs/models/ (or each model's Soul identity, if locked), plus refs/product/* when the brief has real products; never type a label.
 
 PROMPT (send verbatim; it is self-contained by design):
 
