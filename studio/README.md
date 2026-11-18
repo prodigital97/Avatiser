@@ -93,10 +93,13 @@ That one command:
 `compile` parses `campaign.md` (the skill's output format is a contract: keep
 the `## Hero:` / `## Supporting N:` headings, fenced prompts and
 `Aspect ratio:` lines) into one render-plan entry per shot. Each shot keeps
-its own aspect ratio. Shots route to `fashion.editorial`: Soul 2.0, with Nano
-Banana as fallback. Render the hero first (×4) and approve one. Every
-supporting frame then passes that render as its identity and look reference,
-which is what keeps faces, wardrobe and light consistent across the set.
+its own aspect ratio. Faces are locked first: generate the casting headshots in
+`refs/models/CASTING.md` (Soul 2.0) and approve one per model. Shots route to
+`fashion.editorial`: Seedream 5.5, with Nano Banana as fallback, because Soul
+takes only one face reference and editorial frames often hold two models.
+Render the hero first (×4) and approve one; supporting frames pass it as the
+wardrobe/light reference. Attach only the faces and SKUs of the people in each
+shot, or accessories leak between models.
 `Supporting 3` is optional. If you hand-edit `campaign.md`, recompile.
 
 `projects/salt-court/` is the worked demo: the example brief that ships with

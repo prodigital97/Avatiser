@@ -39,3 +39,15 @@ pass them as reference images on every shot. Garments must match these photos ex
   - photo 1: https://cdn.shopify.com/s/files/1/0270/5129/4854/files/NBI054549_1.jpg?v=1793905815
   - photo 2: https://cdn.shopify.com/s/files/1/0270/5129/4854/files/NBI054549_2.jpg?v=1793905817
   - photo 3: https://cdn.shopify.com/s/files/1/0270/5129/4854/files/NBI054549_3.jpg?v=1793905819
+## What to attach per shot
+
+Attach only the people and products in the frame. In round 1, attaching everything
+to every shot leaked Look A's scarf onto the Chennai model and Look B's beanie and
+nose stud onto the Darjeeling model.
+
+| Shot | Casting photos | Product photos | Also |
+|---|---|---|---|
+| Hero | darjeeling.jpg, chennai.jpg | all six SKUs | — |
+| Supporting 1: Batasia Loop | darjeeling.jpg, chennai.jpg | all six SKUs (photo 1 of each) | approved hero |
+| Supporting 2: Catching the Step | chennai.jpg only | NBI053543, NBI055015, NBI054549 | approved hero |
+| Supporting 3: Tea at the Tracks | darjeeling.jpg only | NBI053577, NBI054589 | approved hero |

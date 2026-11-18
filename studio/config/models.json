@@ -31,6 +31,16 @@
       "supports_reference": true,
       "notes": "Primary when the frame contains words (Amazon infographics, banners). Product label still comes from reference, never prompt text."
     },
+    "seedream": {
+      "provider": "byteplus-ark",
+      "model": "seedream-5.5",
+      "adapter": "seedream",
+      "env_key": "ARK_API_KEY",
+      "type": "image",
+      "strengths": ["multiple reference images in one call (several faces + garment photos)", "photoreal people in real locations", "editorial fashion"],
+      "supports_reference": true,
+      "notes": "Primary for fashion-editorial shots: unlike Soul 2.0 it takes more than one face reference, so two-model frames can lock both casting headshots plus the SKU photos. Verify the API model id when wiring — 'seedream-5.5' is the product name."
+    },
     "seedance": {
       "provider": "byteplus-ark",
       "model": "seedance-1.5-pro",
@@ -56,7 +66,7 @@
   "routing": {
     "character.identity": { "primary": "soul2", "fallback": null },
     "character.portrait": { "primary": "soul2", "fallback": null },
-    "fashion.editorial": { "primary": "soul2", "fallback": "nano-banana-pro", "notes": "people-led editorial frames; supporting shots pass the approved hero as identity + look reference" },
+    "fashion.editorial": { "primary": "seedream", "fallback": "nano-banana-pro", "notes": "people-led editorial frames with casting headshots + SKU photos as references; Soul 2.0 takes only one face, so it's used for the casting headshots (character.identity), not for multi-model shots" },
     "character.in-scene": { "primary": "nano-banana-pro", "fallback": "gpt-image-2", "notes": "composite Soul identity ref + product ref into scene" },
     "product.hero": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
     "product.lifestyle": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
