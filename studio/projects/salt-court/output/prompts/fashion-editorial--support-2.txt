@@ -2,9 +2,12 @@
 
 PURPOSE: The slowness made bodily. An overhead portrait where the expression carries the mood.
 
-REFERENCES: the approved hero render (wardrobe, palette, light) and the casting headshots in refs/models/ (faces), plus refs/product/* when the brief has real products.
+REFERENCES: the approved style frame (@image_1), plus the faces and look boards of only the people in this frame (and the approved hero where the key lists it) — in the order the shot's References key lists.
+Attach in this order and paste this key at the top of the prompt:
+- @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces or clothes.
+- @image_2 — face of the woman in her early twenties.
 
-PROMPT (send verbatim; it is self-contained by design):
+PROMPT (key above, then this, verbatim):
 
 Editorial fashion photograph, overhead shot looking straight down, 50mm, waist-up crop. A tall woman in her early twenties with olive skin and dark jaw-length curls fanned out on the ground lies on her back on the white crystalline crust of the Trapani salt pans, one arm stretched out so the oversized pale-rose silk-organza sleeve spreads across the salt like spilled water. Eyes closed, chin tilted up toward the sun, lips softly parted, clay-red lip, sun-flushed bare skin, salt crystals catching on the organza. The terracotta edge of a roof tile enters the frame at the top corner. Low late-afternoon sun from the left rakes across the crust, making every crystal throw a tiny shadow. Palette: salt white, pale rose, terracotta. 35mm Portra 400, slightly overexposed, sun-bleached highlights, fine grain. No text, logos or watermarks.
 

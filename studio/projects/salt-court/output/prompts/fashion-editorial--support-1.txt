@@ -2,9 +2,12 @@
 
 PURPOSE: Scale and slowness. The world is wide and flat, and they move through it unhurried.
 
-REFERENCES: the approved hero render (wardrobe, palette, light) and the casting headshots in refs/models/ (faces), plus refs/product/* when the brief has real products.
+REFERENCES: the approved style frame (@image_1), plus the faces and look boards of only the people in this frame (and the approved hero where the key lists it) — in the order the shot's References key lists.
+Attach in this order and paste this key at the top of the prompt:
+- @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces or clothes.
+- @image_2 — the approved hero, for both women's faces and clothes.
 
-PROMPT (send verbatim; it is self-contained by design):
+PROMPT (key above, then this, verbatim):
 
 Editorial fashion photograph, wide shot, camera at eye level, 35mm, figures small in the lower third. Two women walk slowly along a narrow white salt causeway between shallow pink evaporation ponds in the Trapani salt pans, a stone windmill on the horizon. Ahead, a small sun-browned woman in her seventies with a white low bun, in an ankle-length ivory raw-silk column dress and cream crochet shawl, carrying a long wooden salt rake over her shoulder, eyes on the path, mouth relaxed. A step behind, a tall woman in her early twenties with olive skin and jaw-length dark curls, in an oversized pale-rose silk-organza shirt-dress over wide ivory linen trousers, barefoot, glancing back toward the camera over her shoulder with lowered lids and lips closed. Low late-afternoon sun from camera left throws long shadows across the water; organza glowing. Palette: salt white, pale rose, terracotta. 35mm Portra 400, sun-bleached highlights, fine grain. No text, logos or watermarks.
 

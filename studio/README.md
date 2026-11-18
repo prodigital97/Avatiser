@@ -93,13 +93,21 @@ That one command:
 `compile` parses `campaign.md` (the skill's output format is a contract: keep
 the `## Hero:` / `## Supporting N:` headings, fenced prompts and
 `Aspect ratio:` lines) into one render-plan entry per shot. Each shot keeps
-its own aspect ratio. Faces are locked first: generate the casting headshots in
-`refs/models/CASTING.md` (Soul 2.0) and approve one per model. Shots route to
-`fashion.editorial`: Seedream 5.5, with Nano Banana as fallback, because Soul
-takes only one face reference and editorial frames often hold two models.
-Render the hero first (×4) and approve one; supporting frames pass it as the
-wardrobe/light reference. Attach only the faces and SKUs of the people in each
-shot, or accessories leak between models.
+its own aspect ratio. Every shot renders in two passes:
+
+1. **Casting**: generate the headshots in `refs/models/CASTING.md` (Soul 2.0) and
+   approve one per model.
+2. **Style frame**: `style-<shot>` on Soul 2.0, which has the most photographic
+   look (film colour, unretouched skin, caught moments). Approve one per shot.
+3. **Final**: `<shot>` on Seedream 5.5 (Nano Banana fallback), which takes many
+   references. Attach them in the order the shot's `*References:*` key lists:
+   `@image_1` the style frame (light, grade, grain and mood only), then the
+   faces, then one **look board** per person holding all of that person's SKUs.
+   Paste the key at the top of the prompt.
+
+Soul can't do the final pass because it takes only one face. Seedream can't do
+the style pass because its look is clean and commercial. Attach only the people
+and products in each frame, or accessories leak between models.
 `Supporting 3` is optional. If you hand-edit `campaign.md`, recompile.
 
 `projects/salt-court/` is the worked demo: the example brief that ships with

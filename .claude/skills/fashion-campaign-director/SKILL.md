@@ -151,6 +151,11 @@ Keep the text before the prompts short, about 120–220 words. The prompts are t
 
 ## Hero: [shot name]
 *Purpose:* [one line: what this frame establishes]
+*References:*
+- @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces, clothes or buildings.
+- @image_2 — face of [model].
+- [@image_N — look board: everything [model] wears, when the brief has real products]
+- When references conflict: garments win, then faces, then style.
 ```
 [prompt]
 ```
@@ -158,6 +163,8 @@ Aspect ratio: …
 
 ## Supporting 1: [shot name]
 *Purpose:* …
+*References:*
+- @image_1 — style frame … (as above, then only the people in this frame)
 ```
 [prompt]
 ```
@@ -193,5 +200,14 @@ In the Avatiser repo this skill is the front end of the studio engine's `fashion
 - Never type brand names, logos or label text into a prompt. If the brief includes a product, say it is supplied as a reference image.
 
 **Output format is a contract.** The engine parses the saved file, so keep these exactly: the `# Title` line, `**Concept:**` and `**Visual system:**` paragraphs, the shot headings `## Hero: …` and `## Supporting 1: …` / `2` / `3`, the `*Purpose:*` line, each prompt in its own fenced block, and `Aspect ratio: W:H` on the line after it.
+
+**Two passes per shot, and a reference key.** Each shot renders twice: first a Soul 2.0 *style frame* (the most photographic look, but it takes only one face), then a final render on a multi-reference model (Seedream) that keeps the style frame's look and locks faces and garments to references. Under each shot's `*Purpose:*` line, add a `*References:*` line followed by one `- @image_N — …` bullet per attached image, in attach order:
+- `@image_1` is always the style frame, limited to light, colour grade, film grain, lens feel and mood, with an explicit "do not copy its people, faces, clothes or buildings".
+- Then the casting headshot of each person in the frame. Supporting shots may cite the approved hero instead.
+- Then one **look board** per person when the brief has real products: a single image holding all of that person's SKUs. Never mix two people's products on one board.
+- A last bullet giving priority when references conflict: garments, then faces, then style.
+- In single-person shots, name what she is *not* wearing from the other looks ("Nothing else: no scarf").
+
+**Locations the model might reinvent.** Soul in particular fills gaps with its own defaults: "toy train" became a miniature model and "station" a European building. Describe real places physically ("a small Indian hill-station halt with grey stone walls and a corrugated tin canopy"; "a real narrow-gauge steam locomotive no taller than a man"), and keep name boards out of frame.
 
 **Where it goes.** Save the campaign to `studio/projects/<slug>/campaign.md`, where `<slug>` is the campaign title in kebab-case. Create the project with `node studio/studio.js new <slug> fashion` first, then compile with `node studio/studio.js compile <slug>`. The `/campaign` command does all of this.

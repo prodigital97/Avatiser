@@ -2,9 +2,12 @@
 
 PURPOSE: Detail and texture. Hands, raw silk, gold and salt, cropped tight.
 
-REFERENCES: the approved hero render (wardrobe, palette, light) and the casting headshots in refs/models/ (faces), plus refs/product/* when the brief has real products.
+REFERENCES: the approved style frame (@image_1), plus the faces and look boards of only the people in this frame (and the approved hero where the key lists it) — in the order the shot's References key lists.
+Attach in this order and paste this key at the top of the prompt:
+- @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces or clothes.
+- @image_2 — face of the woman in her seventies.
 
-PROMPT (send verbatim; it is self-contained by design):
+PROMPT (key above, then this, verbatim):
 
 Editorial fashion photograph, tight detail crop from collarbone to waist, 85mm, shallow depth of field. The weathered, sun-browned hands of a Sicilian woman in her seventies grip the worn handle of a long wooden salt rake held upright; fine salt crystals cling to her knuckles and a heavy gold ring. Her ivory raw-silk shantung column dress shows its slubbed weave and high stand collar, a cream crochet shawl falling over one shoulder, a gold coin earring just in frame beneath her white low bun. Lower half of her face visible: lips closed in a composed, level line, chin lifted. Behind her, out of focus, white salt crust and a terracotta-tiled salt mound. Low late-afternoon sun from camera left rakes across the silk and wood grain. Palette: salt white, pale rose, terracotta. 35mm Portra 400, sun-bleached highlights, fine grain. No text, logos or watermarks.
 

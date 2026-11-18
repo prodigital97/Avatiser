@@ -1,7 +1,75 @@
 {
   "project": "salt-court",
-  "compiled_at": "2026-11-18T11:55:42.879Z",
+  "compiled_at": "2026-11-18T12:03:33.009Z",
   "assets": [
+    {
+      "campaign": "fashion-editorial",
+      "id": "style-hero",
+      "type": "image",
+      "route": "fashion.style",
+      "model": "soul2",
+      "fallback": null,
+      "adapter": "higgsfield",
+      "env_key": "HIGGSFIELD_API_KEY",
+      "aspect": "4:5",
+      "shot": "Court on the Salt",
+      "duration_s": null,
+      "count": 2,
+      "depends_on": null,
+      "prompt_file": "output/prompts/fashion-editorial--style-hero.txt",
+      "status": "compiled"
+    },
+    {
+      "campaign": "fashion-editorial",
+      "id": "style-support-1",
+      "type": "image",
+      "route": "fashion.style",
+      "model": "soul2",
+      "fallback": null,
+      "adapter": "higgsfield",
+      "env_key": "HIGGSFIELD_API_KEY",
+      "aspect": "3:2",
+      "shot": "The Long Causeway",
+      "duration_s": null,
+      "count": 2,
+      "depends_on": null,
+      "prompt_file": "output/prompts/fashion-editorial--style-support-1.txt",
+      "status": "compiled"
+    },
+    {
+      "campaign": "fashion-editorial",
+      "id": "style-support-2",
+      "type": "image",
+      "route": "fashion.style",
+      "model": "soul2",
+      "fallback": null,
+      "adapter": "higgsfield",
+      "env_key": "HIGGSFIELD_API_KEY",
+      "aspect": "4:5",
+      "shot": "Drying in the Sun",
+      "duration_s": null,
+      "count": 2,
+      "depends_on": null,
+      "prompt_file": "output/prompts/fashion-editorial--style-support-2.txt",
+      "status": "compiled"
+    },
+    {
+      "campaign": "fashion-editorial",
+      "id": "style-support-3",
+      "type": "image",
+      "route": "fashion.style",
+      "model": "soul2",
+      "fallback": null,
+      "adapter": "higgsfield",
+      "env_key": "HIGGSFIELD_API_KEY",
+      "aspect": "4:5",
+      "shot": "The Sceptre",
+      "duration_s": null,
+      "count": 2,
+      "depends_on": null,
+      "prompt_file": "output/prompts/fashion-editorial--style-support-3.txt",
+      "status": "compiled"
+    },
     {
       "campaign": "fashion-editorial",
       "id": "hero",
@@ -15,7 +83,9 @@
       "shot": "Court on the Salt",
       "duration_s": null,
       "count": 4,
-      "depends_on": null,
+      "depends_on": [
+        "style-hero"
+      ],
       "prompt_file": "output/prompts/fashion-editorial--hero.txt",
       "status": "compiled"
     },
@@ -32,7 +102,10 @@
       "shot": "The Long Causeway",
       "duration_s": null,
       "count": 2,
-      "depends_on": "hero",
+      "depends_on": [
+        "style-support-1",
+        "hero"
+      ],
       "prompt_file": "output/prompts/fashion-editorial--support-1.txt",
       "status": "compiled"
     },
@@ -49,7 +122,9 @@
       "shot": "Drying in the Sun",
       "duration_s": null,
       "count": 2,
-      "depends_on": "hero",
+      "depends_on": [
+        "style-support-2"
+      ],
       "prompt_file": "output/prompts/fashion-editorial--support-2.txt",
       "status": "compiled"
     },
@@ -66,7 +141,9 @@
       "shot": "The Sceptre",
       "duration_s": null,
       "count": 2,
-      "depends_on": "hero",
+      "depends_on": [
+        "style-support-3"
+      ],
       "prompt_file": "output/prompts/fashion-editorial--support-3.txt",
       "status": "compiled"
     }

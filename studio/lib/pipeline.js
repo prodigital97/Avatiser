@@ -44,7 +44,8 @@ function loadProject(slug) {
 
 /* parse a fashion-campaign-director campaign.md (the skill's output format)
    into { title, concept, styling, visual_system, assumed, shots[] }.
-   Shot ids: hero, support-1, support-2, support-3. */
+   Shot ids: hero, support-1, support-2, support-3. Each shot may carry a
+   *References:* bullet list saying what every attached image is for. */
 function parseCampaign(md, label = 'campaign.md') {
   const text = md.replace(/\r\n/g, '\n');
   const title = (text.match(/^# +(.+)$/m) || [])[1];
@@ -76,6 +77,8 @@ function parseCampaign(md, label = 'campaign.md') {
       role: h[2] ? 'supporting' : 'hero',
       name: h[3].trim(),
       purpose: ((body.match(/^\*Purpose:\*\s*(.+)$/m) || [])[1] || '').trim(),
+      /* optional: a *References:* line followed by "- " bullets, one per attached image */
+      references: ((body.match(/^\*References:\*[ \t]*\n((?:[ \t]*- .*(?:\n|$))+)/m) || [])[1] || '').trim(),
       prompt: prompt.trim(),
       aspect,
     });

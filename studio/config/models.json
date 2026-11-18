@@ -66,7 +66,8 @@
   "routing": {
     "character.identity": { "primary": "soul2", "fallback": null },
     "character.portrait": { "primary": "soul2", "fallback": null },
-    "fashion.editorial": { "primary": "seedream", "fallback": "nano-banana-pro", "notes": "people-led editorial frames with casting headshots + SKU photos as references; Soul 2.0 takes only one face, so it's used for the casting headshots (character.identity), not for multi-model shots" },
+    "fashion.style": { "primary": "soul2", "fallback": null, "notes": "look-and-feel frame per shot (light, grade, grain, mood) — Soul 2.0 has the most photographic look; becomes @image_1 for the Seedream final" },
+    "fashion.editorial": { "primary": "seedream", "fallback": "nano-banana-pro", "notes": "final pass: Soul style frame + casting headshots + look boards as references; Seedream takes many references, Soul only one face" },
     "character.in-scene": { "primary": "nano-banana-pro", "fallback": "gpt-image-2", "notes": "composite Soul identity ref + product ref into scene" },
     "product.hero": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
     "product.lifestyle": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },

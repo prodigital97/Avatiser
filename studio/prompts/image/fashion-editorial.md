@@ -3,8 +3,10 @@
 PURPOSE: {{shot.purpose}}
 
 REFERENCES: {{deliverable.reference_rule}}
+Attach in this order and paste this key at the top of the prompt:
+{{shot.references}}
 
-PROMPT (send verbatim; it is self-contained by design):
+PROMPT (key above, then this, verbatim):
 
 {{shot.prompt}}
 

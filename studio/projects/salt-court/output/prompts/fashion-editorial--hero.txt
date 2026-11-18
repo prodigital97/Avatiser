@@ -2,9 +2,13 @@
 
 PURPOSE: The thesis. Two women, the salt, the sceptre, the light.
 
-REFERENCES: the approved casting headshots in refs/models/ (or each model's Soul identity, if locked), plus refs/product/* when the brief has real products; never type a label.
+REFERENCES: the approved style frame (@image_1), the approved casting headshots in refs/models/, and one look board per model (refs/product/look-*.jpg) — in the order the shot's References key lists.
+Attach in this order and paste this key at the top of the prompt:
+- @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces or clothes.
+- @image_2 — face of the woman in her seventies.
+- @image_3 — face of the woman in her early twenties.
 
-PROMPT (send verbatim; it is self-contained by design):
+PROMPT (key above, then this, verbatim):
 
 Editorial fashion photograph, full-length, camera at waist height, 50mm. On the white crystalline crust of the Trapani salt pans, a small sun-browned Sicilian woman in her seventies, white hair in a low bun, sits upright on an upturned weathered wooden crate holding a long wooden salt rake upright like a sceptre; ankle-length ivory raw-silk shantung column dress with a high stand collar, cream crochet shawl, heavy gold coin earrings. Chin lifted, heavy lids, level gaze into the lens, lips closed. Beside her stands a tall woman in her early twenties, olive skin, jaw-length dark curls, clay-red lip, in an oversized pale-rose silk-organza shirt-dress over wide ivory linen trousers, barefoot, one hand on the crate; strict profile toward the horizon, lids lowered. Behind them a salt mound under terracotta tiles and a distant windmill. Low late-afternoon sun from camera left, long shadows. Palette: salt white, pale rose, terracotta. 35mm Portra 400, sun-bleached highlights, fine grain. No text, logos or watermarks.
 
