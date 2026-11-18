@@ -72,6 +72,19 @@ when the frame contains words.**
   become one controlling idea, shot as a hero frame plus 2–3 supporting
   frames (see below)
 
+## Beauty editorial (`/beauty`)
+
+Skincare, cosmetics and haircare campaigns use the `beauty-campaign-director` skill
+(`.claude/skills/`). It's built from a study of 24 documented beauty campaigns
+(sources in its `references/campaign-studies.md`) plus Avatiser's render tests.
+`/beauty <brand, products, market>` reads the products, writes the campaign,
+scaffolds `projects/<slug>/` as `beauty-editorial`, and compiles it:
+- a Seedream final on every shot;
+- a Soul style frame only where a shot asks for one;
+- a Nano Banana product lock on every shot that shows packaging.
+
+`projects/pool-blue/` is the worked example (GYK).
+
 ## Fashion editorial (`/campaign`)
 
 The product pipeline starts from a product. Fashion and editorial work starts
