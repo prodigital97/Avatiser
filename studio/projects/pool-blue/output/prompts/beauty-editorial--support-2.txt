@@ -1,15 +1,23 @@
-# STYLE FRAME (Soul 2.0) — Holding Water / The Capsule (4:5)
+# FASHION EDITORIAL — Pool Blue / Surface (4:5)
 
-PURPOSE: the look-and-feel reference for this shot's final render. Only its
-light, colour grade, film grain, lens feel, framing and mood carry forward;
-faces and garments are locked in the final pass, so don't chase SKU accuracy
-here. Pick the frame a director would want to shoot.
+PURPOSE: Portrait. Deep brown skin, wet and dewy, holding water: the promise shown on its own.
 
-REFERENCES: the casting headshot of ONE person in the frame at most (Soul takes a single face); no product photos. Only light, grade, grain and mood carry forward.
+REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product photos for shape and placement, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+Attach in this order and paste this key at the top of the prompt:
+- @image_1 — style frame: copy only its light, colour grade, lens feel and mood. Do not copy its person, face or setting details.
+- @image_2 — face of the woman from Kochi.
+- No product photos: no packaging appears in this frame, only one melted capsule on her cheek.
+- When references conflict: the face from @image_2 wins, then style from @image_1.
 
-PROMPT (send verbatim):
+PROMPT (key above, then this, verbatim):
 
-Editorial beauty still life, tight crop, camera just above step height, Hasselblad 500C/M with 120mm Makro-Planar, shallow depth of field. Products as in the attached product photos. On a damp sandstone step at the waterline of Chand Baori, the Abhaneri stepwell: a small clear aqua-blue jar about 7 cm across, packed with blue gel capsules in a clear water-gel, stands open with its front label to camera, its white screw lid beside it; behind it on the left, a flat lavender facial-kit box about the size of a hardback book leans against the step's riser; on the right, a squat cream jar with an aqua lid and an aqua wave print. In the foreground, the hands of a young Indian woman from Kochi with deep brown skin: her left hand rests on the step, and with her right index finger she presses one blue capsule into a smear of clear gel on the back of her left hand. Water droplets beaded on the stone, one neem leaf, the green water just below the step's edge throwing rippled light up onto the jar. Low winter-morning sun from camera left rakes down the upper steps of the stepwell while the lower flights stay in cool shadow, with soft light bouncing up off the water. Palette: sandstone ochre, shadowed umber, still green water, white cotton; aqua blue only on the products. Kodak Portra 160 film, fine grain, gentle highlight roll-off; visible skin texture and knuckle creases on the hands, fine scratches on the jar lid, damp darkened stone. No text, logos or watermarks other than the products' own labels.
+Editorial beauty portrait of an Indian woman, tight head-and-shoulders, camera at the waterline, Hasselblad X2D 100C with 120mm macro lens. Face as in the attached casting photo. A Malayali Indian woman from Kochi in her early twenties, deep brown skin, shoulder-length black hair slicked back wet, small gold stud earrings rises out of the clear turquoise water of an old Bombay public pool, the waterline at her collarbones, head tilted slightly back, eyes closed, lips softly sealed, a calm ease at the corners of her mouth; water runs from her hairline, droplets beaded across her cheeks and lashes. A single blue gel capsule has just melted into a clear dewy sheen on her cheekbone. Rippling caustic light from the water plays across her jaw and throat. Behind her, out of focus, white and turquoise tile. No signs, painted depth numbers or lettering anywhere. Bright clear morning sun from high camera left glitters on the water and throws rippling caustic light across skin and tile, with soft fill bouncing off the white tile. Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box. Clean, crisp medium-format digital, neutral-cool grade, fine natural detail, no heavy grain; skin unretouched and dewy, with visible pores, fine vellus hair and beaded water droplets, never oily or airbrushed; wet strands of black hair stuck to her neck. No text, logos or watermarks.
+
+CONTINUITY LOCK (identical in every frame of this campaign; reject any render
+that drifts from it):
+Palette: clear pool turquoise and the jar's aqua, white tile, warm brown skin; lavender only on the facial-kit box · Light: bright clear morning sun from high camera left, rippling caustic light across skin and tile, soft fill off the white tile · Medium: Hasselblad X2D 100C, clean crisp medium-format digital, neutral-cool grade, no heavy grain · Hair & makeup: Jaipur model's silver-streaked hair in a low knot, small gold nose ring, bare skin; Kochi model's hair slicked back wet, small gold studs, bare dewy skin; both unretouched
+
+Controlling idea: Hydration made literal: the jar's own aqua becomes the whole world. An old Bombay public pool on a bright winter morning, crystal-clear turquoise water and white tile, two women and the capsule cream at the water's edge, skin wet, dewy and close enough to see.
 
 # REALISM CORE — injected into every Avatiser prompt
 

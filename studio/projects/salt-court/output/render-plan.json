@@ -1,6 +1,6 @@
 {
   "project": "salt-court",
-  "compiled_at": "2026-11-18T17:48:10.242Z",
+  "compiled_at": "2026-11-18T18:08:18.014Z",
   "assets": [
     {
       "campaign": "fashion-editorial",
@@ -83,9 +83,7 @@
       "shot": "Court on the Salt",
       "duration_s": null,
       "count": 4,
-      "depends_on": [
-        "style-hero"
-      ],
+      "depends_on": "style-hero",
       "prompt_file": "output/prompts/fashion-editorial--hero.txt",
       "status": "compiled"
     },
@@ -102,9 +100,7 @@
       "shot": "The Long Causeway",
       "duration_s": null,
       "count": 2,
-      "depends_on": [
-        "style-support-1"
-      ],
+      "depends_on": "style-support-1",
       "prompt_file": "output/prompts/fashion-editorial--support-1.txt",
       "status": "compiled"
     },
@@ -121,9 +117,7 @@
       "shot": "Drying in the Sun",
       "duration_s": null,
       "count": 2,
-      "depends_on": [
-        "style-support-2"
-      ],
+      "depends_on": "style-support-2",
       "prompt_file": "output/prompts/fashion-editorial--support-2.txt",
       "status": "compiled"
     },
@@ -140,9 +134,7 @@
       "shot": "The Sceptre",
       "duration_s": null,
       "count": 2,
-      "depends_on": [
-        "style-support-3"
-      ],
+      "depends_on": "style-support-3",
       "prompt_file": "output/prompts/fashion-editorial--support-3.txt",
       "status": "compiled"
     }

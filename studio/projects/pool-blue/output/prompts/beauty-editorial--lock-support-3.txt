@@ -1,0 +1,14 @@
+# PRODUCT LOCK (Nano Banana edit) — Pool Blue / Poolside (4:5)
+
+PURPOSE: replace the generated product(s) in the approved final render with the
+exact product photos, so label, logo and packaging text are copied pixel-true
+from the reference and never generated. Realism core §4.
+
+REFERENCES: @image_1 the approved final render, then one clean product photo per product in frame (refs/product/), in the order the shot's Product lock prompt names them.
+
+PROMPT (send verbatim):
+
+Edit @image_1: replace the three products with the exact products in @image_2 (the blue capsule jar), @image_3 (the lavender box) and @image_4 (the scrub jar), keeping every label, logo, colour and proportion exactly as photographed, at the sizes, positions and angles they occupy in @image_1. Relight each to match the scene: bright sun from high camera left, rippling caustic light from the pool, water droplets on the jars, soft contact shadows on the wet tile and the towel. Keep the hands, the gel, the tile, the water, the light and the grade exactly as they are. No other text.
+
+QC: zoom to 100% on every label. Any letter that differs from the product photo
+is a hard fail; re-run the lock, never ship it.

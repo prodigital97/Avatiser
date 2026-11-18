@@ -2,7 +2,7 @@
 
 PURPOSE: The thesis. The stepwell, the water, the blue jar, and the professional hand applying it.
 
-REFERENCES: the approved style frame (@image_1), the casting headshots of the people in this frame, and the product photos for shape and placement, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product photos for shape and placement, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
 Attach in this order and paste this key at the top of the prompt:
 - @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces, clothes, products or architecture details.
 - @image_2 — face of the woman from Jaipur (one step above).

@@ -1,22 +1,22 @@
 {
   "project": "holding-water",
-  "compiled_at": "2026-11-18T17:48:43.887Z",
+  "compiled_at": "2026-11-18T18:08:18.054Z",
   "assets": [
     {
       "campaign": "beauty-editorial",
-      "id": "style-hero",
+      "id": "hero",
       "type": "image",
-      "route": "fashion.style",
-      "model": "soul2",
-      "fallback": null,
-      "adapter": "higgsfield",
-      "env_key": "HIGGSFIELD_API_KEY",
+      "route": "fashion.editorial",
+      "model": "seedream",
+      "fallback": "nano-banana-pro",
+      "adapter": "seedream",
+      "env_key": "ARK_API_KEY",
       "aspect": "4:5",
       "shot": "Applied at the Waterline",
       "duration_s": null,
-      "count": 2,
+      "count": 4,
       "depends_on": null,
-      "prompt_file": "output/prompts/beauty-editorial--style-hero.txt",
+      "prompt_file": "output/prompts/beauty-editorial--hero.txt",
       "status": "compiled"
     },
     {
@@ -38,97 +38,6 @@
     },
     {
       "campaign": "beauty-editorial",
-      "id": "style-support-2",
-      "type": "image",
-      "route": "fashion.style",
-      "model": "soul2",
-      "fallback": null,
-      "adapter": "higgsfield",
-      "env_key": "HIGGSFIELD_API_KEY",
-      "aspect": "4:5",
-      "shot": "After",
-      "duration_s": null,
-      "count": 2,
-      "depends_on": null,
-      "prompt_file": "output/prompts/beauty-editorial--style-support-2.txt",
-      "status": "compiled"
-    },
-    {
-      "campaign": "beauty-editorial",
-      "id": "style-support-3",
-      "type": "image",
-      "route": "fashion.style",
-      "model": "soul2",
-      "fallback": null,
-      "adapter": "higgsfield",
-      "env_key": "HIGGSFIELD_API_KEY",
-      "aspect": "4:5",
-      "shot": "The Capsule",
-      "duration_s": null,
-      "count": 2,
-      "depends_on": null,
-      "prompt_file": "output/prompts/beauty-editorial--style-support-3.txt",
-      "status": "compiled"
-    },
-    {
-      "campaign": "beauty-editorial",
-      "id": "hero",
-      "type": "image",
-      "route": "fashion.editorial",
-      "model": "seedream",
-      "fallback": "nano-banana-pro",
-      "adapter": "seedream",
-      "env_key": "ARK_API_KEY",
-      "aspect": "4:5",
-      "shot": "Applied at the Waterline",
-      "duration_s": null,
-      "count": 4,
-      "depends_on": [
-        "style-hero"
-      ],
-      "prompt_file": "output/prompts/beauty-editorial--hero.txt",
-      "status": "compiled"
-    },
-    {
-      "campaign": "beauty-editorial",
-      "id": "lock-hero",
-      "type": "image",
-      "route": "product.lock",
-      "model": "nano-banana-pro",
-      "fallback": "gpt-image-2",
-      "adapter": "gemini-image",
-      "env_key": "GEMINI_API_KEY",
-      "aspect": "4:5",
-      "shot": "Applied at the Waterline",
-      "duration_s": null,
-      "count": 2,
-      "depends_on": [
-        "hero"
-      ],
-      "prompt_file": "output/prompts/beauty-editorial--lock-hero.txt",
-      "status": "compiled"
-    },
-    {
-      "campaign": "beauty-editorial",
-      "id": "support-1",
-      "type": "image",
-      "route": "fashion.editorial",
-      "model": "seedream",
-      "fallback": "nano-banana-pro",
-      "adapter": "seedream",
-      "env_key": "ARK_API_KEY",
-      "aspect": "3:2",
-      "shot": "Thirteen Storeys",
-      "duration_s": null,
-      "count": 2,
-      "depends_on": [
-        "style-support-1"
-      ],
-      "prompt_file": "output/prompts/beauty-editorial--support-1.txt",
-      "status": "compiled"
-    },
-    {
-      "campaign": "beauty-editorial",
       "id": "support-2",
       "type": "image",
       "route": "fashion.editorial",
@@ -140,9 +49,7 @@
       "shot": "After",
       "duration_s": null,
       "count": 2,
-      "depends_on": [
-        "style-support-2"
-      ],
+      "depends_on": null,
       "prompt_file": "output/prompts/beauty-editorial--support-2.txt",
       "status": "compiled"
     },
@@ -159,10 +66,42 @@
       "shot": "The Capsule",
       "duration_s": null,
       "count": 2,
-      "depends_on": [
-        "style-support-3"
-      ],
+      "depends_on": null,
       "prompt_file": "output/prompts/beauty-editorial--support-3.txt",
+      "status": "compiled"
+    },
+    {
+      "campaign": "beauty-editorial",
+      "id": "lock-hero",
+      "type": "image",
+      "route": "product.lock",
+      "model": "nano-banana-pro",
+      "fallback": "gpt-image-2",
+      "adapter": "gemini-image",
+      "env_key": "GEMINI_API_KEY",
+      "aspect": "4:5",
+      "shot": "Applied at the Waterline",
+      "duration_s": null,
+      "count": 2,
+      "depends_on": "hero",
+      "prompt_file": "output/prompts/beauty-editorial--lock-hero.txt",
+      "status": "compiled"
+    },
+    {
+      "campaign": "beauty-editorial",
+      "id": "support-1",
+      "type": "image",
+      "route": "fashion.editorial",
+      "model": "seedream",
+      "fallback": "nano-banana-pro",
+      "adapter": "seedream",
+      "env_key": "ARK_API_KEY",
+      "aspect": "3:2",
+      "shot": "Thirteen Storeys",
+      "duration_s": null,
+      "count": 2,
+      "depends_on": "style-support-1",
+      "prompt_file": "output/prompts/beauty-editorial--support-1.txt",
       "status": "compiled"
     },
     {
@@ -178,9 +117,7 @@
       "shot": "The Capsule",
       "duration_s": null,
       "count": 2,
-      "depends_on": [
-        "support-3"
-      ],
+      "depends_on": "support-3",
       "prompt_file": "output/prompts/beauty-editorial--lock-support-3.txt",
       "status": "compiled"
     }

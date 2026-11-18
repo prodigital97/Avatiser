@@ -84,6 +84,10 @@ function parseCampaign(md, label = 'campaign.md') {
          prompt, for when the Soul pass must differ (e.g. an empty plate for a
          scale shot, people added in the final pass). Defaults to the prompt. */
       style_prompt: ((body.match(/^\*Style frame:\*[^\n]*\n```[^\n]*\n([\s\S]*?)\n```/m) || [])[1] || prompt).trim(),
+      /* 'own' when the shot has its own *Style frame:* prompt, 'same' when it has a bare
+         *Style frame:* line (Soul pass with the main prompt), '' when it has neither.
+         fashion-editorial always runs the style pass; beauty-editorial only when set. */
+      style_frame: /^\*Style frame:\*[^\n]*\n```/m.test(body) ? 'own' : (/^\*Style frame:\*/m.test(body) ? 'same' : ''),
       /* optional: a "*Product lock:*" line + fenced block — the Nano Banana pass that
          swaps the generated product for the exact product photo, so label text is
          copied, never generated. Shots without one skip that pass. */
@@ -245,6 +249,13 @@ function compile(slug) {
   }
 
   /* dependency-ordered: anything nothing depends on last, identities first */
+  /* drop dependencies on passes this campaign skipped (e.g. no style frame for a shot) */
+  const planned = new Set(plan.map((a) => a.id));
+  for (const a of plan) {
+    if (!a.depends_on) continue;
+    const deps = [].concat(a.depends_on).filter((x) => planned.has(x));
+    a.depends_on = deps.length ? (deps.length === 1 ? deps[0] : deps) : null;
+  }
   plan.sort((a, b) => (a.depends_on ? 1 : 0) - (b.depends_on ? 1 : 0));
 
   const planOut = { project: slug, compiled_at: new Date().toISOString(), assets: plan };
