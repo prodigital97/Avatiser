@@ -1,0 +1,14 @@
+# PRODUCT LOCK (Nano Banana edit) — The Melt / The Melt (4:5)
+
+PURPOSE: replace the generated product(s) in the approved final render with the
+exact product photos, so label, logo and packaging text are copied pixel-true
+from the reference and never generated. Realism core §4.
+
+REFERENCES: @image_1 the approved final render, then the real product photo or reference sheet for each product in frame (refs/product/), in the order the shot's Product lock prompt names them.
+
+PROMPT (send verbatim):
+
+Edit @image_1: replace the jar in the woman's left hand with the exact product in @image_2, keeping its label, logo, colours and capsule fill exactly as photographed, at the same size (about 7 cm across, sitting in her palm) and the same angle. Recolour the capsule on her cheekbone to match the capsules in @image_2. Relight the jar to match the scene: beauty-dish key from high front-left, a clean highlight on the jar's shoulder, the strip-light rim from behind camera right on its edge, her fingers casting a soft shadow on it. Keep everything else in @image_1 exactly as it is: face, make-up, skin, hands, light and grade. No other text.
+
+QC: zoom to 100% on every label. Any letter that differs from the product photo
+is a hard fail; re-run the lock, never ship it.
