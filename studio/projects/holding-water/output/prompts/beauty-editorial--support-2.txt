@@ -2,7 +2,7 @@
 
 PURPOSE: Portrait. Mature skin holding water, the result the campaign promises, shown on its own.
 
-REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product photos for shape and placement, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
 Attach in this order and paste this key at the top of the prompt:
 - @image_1 — style frame: copy only its light, colour grade, film grain, lens feel and mood. Do not copy its people, faces, clothes, products or architecture details.
 - @image_2 — face of the woman from Jaipur.

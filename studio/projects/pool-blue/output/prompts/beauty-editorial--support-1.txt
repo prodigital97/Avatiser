@@ -2,7 +2,7 @@
 
 PURPOSE: Scale and graphic. The pool as a turquoise field from above, the two women small inside it.
 
-REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product photos for shape and placement, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
 Attach in this order and paste this key at the top of the prompt:
 - @image_1 — base plate (the approved Soul style frame, rendered empty): keep it exactly, including the pool, tile, light and grade. Only add the two women.
 - Attach nothing else: at this size faces and products don't read, and extra references pull the figures too large.

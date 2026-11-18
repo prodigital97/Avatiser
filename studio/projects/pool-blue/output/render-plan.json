@@ -1,6 +1,6 @@
 {
   "project": "pool-blue",
-  "compiled_at": "2026-11-18T18:22:58.521Z",
+  "compiled_at": "2026-11-18T18:46:40.345Z",
   "assets": [
     {
       "campaign": "beauty-editorial",
@@ -85,6 +85,26 @@
       "count": 2,
       "depends_on": "hero",
       "prompt_file": "output/prompts/beauty-editorial--lock-hero.txt",
+      "status": "compiled"
+    },
+    {
+      "campaign": "beauty-editorial",
+      "id": "motion-hero",
+      "type": "video",
+      "route": "video.social",
+      "model": "seedance",
+      "fallback": "kling",
+      "adapter": "seedance",
+      "env_key": "ARK_API_KEY",
+      "aspect": "3:4",
+      "shot": "At the Edge",
+      "duration_s": 8,
+      "count": 2,
+      "depends_on": [
+        "lock-hero",
+        "hero"
+      ],
+      "prompt_file": "output/prompts/beauty-editorial--motion-hero.txt",
       "status": "compiled"
     },
     {

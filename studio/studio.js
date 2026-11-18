@@ -70,12 +70,13 @@ const commands = {
     if (!slug) die('usage: studio.js compile <slug>');
     let res;
     try { res = compile(slug); } catch (e) { die(e.message); }
-    const { plan, missing, skipped } = res;
+    const { plan, missing, skipped, unusedSlots } = res;
     console.log(`✓ compiled ${plan.assets.length} assets → studio/projects/${slug}/output/`);
     for (const a of plan.assets) {
       console.log(`  [${a.type}] ${a.campaign}/${a.id}${a.shot ? ` "${a.shot}"` : ''} → ${a.model} (${a.aspect}${a.duration_s ? `, ${a.duration_s}s` : ''}) ×${a.count}${a.depends_on ? `  ⇠ needs ${a.depends_on}` : ''}`);
     }
-    if (skipped.length) console.log(`  (skipped, not needed by this campaign.md: ${skipped.join(', ')})`);
+    if (skipped.length) console.log(`  (skipped, not needed by these shots: ${skipped.map((x) => x.split('/')[1]).join(', ')})`);
+    if (unusedSlots.length) console.log(`  (${unusedSlots.length} optional shot slot${unusedSlots.length > 1 ? 's' : ''} unused: ${unusedSlots.join(', ')})`);
     const gaps = Object.keys(missing);
     if (gaps.length) {
       console.log(`\n⚠ ${gaps.length} prompts have unfilled sheet fields (search ⚠MISSING in output/prompts/):`);

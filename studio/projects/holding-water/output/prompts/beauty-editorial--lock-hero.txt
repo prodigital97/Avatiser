@@ -4,7 +4,7 @@ PURPOSE: replace the generated product(s) in the approved final render with the
 exact product photos, so label, logo and packaging text are copied pixel-true
 from the reference and never generated. Realism core §4.
 
-REFERENCES: @image_1 the approved final render, then one clean product photo per product in frame (refs/product/), in the order the shot's Product lock prompt names them.
+REFERENCES: @image_1 the approved final render, then the real product photo or reference sheet for each product in frame (refs/product/), in the order the shot's Product lock prompt names them.
 
 PROMPT (send verbatim):
 

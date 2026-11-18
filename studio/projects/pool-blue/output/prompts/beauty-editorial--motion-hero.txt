@@ -1,0 +1,12 @@
+# MOTION (Seedance, image-to-video) — Pool Blue / At the Edge (8s)
+
+START FRAME (@image_1): the approved, label-locked still of this shot. Attach
+nothing else; the still already carries face, product and light.
+
+PROMPT (send verbatim):
+
+Start from @image_1 and keep its framing. Camera: locked tripod at the waterline with one slow 3 cm push-in across all eight seconds, no other camera move. Light: the high morning sun from camera left and the rippling caustic pattern on the tile stay fixed in place while the water moves, so the caustics glide across both women's skin and the jar. 0–3 s: the woman from Kochi breathes slowly, eyes closed, small ripples lapping at her shoulders; the older woman blinks once, naturally. 3–6 s: the woman from Jaipur draws her two fingertips slowly across the younger woman's cheekbone, spreading the clear gel into a dewy sheen, the jar steady in her other palm with its label to camera. 6–8 s: the younger woman opens her eyes and settles, a calm ease at the corners of her mouth. Sound: quiet pool room tone and small water laps only, no music, no dialogue. Keep the jar's size, shape and label exactly as in @image_1; no identity drift, no jitter, no flicker.
+
+RENDER: draft at 480p, check label, hands and face for drift, then render the
+final at 720p or higher. Reject any take where the product resizes, the label
+changes, the face drifts, or the frame jitters or flickers.

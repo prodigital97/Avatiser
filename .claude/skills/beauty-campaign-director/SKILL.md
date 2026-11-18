@@ -1,6 +1,6 @@
 ---
 name: beauty-campaign-director
-description: Turns a skincare, cosmetics, haircare or other beauty product brief (a brand, its real products, a market, and optionally a mood, location or casting) into a cohesive beauty campaign. It produces one controlling idea drawn from a product truth (texture, ingredient, ritual, proof, people or a sensorial element), a visual system taken from the packaging, and a hero plus 2–3 supporting shot prompts, each with a reference key and, where packaging shows, a product-lock edit that copies the label from the product photo. Use it whenever someone wants a skincare or makeup campaign, beauty product shoot, packshots in a scene, texture or swatch imagery, a launch visual for a beauty SKU, or "campaign images for this cream / serum / lipstick / foundation", including one-line briefs and requests that never say "campaign". For clothing and accessories use fashion-campaign-director instead.
+description: Turns a skincare, cosmetics, fragrance, haircare or other beauty product brief (a brand, its real products, a market, and optionally a mood, location or casting) into a cohesive beauty campaign. It produces one controlling idea drawn from a product truth (texture, ingredient, ritual, proof, people or a sensorial element), a visual system taken from the packaging, and a hero plus 2–7 supporting shot prompts. Each prompt carries a reference key and a strict product-scale lock tied to hands and face; shots that show packaging also get a product-lock edit that copies the label from the product photo; and the hero can add a Seedance motion prompt from the locked still. Use it whenever someone wants a skincare or makeup campaign, beauty product shoot, packshots in a scene, texture or swatch imagery, a launch visual for a beauty SKU, or "campaign images for this cream / serum / lipstick / foundation", including one-line briefs and requests that never say "campaign". For clothing and accessories use fashion-campaign-director instead.
 ---
 
 # Beauty Campaign Director
@@ -13,7 +13,7 @@ Beauty imagery has to sell a result you can see: the skin, the texture, the prod
 
 The weak ones borrowed a fashion mood, and the product disappeared into it. Avatiser's tests proved this: a stepwell campaign shot in fashion codes failed as skincare, while the same products in a clear-water pool that matched the packaging worked.
 
-The evidence and sources are in `references/campaign-studies.md`. The working tools (idea sources, archetypes, light per material, staging, texture words, skin rules, cosmetics, India and claims, tested generator failures) are in `references/visual-language.md`. Read the second one while you develop the concept, and dip into the studies when you need a precedent.
+An external sweep of 228 real (non-AI) campaigns by another research agent added light rigs per brand school, a product-scale table, eight shot archetypes and motion rules. Its source list hasn't been delivered yet, so those additions are marked as unverified in `references/campaign-studies.md` until it is. The evidence and sources are in `references/campaign-studies.md`. The working tools (idea sources, archetypes, light per material, staging, texture words, skin rules, cosmetics, India and claims, tested generator failures) are in `references/visual-language.md`. Read the second one while you develop the concept, and dip into the studies when you need a precedent.
 
 ## Inputs
 
@@ -49,16 +49,26 @@ Pick one of the six sources (visual-language §2) as the spine: **texture / fini
 > **Fashion-mood, fails "sells":** "Two women at an ancient stepwell, the water it was built to hold." (The product is 2% of the frame.)
 > **Grounded and sells:** "Hydration made literal: the jar's own aqua becomes the whole world — clear pool water, white tile, skin wet and close."
 
-### 3. Choose the archetype and lock the visual system
-Pick one archetype (visual-language §3): clinical white, Penn-style still life, texture macro, glazed skin, sensorial element, ingredient world, apothecary/object, ritual at home, range line-up or glamour/era. Then lock the constants, worded identically in every prompt:
-- **Palette:** taken from the packaging (§8). Say where each colour lives. One line colour per frame unless it's a range shot.
+### 3. Choose the school, the archetype and lock the visual system
+First pick the brand's **visual school** and its light rig (visual-language §13): global luxury prestige, cult D2C / tactile minimalism, high-fashion colour cosmetics, apothecary / clinical derm / K-beauty, luxury haircare, or Indian luxury Ayurveda versus modern Indian D2C. These are separate schools: heritage codes like jaali light, terracotta and kansa brass suit luxury Ayurveda, not ingredient-led or colour-coded D2C brands. Then pick one archetype (visual-language §3): clinical white, Penn-style still life, texture macro, glazed skin, sensorial element, ingredient world, apothecary/object, ritual at home, range line-up or glamour/era. Then lock the constants, worded identically in every prompt:
+- **Palette:** taken from the packaging (§8). Say where each colour lives. One line colour per frame unless it's a range shot. Only if the packaging has no strong colour, use one of the colour directions in §17.
 - **Light:** one motivated family chosen for skin and for the hero material (§4), e.g. backlight for gels, raking light for creams, a hard point for glitter, soft even light for shade truth.
 - **Medium:** crisp medium-format digital with a neutral grade by default. Use film grain only for heritage or ritual brands, and never warm-grade a cool product.
 - **Skin line:** "unretouched and dewy, visible pores, fine vellus hair, never oily or airbrushed" (adapt the finish word).
 - **Set:** one surface family (white tile, amber stone, glass, skin), with at least one foreground element, 2–4 specific set details and one atmosphere (mist, droplets, steam, caustics). Keep the set simpler than a fashion set: the product and the skin need the room.
 
 ### 4. Plan the shots
-The **hero** carries product, person and idea together. Hand-held product must read at thumbnail size, and the face is close enough to see skin. Pick 2–3 **supporting** jobs:
+The **hero** carries product, person and idea together. Hand-held product must read at thumbnail size, and the face is close enough to see skin. A standard campaign has a hero plus 2–3 supporting shots; a flagship launch can run to a hero plus 7. Never repeat the same seated portrait. Choose supporting shots from the eight archetypes in visual-language §15:
+1. architectural light portrait
+2. museum-sculpture macro still life
+3. overhead flat-lay
+4. outdoor daylight with a skin swatch
+5. face-free tactile hold
+6. motion-contrast
+7. monochrome or chiaroscuro hydration study
+8. clinical lab proof
+
+Or choose from the core jobs below. Every campaign needs at least one product-in-world frame and one skin-result frame.
 - **Product in world:** the packaging large (at least 20–30% of the frame), label to camera, texture beside it (swatch, smear, capsule, drop), on the campaign's set.
 - **Texture macro:** the formula itself on skin, glass or the set surface; raking or back light.
 - **Skin result:** a close portrait showing the finish the product promises (dew, glaze, matte, flush). No packaging, or a single melted capsule or swipe.
@@ -92,7 +102,8 @@ Rules:
 - **Never type label text, brand names on packs or ingredient percentages.** Describe the pack physically; the product-lock pass copies the label.
 - **Name every product in frame and say that nothing else is**, so the generator doesn't invent a second jar or spare lids.
 - **Say what each person isn't holding or wearing** when two people share a campaign.
-- **Length:** 180–300 words is normal, because beauty prompts carry product and skin detail. Put the important information first, since generators lose detail near the end. Spend words on product, texture and skin, not adjectives. No filler words (stunning, flawless, 8k, masterpiece).
+- **Scale lock:** every prompt that shows packaging carries one sentence starting `STRICT PRODUCT SCALE LOCK:`, built from the scale table (visual-language §14). It gives the pack's true height and width, how the hand grips it, and its size against the face or a familiar prop, e.g. "STRICT PRODUCT SCALE LOCK: the jar is about 7 cm across and 6 cm tall, sitting in her palm with four fingers curled around its side, about a third of her face height; it never grows or shrinks."
+- **Length:** 180–300 words is normal, because beauty prompts carry product, scale and skin detail; a two-person hero with product can reach about 400. Then cut set and background description before product, scale, casting or skin, and state the pack's size once (in the scale lock), not twice. Put the important information first, since generators lose detail near the end. Spend words on product, texture and skin, not adjectives. No filler words (stunning, flawless, 8k, masterpiece).
 - **Aspect ratio:** on its own line after the prompt (`Aspect ratio: 4:5`). Use 4:5 and 9:16 for social, 1:1 for e-commerce, 3:2 or 16:9 for web banners.
 
 ### 7. Passes and references (Avatiser studio)
@@ -104,7 +115,20 @@ Campaigns run as `beauty-editorial` (`node studio/studio.js new <slug> beauty`).
    - Without a style frame, number the References key from the faces.
 3. **Nano Banana product lock.** Add a `*Product lock:*` block to every shot that shows packaging: an edit that replaces each generated product with the exact product photo at the same size and angle, relit to the scene, changing nothing else. Name each product by its attachment. If a product shows up only as a melted capsule or a swipe, the shot needs no lock.
 
-Product photos for references are packshots on white, with ratios between 0.4 and 2.5. Multi-product boards stay inside that range too.
+4. **Seedance motion, optional.** Add a `*Motion:*` block to the hero, and to any shot worth moving. It's an 8-second image-to-video prompt whose start frame is that shot's approved, label-locked still. Rules (visual-language §16):
+   - **Camera:** one camera move only.
+   - **Light:** the light pattern stays fixed while the subject moves through it.
+   - **Action:** three beats (0–3 s breath and blink, 3–6 s one motivated product gesture, 6–8 s settle). Never write "frozen" or "still".
+   - **Sound:** room tone only, no music and no dialogue.
+   - **Guardrails:** explicitly forbid product resizing, label drift, identity drift, jitter and flicker.
+   - **Format:** add `Motion aspect ratio: W:H` after the block.
+
+**Product references** are packshots on white, with ratios between 0.4 and 2.5. For each product, also assemble a **3-panel reference sheet** from the real photos, never generated: front square to camera, side, and a sharp crop of the label. A generated sheet would invent the label. Multi-product boards stay inside the same ratio range.
+
+**Edits:**
+- **At most one clean-up edit before the lock**, then the lock.
+- **If a render needs more fixing,** fold the fix into the prompt and re-roll from the original references. Chained edits degrade faces and labels.
+- **Never attach product photos to a Soul style frame or empty plate.** It flattens the light.
 
 ## Output format
 
@@ -137,8 +161,14 @@ Aspect ratio: …
 [lock prompt]
 ```
 
+*Motion:* Seedance image-to-video, 8 s, start frame: this shot's approved, label-locked still.
+```
+[motion prompt]
+```
+Motion aspect ratio: …
+
 ## Supporting 1: [shot name]
-… (same pattern; add `*Style frame:*` as a bare line or with its own fenced prompt where the shot needs Soul)
+… (same pattern; add `*Style frame:*` as a bare line or with its own fenced prompt where the shot needs Soul; `*Motion:*` is optional on any shot)
 ````
 
 A complete worked example (Pool Blue, GYK) is in `references/example-campaign.md`.
@@ -153,5 +183,7 @@ Re-read the campaign against these checks and fix anything that fails:
 - Is every person cast by nationality or region, city, age and skin depth, identically everywhere?
 - Is every frame free of typed label text, signage and stray people?
 - Is there no lightening, fairness or exaggerated before/after framing, and is every tone rendered true?
-- Does every shot with packaging have a `*Product lock:*` block, and does every References key match its attach order?
+- Does every shot with packaging have a `*Product lock:*` block and a `STRICT PRODUCT SCALE LOCK:` sentence, and does every References key match its attach order?
+- Does every `*Motion:*` prompt use one camera move, fixed light, three beats, room tone only, and the drift guardrails?
+- Are prompts free of living photographers' names, using light, lens and surface descriptions instead?
 - Is each prompt standalone, with the important information first, no filler, and the closing label line?

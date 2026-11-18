@@ -15,6 +15,11 @@ Tools for building beauty campaigns, drawn from the 24 campaigns in `campaign-st
 10. Casting, claims and India
 11. Generator failure modes (tested)
 12. Anti-patterns
+13. Visual schools and light rigs *(external research, unverified)*
+14. Product scale lock table *(external research, unverified)*
+15. Eight shot archetypes *(external research, unverified)*
+16. Motion rules (Seedance) *(external research, unverified)*
+17. Colour directions *(external, a fallback only)*
 
 ---
 
@@ -163,6 +168,7 @@ Describe the motion when there is one: "a fingertip drags a ribbon of cream acro
 | Wrong-ethnicity casting | Walking Pace [T] | Nationality + city + specific cues first; casting headshot | Re-cast the headshot |
 | Accessories or products leaking between people | Walking Pace [T] | Don't name both people's items in a shared line; say what each person is not wearing or holding | Edit |
 | Signage and lettering in the set | Walking Pace, stepwell [T] | "No signs or lettering anywhere"; describe plain surfaces | Edit: blank the sign |
+| Product size drifting between frames | Pool Blue (jar size guessed) [T] | A `STRICT PRODUCT SCALE LOCK:` sentence (§14) | Re-roll with the lock; never resize in an edit |
 | Stray people at frame edges | Pool Blue hero [T] | "No other people" | Edit: remove |
 | Fashion look instead of beauty | Stepwell [T] | Skincare codes (sections 1, 3–8) | Re-direct |
 
@@ -178,3 +184,82 @@ Describe the motion when there is one: "a fingertip drags a ribbon of cream acro
 - Two or more people's products in one frame with no clear owner.
 - Typed label text; hallucinated ingredient percentages.
 - Any lightening, fairness or before/after framing [20, 21].
+
+
+---
+
+> **Sections 13–17 come from an external research sweep** (another agent, a reported 228 real non-AI campaigns). Its campaign list and sources haven't been delivered yet, so treat these as **unverified working rules**. They are rewritten here to fit this skill's rules: every living photographer named in the source is translated into physical light and lens descriptions, because prompts never name living artists.
+
+## 13. Visual schools and light rigs
+
+| School | Typical brands (as named in the sweep) | Light rig | Surfaces and space | Watch for |
+|---|---|---|---|---|
+| **Global luxury prestige** | Dior, La Mer, SK-II, Shiseido, Estée Lauder | Broad frontal diffusion (large octabox or silk scrim) with black negative-fill flags sculpting the cheekbones; hard edge kickers on packaging | Dark reflective plinths; packaging lit like museum sculpture | Skin must still show pores; no plastic luxury |
+| **Cult D2C / tactile minimalism** | Rhode, Glossier, Summer Fridays, Milk, Merit | Natural daylight with real specular highlights on skin; hard sun casting sculptural tabletop shadows | Single-hue world from the hero ingredient or pack; macro "edible" texture: glossy smears, whipped peaks, water caustics | Keep it one hue; no props without a reason |
+| **High-fashion colour cosmetics** | Pat McGrath, NARS, Prada Beauty, Byredo, Valentino | Match light hardness to the finish: crisp strobe for vinyl gloss and metallics, a diffused key for velvet matte | Graphic colour contrast; true pigment on real pores | The shade must read true under the drama |
+| **Apothecary / clinical derm / K-beauty** | Aesop, Diptyque, Le Labo, The Ordinary, CeraVe, Tatcha, Tamburins | Apothecary: deep raking shadows, film. Derm: flat overhead clinical light. Real optical caustics through glass | 45–70% deliberate negative space: drapery, stone, an architectural wall | Don't mix the apothecary and clinical registers |
+| **Luxury haircare** | K18, Kérastase, Dyson, Oribe | Tight back-edge rim light for mirror shine on strands; fast shutter | Kinetic strand separation, real airflow, liquid physics | Hair physics must be real; no impossible swirls |
+| **Indian luxury Ayurveda** | Forest Essentials, Kama Ayurveda, Sabyasachi × Estée Lauder, Indē Wild | Warm golden-hour light or sandstone-jaali lattice light, calibrated for South Asian undertones | Terracotta plaster, rosewood, kansa brass, Chanderi or khadi fabric; restrained botanicals (a few saffron threads, one lotus petal) | Heritage only where the brand is heritage-led [22]; product still large, skin still close [T] |
+| **Modern Indian D2C** *(added here, not in the sweep)* | Minimalist, Foxtale, Dot & Key, Kay Beauty, Fae Beauty | Clean directional daylight or a soft studio key; neutral colour balance so every undertone stays true | Line colour-coding, legible actives on labels [23, 24] | Don't impose heritage codes on clinical or colour-coded brands |
+
+**One light source per related set of frames:** name one physically plausible source, its angle and the time of day, and match its hardness to the brand's proof (hard for glow and gloss, soft for matte and shade truth). Keep it fixed across related frames.
+
+**Skin-tone note:** the sweep warns against flat frontal ring light and cool grey flash on South Asian and melanin-rich skin, and recommends directional light with controlled falloff. Keep the white balance neutral so tones stay true (§7): "warm light" means the light's direction and quality, not grading the skin warmer.
+
+**Light and lens shorthand.** These are the light and lens qualities the sweep cited from named photographers, written as physical descriptions. Use the description, never a name.
+
+| Quality | Physical description to prompt |
+|---|---|
+| Honest documentary beauty | Large frontal diffused key at eye level, direct gaze, unretouched pores and fine lines, 85 mm |
+| Crisp graphic 90s strobe | Hard strobe from high front, crisp shadow under the jaw, saturated architectural colour blocks, contoured sheen on lips and cheeks |
+| Intimate raw daylight | Warm directional window or late sun, close handheld 50 mm, dewy bare skin, a hand touching the face |
+| Sculptural beam | A narrow beam of directional light slicing deep shadow across the face, the rest falling to black |
+| Painterly daylight with glass | Soft natural sun through coloured or textured glass, casting caustics beside sculptural botanicals |
+| Rich warm saturation on deep skin | Warm-direction key, rich saturated colour around the subject, deep skin rendered luminous and true |
+| Precision tabletop macro | Flagged hard light on a macro still life, water caustics, jewel-like refraction through glass, focus-stacked |
+
+## 14. Product scale lock table
+
+A white-background product photo carries no sense of size. Every prompt showing packaging needs a `STRICT PRODUCT SCALE LOCK:` sentence built from this table. Measure the real SKU where you can: these are typical sizes, and the true dimensions win.
+
+| Format | Typical height | Hand grip | Face / prop anchor |
+|---|---|---|---|
+| 15 ml eye serum / lip oil | 7.5–8.5 cm | Thumb plus two fingers; the body spans two stacked fingers (about 4.5 cm) | About 35% of face height (chin to brow); shorter than a lipstick tube |
+| 30 ml dropper / face oil | 9.5–10.5 cm | Full three-finger wrap around a ~5.5 cm glass body; collar and bulb rise ~4 cm above the index finger; never a two-finger pinch | About 45% of face height; on a table, the glass body matches an espresso cup |
+| 50 ml perfume bottle | 10.5–12 cm | Full four-finger wrap around a ~7.5 cm body; the cap rises ~3.5 cm above the index knuckle | About 50% of face height; reaches halfway up a teapot |
+| 50 g / 50 ml cream jar | 5–7 cm tall, 6–8 cm across | Sits in the palm with the fingers curled around its side, or the lid unscrewed between thumb and fingers | About a third of face height; the width of a teacup |
+| 100 ml body oil / mist | 14–16 cm | Full-palm wrap around the middle third; the top third rises above the hand | About 70% of face height; taller than a coffee mug |
+| 200–250 ml wash / shampoo / scrub tub | 18–21 cm (bottle) | Full palm or a two-hand cradle; taller than the hand span | About full head height (chin to hairline) for bottles |
+
+## 15. Eight shot archetypes
+
+| # | Archetype | Frame | What it shows | Key physics |
+|---|---|---|---|---|
+| 1 | Architectural light portrait | 4:5 or 9:16 | The person in the campaign's room, holding the pack with a locked, natural grip | Window or lattice light throwing a fixed pattern or caustics across skin and clothes |
+| 2 | Museum-sculpture macro still life | 4:5, no face | The pack as an object: solo, or one upright and one angled, on wet stone or a dark reflective plinth | Hard edge kickers, micro-condensation, a frozen spill or cream smear; macro, f/11, focus-stacked |
+| 3 | Overhead flat-lay | 4:5, no face | The pack among routine props that anchor scale (sleep mask, jewellery, gua sha, earphones, a notebook) on a tray or stone slab | True 90° overhead; one light; real contact shadows |
+| 4 | Outdoor daylight with skin swatch | 4:5 | The face outdoors in golden light, a visible swatch on the cheek (oil bead, cream smear, flush, hydrogel), the pack near the chin | Real wind in hair, sun specular on the swatch, unretouched pores |
+| 5 | Face-free tactile hold | 4:5 | Collarbone-to-knee or hands only, a rich textile (ribbed wool, khadi, washed linen) or wet stone, skin pressing slightly around the pack | Natural grip, soft compression, fibre detail |
+| 6 | Motion-contrast | 4:5 or 9:16 | The subject razor-sharp with the pack at chest height while foreground fabric, hair or passers-by blur | Slow shutter on the movement only; 35 mm, fine grain |
+| 7 | Monochrome or chiaroscuro hydration | 4:5 | Freshly misted bare skin, crisp specular micro-droplets, black and white or a deep-shadow beam | One hard source, deep falloff |
+| 8 | Clinical lab proof | 4:5, no face | The pack with clear lab glassware, suspended droplets, a backlit lightbox, generous negative space | Flat overhead or back light; clean optical refraction |
+
+## 16. Motion rules (Seedance)
+
+- **Start frame:** the shot's approved, label-locked still (`@image_1`), nothing else.
+- **Camera:** one move only (e.g. a locked tripod with a slow 3 cm push-in). Never stack moves.
+- **Light:** the light pattern on the set stays fixed while the subject moves through it, so light glides across skin and glass.
+- **Three beats over 8 s:** 0–3 s a slow breath and a natural blink; 3–6 s one small motivated gesture with the product; 6–8 s settle into the end state. Never write "frozen" or "still".
+- **Sound:** room tone only, no music or dialogue.
+- **Guardrails:** forbid product resizing, label drift, identity drift, jitter and flicker.
+- **Render:** draft at 480p, check, then render finals at 720p or higher. 100–150 words.
+
+## 17. Colour directions (a fallback only)
+
+The sweep proposes trend directions for 2026–27. Use one **only when the packaging has no strong colour of its own**; the pack's palette always wins (§8). The trend names aren't sourced.
+- **Soft Butter:** cream, honey, oils.
+- **Dreamy Cerulean:** water, droplets, glass, hydration.
+- **Moon Lilac:** pearlescent translucency.
+- **Cherry Glaze:** glossy crimson or berry.
+- **Silver Shift:** chrome, stainless steel, mirror.
+- **Warm Terracotta and Amber.**

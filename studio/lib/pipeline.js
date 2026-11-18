@@ -92,6 +92,10 @@ function parseCampaign(md, label = 'campaign.md') {
          swaps the generated product for the exact product photo, so label text is
          copied, never generated. Shots without one skip that pass. */
       product_prompt: ((body.match(/^\*Product lock:\*[^\n]*\n```[^\n]*\n([\s\S]*?)\n```/m) || [])[1] || '').trim(),
+      /* optional: a "*Motion:*" line + fenced block — an image-to-video prompt that
+         starts from the shot's approved (locked) still; "Motion aspect ratio: W:H" after it */
+      motion_prompt: ((body.match(/^\*Motion:\*[^\n]*\n```[^\n]*\n([\s\S]*?)\n```/m) || [])[1] || '').trim(),
+      motion_aspect: ((body.match(/Motion aspect ratio:\s*([\d.]+\s*:\s*[\d.]+)/i) || [])[1] || '').replace(/\s/g, ''),
       aspect,
     });
   });
@@ -188,7 +192,8 @@ function compile(slug) {
 
   const plan = [];
   const allMissing = {};
-  const skipped = [];
+  const skipped = [];      // passes a present shot doesn't need (no style frame / lock / motion)
+  const unusedSlots = new Set(); // optional shot slots the campaign doesn't use
 
   for (const d of deliverables) {
     const route = cfg.models.routing[d.route];
@@ -200,7 +205,7 @@ function compile(slug) {
     if (d.shot) {
       shot = proj.campaign && proj.campaign.shots.find((s) => s.id === d.shot);
       if (!shot) {
-        if (d.optional) { skipped.push(`${d.campaign}/${d.id}`); continue; }
+        if (d.optional) { unusedSlots.add(d.shot); continue; }
         throw new Error(`${slug}/campaign.md has no shot '${d.shot}' (needed by ${d.campaign}/${d.id})`);
       }
       /* a pass that only some shots need, e.g. "skip_unless": "shot.product_prompt" */
@@ -260,7 +265,7 @@ function compile(slug) {
 
   const planOut = { project: slug, compiled_at: new Date().toISOString(), assets: plan };
   fs.writeFileSync(path.join(outDir, 'render-plan.json'), JSON.stringify(planOut, null, 2));
-  return { plan: planOut, missing: allMissing, skipped, promptsDir };
+  return { plan: planOut, missing: allMissing, skipped, unusedSlots: [...unusedSlots], promptsDir };
 }
 
 module.exports = { loadConfig, loadProject, parseCampaign, compile, fillTemplate, expandCampaigns, STUDIO };

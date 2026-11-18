@@ -150,6 +150,17 @@ Groups: A. Skin truth and people · B. Proof and science · C. Texture and senso
 
 ---
 
+## External research sweep, pending sources
+
+Another research agent reported a sweep of **228 real, photographed and filmed (non-AI) campaigns** in five verticals:
+- **Global luxury and prestige skincare:** La Mer, Dior Beauty, Chanel, SK-II, Augustinus Bader, Shiseido, Guerlain.
+- **Cult D2C and clean skincare:** Rhode, Glossier, Summer Fridays, Rare Beauty, Fenty Skin, Gisou, Merit, Topicals.
+- **High-fashion colour cosmetics and editorial photographers:** Pat McGrath, Charlotte Tilbury, NARS, Prada Beauty, Byredo.
+- **Apothecary, clinical derm, K-beauty and luxury haircare:** Aesop, Le Labo, The Ordinary, Tamburins, Laneige, Dyson, Oribe.
+- **Indian luxury Ayurveda and modern Indian D2C:** Forest Essentials, Kama Ayurveda, Indē Wild, Kay Beauty, Fae Beauty, 82°E, Sabyasachi × Estée Lauder.
+
+Its synthesis is merged into `visual-language.md` §13–17. **Its campaign list, image links and sources haven't been delivered**, so none of it can be checked here yet. When the audit files arrive, add each campaign below in the same format as entries 1–24 (what's documented, what it teaches, source links), then remove the *unverified* labels from §13–17 for every rule they confirm.
+
 ## Avatiser's own render tests (Nov 2026)
 
 First-hand evidence from Avatiser's own renders for the GYK and Nicobar test campaigns (`studio/projects/`):
