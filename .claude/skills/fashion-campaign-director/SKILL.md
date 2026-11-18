@@ -204,7 +204,7 @@ In the Avatiser repo this skill is the front end of the studio engine's `fashion
 **Two passes per shot, and a reference key.** Each shot renders twice: first a Soul 2.0 *style frame* (the most photographic look, but it takes only one face), then a final render on a multi-reference model (Seedream) that keeps the style frame's look and locks faces and garments to references. Under each shot's `*Purpose:*` line, add a `*References:*` line followed by one `- @image_N — …` bullet per attached image, in attach order:
 - `@image_1` is always the style frame, limited to light, colour grade, film grain, lens feel and mood, with an explicit "do not copy its people, faces, clothes or buildings".
 - Then the casting headshot of each person in the frame. Supporting shots may cite the approved hero instead.
-- Then one **look board** per person when the brief has real products: a single image holding all of that person's SKUs. Never mix two people's products on one board.
+- Then one **look board** per person when the brief has real products: a single image holding all of that person's SKUs. Never mix two people's products on one board. Keep every board's width-to-height ratio between 0.4 and 2.5 (Seedream rejects anything outside that range); about 2:1 for three products works well. Crop each product photo to the garment so faces from the brand's own photos don't leak in.
 - A last bullet giving priority when references conflict: garments, then faces, then style.
 - In single-person shots, name what she is *not* wearing from the other looks ("Nothing else: no scarf").
 
