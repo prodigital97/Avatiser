@@ -96,7 +96,7 @@ Give each frame one clear action. Each supporting shot must differ from the hero
   - age or shade range shown side by side;
   - a relationship that is the concept.
   Give that person only the frames where their role is real.
-- **Name nationality or region, city, age and skin depth for every person**, worded identically in every prompt (§10). Plan a casting headshot per person.
+- **Cast by nationality plus a specific physical description:** nationality first ("an Indian woman"), then age, skin depth and undertone, face shape and bone structure, eyes, brows, nose, lips, hair, and one or two natural marks (a mole, freckles, a dimple), worded identically in every prompt. Don't use a state, city or community as the casting cue unless the concept needs that place; regions aren't faces, and they invite stereotypes. Before the campaign, write **4–6 casting headshot options** with identical light, make-up and hair, so the client compares faces only, across skin depths from light to deep, face shapes and ages. The approved headshot then carries the face into every shot. (§10)
 - **Expressions:** describe the mechanics. Beauty favours inward pleasure and calm: eyes closed, chin lifted to the light, lips softly parted; or a level, assured gaze. A real smile is allowed when the idea is joy, but describe the face, never just "smiling".
 - **Hands:** clean, natural nails, true skin tone, knuckle creases kept, a correct grip. The label stays uncovered.
 - **Application:** name the exact point and keep it safe: on the cheekbone, well below the eye.
@@ -197,7 +197,7 @@ Re-read the campaign against these checks and fix anything that fails:
 - Is the palette taken from the packaging, worded identically in every prompt, along with light, medium and the skin line?
 - In product shots, is the packaging at least 20–30% of the frame, label to camera, every product named and nothing else in frame?
 - Is the application point correct and safe, and are hands natural with the label uncovered?
-- Is every person cast by nationality or region, city, age and skin depth, identically everywhere?
+- Is every person cast by nationality plus a specific physical description, worded identically everywhere, with 4–6 casting options offered before the campaign?
 - Is every frame free of typed label text, signage and stray people?
 - Is there no lightening, fairness or exaggerated before/after framing, and is every tone rendered true?
 - Does every shot with packaging have a `*Product lock:*` block and a `STRICT PRODUCT SCALE LOCK:` sentence, and does every References key match its attach order?

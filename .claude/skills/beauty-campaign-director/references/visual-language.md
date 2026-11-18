@@ -150,7 +150,7 @@ Describe the motion when there is one: "a fingertip drags a ribbon of cream acro
 
 ## 10. Casting, claims and India
 
-- **Name nationality or region, city, age and skin depth** in every prompt. Skin tone and hair alone default to the generator's assumptions [T].
+- **Cast by nationality plus a specific physical description:** nationality first ("an Indian woman"), then age, skin depth and undertone, face shape and bone structure, eyes, brows, nose, lips, hair, and one or two natural marks (a mole, freckles, a dimple), worded identically in every prompt. Don't use a state, city or community as the casting cue unless the concept needs that place; regions aren't faces, and they invite stereotypes. Before the campaign, write **4–6 casting headshot options** with identical light, make-up and hair, so the client compares faces only, across skin depths from light to deep, face shapes and ages. The approved headshot then carries the face into every shot. Tested: skin tone plus hair alone defaulted to the wrong ethnicity [T]; nationality plus specific features plus an approved headshot fixes it.
 - **Cast for the market**, and celebrate deep and mature skin. Never cast a darker tone as the "before" [20].
 - **Banned framings:** fairness, whitening, lightening, "brighter = better" comparisons; skin tone tied to marriage, jobs, status or caste [20]. Use glow, hydration, clarity, even-looking tone, radiance [21].
 - **Before/after:** avoid it. If the brief requires it: same light, same expression, no retouching beyond the product's real effect, and no tone change [20].
