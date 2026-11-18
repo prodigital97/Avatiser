@@ -37,6 +37,18 @@ Note each product's:
 - how it's applied, and where on the body it's safe to apply;
 - price tier.
 
+**Read the product page's "How to use" and treat it as the shot list.**
+- **Show the product used exactly as directed:**
+  - skin state (cleansed, dry, damp);
+  - amount;
+  - area (face and neck, lips, under-eye);
+  - tool (spatula, dropper, brush);
+  - time of day (morning, night).
+- **Rule out settings that imply a use or claim the product doesn't make.** Applying a moisturiser in water, or showing a non-SPF product in beach or pool sun, implies swim or sun protection.
+- **Keep water and other elements as metaphor** in frames without application.
+
+(Tested: a pool campaign for a face moisturiser showed it applied to a wet face in the water; the directions say cleanse and dry first, morning and evening.)
+
 Group the brief's products by line. Products that share a palette can share a frame; products from colour-coded lines should get separate frames, or one deliberate range shot.
 
 ### 2. Find the controlling idea

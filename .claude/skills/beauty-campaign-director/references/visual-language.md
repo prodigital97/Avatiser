@@ -169,6 +169,7 @@ Describe the motion when there is one: "a fingertip drags a ribbon of cream acro
 | Accessories or products leaking between people | Walking Pace [T] | Don't name both people's items in a shared line; say what each person is not wearing or holding | Edit |
 | Signage and lettering in the set | Walking Pace, stepwell [T] | "No signs or lettering anywhere"; describe plain surfaces | Edit: blank the sign |
 | Product size drifting between frames | Pool Blue (jar size guessed) [T] | A `STRICT PRODUCT SCALE LOCK:` sentence (§14) | Re-roll with the lock; never resize in an edit |
+| Wrong use context (applied in water, on wet skin, or a non-SPF product in pool sun) | Pool Blue (HBC is applied to cleansed, dry skin, morning and night) [T] | Read "How to use"; stage application exactly as directed; water only as metaphor in non-use frames | Re-direct the shot |
 | Stray people at frame edges | Pool Blue hero [T] | "No other people" | Edit: remove |
 | Fashion look instead of beauty | Stepwell [T] | Skincare codes (sections 1, 3–8) | Re-direct |
 
