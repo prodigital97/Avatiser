@@ -66,6 +66,7 @@
   "routing": {
     "character.identity": { "primary": "soul2", "fallback": null },
     "character.portrait": { "primary": "soul2", "fallback": null },
+    "product.lock": { "primary": "nano-banana-pro", "fallback": "gpt-image-2", "notes": "edit pass: swap the generated product for the exact product photo so label text is copied, never generated (realism core §4)" },
     "fashion.style": { "primary": "soul2", "fallback": null, "notes": "look-and-feel frame per shot (light, grade, grain, mood) — Soul 2.0 has the most photographic look; becomes @image_1 for the Seedream final" },
     "fashion.editorial": { "primary": "seedream", "fallback": "nano-banana-pro", "notes": "final pass: Soul style frame + casting headshots + look boards as references; Seedream takes many references, Soul only one face" },
     "character.in-scene": { "primary": "nano-banana-pro", "fallback": "gpt-image-2", "notes": "composite Soul identity ref + product ref into scene" },

@@ -65,6 +65,9 @@ when the frame contains words.**
 - `amazon-listing-pack` — hero on white, 3 lifestyle, 2 detail, 2 infographic
 - `social-static-pack` — feed statics + story statics
 - `product-hero-loop` — one seamless 5–8s hero loop for web/retail screens
+- `beauty-editorial` — fashion-editorial for skincare/beauty, plus a Nano Banana
+  product-lock pass on every shot that shows packaging, so labels are copied
+  from the product photo, never generated (`studio.js new <slug> beauty`)
 - `fashion-editorial` — no product needed: a place, the people and a vibe
   become one controlling idea, shot as a hero frame plus 2–3 supporting
   frames (see below)

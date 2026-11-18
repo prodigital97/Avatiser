@@ -1,0 +1,25 @@
+{
+  "_howto": "Real-brand test: GYK Professional skincare (thegyk.com), real products (see refs/product/SKUS.md). beauty-editorial = Soul style frame -> Seedream final -> Nano Banana product lock.",
+  "client": "GYK Professional (test, not a commissioned job)",
+  "brief": "GYK Professional (India) skincare, hydration capsule: HBC Hydrating Boba Cream 50g, Hydracloud Infusion 9-Step Hydration Boost Facial Kit (launched 12 Nov 2026), Face Scrub 200g. Labels must match the product photos exactly. Location: Chand Baori stepwell, Abhaneri, Rajasthan, winter morning. Models: two Indian women, a woman from Jaipur in her late forties and a woman from Kochi in her early twenties with deep brown skin. Vibe: cool water in a dry land; calm, dewy, architectural. A hydration story, never a fairness one.",
+  "location": "Chand Baori stepwell, Abhaneri, Rajasthan — winter morning",
+  "models": [
+    "Rajasthani Indian woman from Jaipur, late 40s, fine lines, silver-streaked hair, gold nose ring",
+    "Malayali Indian woman from Kochi, early 20s, deep brown skin, hair tucked behind ears, gold studs"
+  ],
+  "vibe": "cool water in a dry land; calm, dewy, architectural",
+  "campaigns": [
+    "beauty-editorial"
+  ],
+  "target_tool": "",
+  "deadline": "",
+  "products": [
+    "HBC Hydrating Boba Cream 50g",
+    "Hydracloud Infusion 9-Step Hydration Boost Facial Kit",
+    "GYK Professional Face Scrub 200g"
+  ],
+  "banned": [
+    "fairness, lightening or before/after framing",
+    "typed label text"
+  ]
+}

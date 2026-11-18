@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 /* studio.js — avatiser. studio engine CLI
-   new <slug> [fashion]  start a project from projects/_template
+   new <slug> [fashion|beauty]  start a project from projects/_template
                   (or _template-fashion for a fashion-editorial campaign)
    compile <slug> sheets + templates -> output/prompts + render-plan.json
    render <slug>  execute the plan through lib/adapters (needs API keys in studio/.env)
@@ -44,12 +44,19 @@ const commands = {
     if (!slug) die('usage: studio.js new <slug> [fashion]');
     if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) die('slug must be kebab-case: lowercase letters, digits and hyphens');
     const kind = process.argv[4] || 'product';
-    if (!['product', 'fashion'].includes(kind)) die(`unknown project kind '${kind}' — use product (default) or fashion`);
+    if (!['product', 'fashion', 'beauty'].includes(kind)) die(`unknown project kind '${kind}' — use product (default), fashion or beauty`);
     const dst = path.join(STUDIO, 'projects', slug);
     if (fs.existsSync(dst)) die(`project ${slug} already exists`);
-    copyDir(path.join(STUDIO, kind === 'fashion' ? 'projects/_template-fashion' : 'projects/_template'), dst);
+    copyDir(path.join(STUDIO, kind === 'product' ? 'projects/_template' : 'projects/_template-fashion'), dst);
+    if (kind === 'beauty') {
+      /* same project shape as fashion; only the campaign type differs (adds the product-lock pass) */
+      const bp = path.join(dst, 'brief.json');
+      const brief = JSON.parse(fs.readFileSync(bp, 'utf8'));
+      brief.campaigns = ['beauty-editorial'];
+      fs.writeFileSync(bp, JSON.stringify(brief, null, 2) + '\n');
+    }
     console.log(`✓ created studio/projects/${slug} (${kind})`);
-    if (kind === 'fashion') {
+    if (kind !== 'product') {
       console.log('  next: fill brief.json, write campaign.md with the fashion-campaign-director');
       console.log('  skill (or just run /campaign <brief> in Claude Code, which does all of this),');
     } else {
@@ -68,7 +75,7 @@ const commands = {
     for (const a of plan.assets) {
       console.log(`  [${a.type}] ${a.campaign}/${a.id}${a.shot ? ` "${a.shot}"` : ''} → ${a.model} (${a.aspect}${a.duration_s ? `, ${a.duration_s}s` : ''}) ×${a.count}${a.depends_on ? `  ⇠ needs ${a.depends_on}` : ''}`);
     }
-    if (skipped.length) console.log(`  (skipped optional, not in campaign.md: ${skipped.join(', ')})`);
+    if (skipped.length) console.log(`  (skipped, not needed by this campaign.md: ${skipped.join(', ')})`);
     const gaps = Object.keys(missing);
     if (gaps.length) {
       console.log(`\n⚠ ${gaps.length} prompts have unfilled sheet fields (search ⚠MISSING in output/prompts/):`);
@@ -167,7 +174,7 @@ const commands = {
 };
 
 if (!commands[cmd]) {
-  console.log('avatiser. studio engine\n  usage: node studio/studio.js <new|compile|render|status> <slug>  (new <slug> fashion for an editorial project)');
+  console.log('avatiser. studio engine\n  usage: node studio/studio.js <new|compile|render|status> <slug>  (new <slug> fashion|beauty for an editorial project)');
   process.exit(cmd ? 1 : 0);
 }
 commands[cmd]();

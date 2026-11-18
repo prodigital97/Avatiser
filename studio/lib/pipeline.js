@@ -84,6 +84,10 @@ function parseCampaign(md, label = 'campaign.md') {
          prompt, for when the Soul pass must differ (e.g. an empty plate for a
          scale shot, people added in the final pass). Defaults to the prompt. */
       style_prompt: ((body.match(/^\*Style frame:\*[^\n]*\n```[^\n]*\n([\s\S]*?)\n```/m) || [])[1] || prompt).trim(),
+      /* optional: a "*Product lock:*" line + fenced block — the Nano Banana pass that
+         swaps the generated product for the exact product photo, so label text is
+         copied, never generated. Shots without one skip that pass. */
+      product_prompt: ((body.match(/^\*Product lock:\*[^\n]*\n```[^\n]*\n([\s\S]*?)\n```/m) || [])[1] || '').trim(),
       aspect,
     });
   });
@@ -195,6 +199,8 @@ function compile(slug) {
         if (d.optional) { skipped.push(`${d.campaign}/${d.id}`); continue; }
         throw new Error(`${slug}/campaign.md has no shot '${d.shot}' (needed by ${d.campaign}/${d.id})`);
       }
+      /* a pass that only some shots need, e.g. "skip_unless": "shot.product_prompt" */
+      if (d.skip_unless && !resolvePath({ shot }, d.skip_unless)) { skipped.push(`${d.campaign}/${d.id}`); continue; }
     }
 
     const tplPath = path.join(STUDIO, 'prompts', d.template);
