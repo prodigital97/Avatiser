@@ -7,15 +7,22 @@ const fs = require('fs');
 const path = require('path');
 
 const STUDIO = path.resolve(__dirname, '..');
+const { parseCampaign } = require('./pipeline');
 
 function readJson(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
 function maybeJson(p) { return fs.existsSync(p) ? readJson(p) : null; }
+
+function maybeCampaign(p) {
+  if (!fs.existsSync(p)) return null;
+  try { return parseCampaign(fs.readFileSync(p, 'utf8')); }
+  catch (e) { return { error: e.message }; }
+}
 
 function collect() {
   const projectsDir = path.join(STUDIO, 'projects');
   const projects = [];
   for (const slug of fs.readdirSync(projectsDir)) {
-    if (slug === '_template' || slug.startsWith('.')) continue;
+    if (slug.startsWith('_template') || slug.startsWith('.')) continue;
     const dir = path.join(projectsDir, slug);
     if (!fs.statSync(dir).isDirectory()) continue;
     const plan = maybeJson(path.join(dir, 'output/render-plan.json'));
@@ -33,6 +40,7 @@ function collect() {
       product: maybeJson(path.join(dir, 'product-sheet.json')),
       character: maybeJson(path.join(dir, 'character-sheet.json')),
       scene: maybeJson(path.join(dir, 'scene-sheet.json')),
+      campaign: maybeCampaign(path.join(dir, 'campaign.md')),
       plan, prompts,
     });
   }
@@ -126,17 +134,30 @@ function kv(rows){ return '<div class="kv">' + rows.map(function(r){ return '<b>
 function renderProject(p){
   var h = '';
   var b = p.brief || {};
-  h += '<div class="hero"><div class="name">' + esc(b.product_name || p.slug) + '</div>';
-  h += '<div class="cli">' + esc(b.client || '') + (b.market ? ' · ' + esc(b.market) : '') + '</div>';
+  var cp = p.campaign;
+  h += '<div class="hero"><div class="name">' + esc(b.product_name || (cp && cp.title) || p.slug) + '</div>';
+  h += '<div class="cli">' + esc(b.client || '') + (b.market ? ' · ' + esc(b.market) : '') + (b.brief && b.client ? ' · ' : '') + esc(b.brief || '') + '</div>';
   h += '<div class="chips">' + (b.campaigns||[]).map(function(c){ return '<span class="chip hl">'+esc(c)+'</span>'; }).join('');
   h += (b.brand_voice ? '<span class="chip">'+esc(b.brand_voice)+'</span>' : '') + '</div></div>';
 
+  if (cp) {
+    h += '<h2>campaign</h2>';
+    if (cp.error) h += '<div class="empty">campaign.md does not parse: ' + esc(cp.error) + '</div>';
+    else {
+      var vs = cp.visual_system || {};
+      h += '<div class="grid3"><div class="card"><h3>concept</h3><div style="color:var(--wht);font-size:13.5px">' + esc(cp.concept || '—') + '</div></div>';
+      h += '<div class="card"><h3>visual system</h3>' + kv([['palette',vs.palette],['light',vs.light],['medium',vs.medium],['hair & mu',vs.hair_makeup]]) + '</div>';
+      h += '<div class="card"><h3>shots</h3>' + kv(cp.shots.map(function(s){ return [s.id, s.name + ' · ' + (s.aspect || '?') + (s.purpose ? ' — ' + s.purpose : '')]; })) + '</div></div>';
+    }
+  }
+  if (!cp || p.product || p.character || p.scene) {
   h += '<h2>consistency sheets</h2><div class="grid3">';
   var pr = p.product, ch = p.character, sc = p.scene;
   h += '<div class="card"><h3>product</h3>' + (pr ? kv([['name',pr.name],['form',pr.form_factor],['hero angle',pr.hero_angle],['must read',pr.label && pr.label.must_read_text],['claims',pr.claims]]) : '<span class="dep">not built</span>') + '</div>';
   h += '<div class="card"><h3>character</h3>' + (ch ? kv([['role',ch.role],['casting',ch.casting && (ch.casting.age_range+' · '+ch.casting.ethnicity_region)],['face',ch.casting && ch.casting.face_notes],['energy',ch.performance && ch.performance.energy],['identity',ch.identity && ch.identity.soul_identity_id || 'not yet locked']]) : '<span class="dep">not built</span>') + '</div>';
   h += '<div class="card"><h3>scene</h3>' + (sc ? kv([['world',sc.world],['key light',sc.settings && sc.settings[0] && sc.settings[0].light && sc.settings[0].light.key],['palette',sc.camera && sc.camera.palette],['grade',sc.camera && sc.camera.grade]]) : '<span class="dep">not built</span>') + '</div>';
   h += '</div>';
+  }
 
   h += '<h2>render plan</h2>';
   if (!p.plan) { h += '<div class="empty">not compiled yet — run <code>node studio/studio.js compile '+esc(p.slug)+'</code></div>'; }

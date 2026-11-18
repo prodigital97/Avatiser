@@ -1,0 +1,122 @@
+# FASHION EDITORIAL — Salt Court / Drying in the Sun (4:5)
+
+PURPOSE: The slowness made bodily. An overhead portrait where the expression carries the mood.
+
+REFERENCES: the approved hero render, for face identity, wardrobe, palette and light; plus refs/product/* if the brief includes a product.
+
+PROMPT (send verbatim; it is self-contained by design):
+
+Editorial fashion photograph, overhead shot looking straight down, 50mm, waist-up crop. A tall woman in her early twenties with olive skin and dark jaw-length curls fanned out on the ground lies on her back on the white crystalline crust of the Trapani salt pans, one arm stretched out so the oversized pale-rose silk-organza sleeve spreads across the salt like spilled water. Eyes closed, chin tilted up toward the sun, lips softly parted, clay-red lip, sun-flushed bare skin, salt crystals catching on the organza. The terracotta edge of a roof tile enters the frame at the top corner. Low late-afternoon sun from the left rakes across the crust, making every crystal throw a tiny shadow. Palette: salt white, pale rose, terracotta. 35mm Portra 400, slightly overexposed, sun-bleached highlights, fine grain. No text, logos or watermarks.
+
+CONTINUITY LOCK (identical in every frame of this campaign; reject any render
+that drifts from it):
+Palette: salt white, pale rose, terracotta accent · Light: low late-afternoon sun from camera left, long raking shadows · Medium: 35mm Portra 400, slightly overexposed, sun-bleached highlights, fine grain · Hair & makeup: elder's white low bun and bare skin; younger's natural jaw-length curls, sun-flushed bare skin, clay-red lip
+
+Controlling idea: The Trapani salt pans treated as a sunlit throne room. Two generations of women hold court on the white crust, dressed in the pans' own salt-white and evaporating pink, and moving with the slowness of salt drying in the sun. The harvest rake becomes a sceptre: the campaign's one incongruity.
+
+# REALISM CORE — injected into every Avatiser prompt
+
+Avatiser's entire brand is that our output cannot be clocked as AI. This block
+is appended to every compiled prompt AND used as the QC scorecard. A render
+that trips even one HARD FAIL below gets regenerated — we do not "fix it in
+grading," we re-roll until the tell is gone.
+
+---
+
+## 1. Camera physics — every frame must claim a real camera
+
+Never describe a look abstractly ("cinematic", "high quality", "8k"). Specify
+the rig, and the model will inherit its physics:
+
+- **Cinema / hero product:** "shot on ARRI Alexa 35, 50mm Master Prime at
+  T2.8, subtle halation in highlights, gentle sensor grain"
+- **Lifestyle stills:** "shot on Sony A7 IV, 35mm f/1.8, natural depth of
+  field, slight vignetting"
+- **Macro product detail:** "100mm macro at f/5.6, shallow focus plane,
+  visible micro-texture"
+- **UGC / creator:** "filmed on iPhone 15 Pro front camera, 24mm equivalent,
+  auto-exposure that breathes, slight rolling-shutter wobble, handheld"
+
+One focal length per shot. Mixed-focal looks inside a single frame is an AI
+tell.
+
+## 2. Light must be motivated
+
+Every light source in frame needs a reason to exist. Choose ONE lighting story
+per scene and name its source: window left, golden-hour sun low behind
+subject, single softbox overhead, practical lamps in background. Forbidden:
+"studio lighting" with no direction, rim light appearing from nowhere,
+shadows pointing two directions.
+
+## 3. Deliberate imperfection (the anti-render pass)
+
+Perfection is the loudest AI tell. Every prompt includes 2–3 of these,
+matched to the medium:
+
+- skin: visible pores, faint asymmetry, flyaway hairs, natural oil sheen on
+  T-zone — never "flawless skin"
+- surfaces: fingerprints near where a product is held, micro-scratches on
+  metal, slight dust in light beams
+- environment: cables, worn edges, an object slightly out of place
+- optics: subtle chromatic aberration at frame edges, breathing focus in
+  video, grain matched to ISO story
+- UGC specifically: clipped highlights out a window, imperfect framing,
+  a fingertip briefly shading the lens, compression artifacts
+
+## 4. Product label fidelity — HARD RULE
+
+The product's label, logo and packaging text are NEVER text-prompted. They are
+always supplied as an image reference (image-to-image / reference
+conditioning) from `refs/product/`. If a model cannot take a product
+reference, it does not render the product — it renders the scene, and the
+product is composited from a reference-conditioned pass. Hallucinated label
+text is the #1 instant campaign-killer on Amazon and retail.
+
+## 5. Faces — one identity, locked
+
+Characters are generated once as a Soul 2.0 identity (character-sheet.json
+stores the seed/identity id + reference set). Every subsequent appearance uses
+that identity reference. Never re-describe a face in words and hope — words
+drift, references don't.
+
+## 6. Motion rules (video)
+
+- Real-world physics only: fabric settles, liquid overshoots then rests, hair
+  has mass. If a motion could not be filmed with a gimbal, slider, or hand —
+  don't prompt it.
+- Camera moves: name the rig. "slow 20cm dolly-in", "handheld with natural
+  sway", "tripod locked-off". Forbidden: impossible orbit-through-object
+  moves, zero-inertia direction changes, speed-ramps inside a 5s clip.
+- 24fps for cinema, 30fps for UGC/social. Motion blur consistent with shutter
+  at 1/48 or 1/60 respectively.
+
+## 7. The negative block (append to every generation)
+
+```
+avoid: waxy or plastic skin, over-smooth surfaces, HDR glow, oversaturated
+teal-orange grade, symmetrical face perfection, floating shadows, double
+irises, malformed hands, extra fingers, warped or invented label text,
+gibberish typography, impossible reflections, light without source, oily
+sheen on everything, beauty-filter look, AI art style, illustration,
+3D render look, video-game lighting
+```
+
+## 8. QC scorecard (run per render before delivery)
+
+HARD FAILS — regenerate immediately:
+- [ ] any label/logo/text differs from the reference product
+- [ ] hands: wrong finger count, impossible grip
+- [ ] face drift from the locked identity
+- [ ] shadow/reflection physically impossible
+- [ ] motion that violates physics (video)
+
+SOFT FAILS — regenerate if 2+ present:
+- [ ] skin or surface reads "airbrushed"
+- [ ] lighting direction unclear or contradictory
+- [ ] depth of field inconsistent with stated lens
+- [ ] grade drifts from campaign palette (scene-sheet)
+- [ ] frame too clean — no trace of the imperfection pass
+
+Ship threshold: zero hard fails, ≤1 soft fail, and the "squint test" — at
+arm's length, would a media buyer flag this? If yes, re-roll.
+

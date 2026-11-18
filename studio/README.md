@@ -65,11 +65,48 @@ when the frame contains words.**
 - `amazon-listing-pack` — hero on white, 3 lifestyle, 2 detail, 2 infographic
 - `social-static-pack` — feed statics + story statics
 - `product-hero-loop` — one seamless 5–8s hero loop for web/retail screens
+- `fashion-editorial` — no product needed: a place, the people and a vibe
+  become one controlling idea, shot as a hero frame plus 2–3 supporting
+  frames (see below)
+
+## Fashion editorial (`/campaign`)
+
+The product pipeline starts from a product. Fashion and editorial work starts
+from a **place, people and a mood**. That front end is the
+`fashion-campaign-director` skill at `.claude/skills/` in the repo root. It
+works the brief into a one-sentence concept, wardrobe, a locked visual system
+(palette, light, medium, hair & makeup) and one standalone, copy-paste-ready
+prompt per shot.
+
+In Claude Code, from the repo root:
+
+```
+/campaign rooftop in Lisbon, two models, 90s minimal
+```
+
+That one command:
+1. writes the campaign,
+2. scaffolds `projects/<slug>/` from `_template-fashion` (`studio.js new <slug> fashion`),
+3. fills `brief.json` and saves the campaign to `campaign.md`, unchanged,
+4. compiles it.
+
+`compile` parses `campaign.md` (the skill's output format is a contract: keep
+the `## Hero:` / `## Supporting N:` headings, fenced prompts and
+`Aspect ratio:` lines) into one render-plan entry per shot. Each shot keeps
+its own aspect ratio. Shots route to `fashion.editorial`: Soul 2.0, with Nano
+Banana as fallback. Render the hero first (×4) and approve one. Every
+supporting frame then passes that render as its identity and look reference,
+which is what keeps faces, wardrobe and light consistent across the set.
+`Supporting 3` is optional. If you hand-edit `campaign.md`, recompile.
+
+`projects/salt-court/` is the worked demo: the example brief that ships with
+the skill, compiled.
 
 ## CLI
 
 ```bash
 node studio/studio.js new <slug>          # start a project from the template
+node studio/studio.js new <slug> fashion  # …or a fashion-editorial project
 node studio/studio.js compile <slug>      # sheets + templates → prompts + render plan
 node studio/studio.js render <slug>       # execute plan via API adapters (needs keys)
 node studio/studio.js status <slug>       # what's compiled / rendered / pending
@@ -117,5 +154,7 @@ studio/
 │   └── video/                ← per-deliverable video prompt templates
 └── projects/
     ├── _template/            ← copy per product (studio.js new does this)
+    ├── _template-fashion/    ← copy per editorial (studio.js new <slug> fashion)
+    ├── salt-court/           ← worked fashion-editorial demo
     └── olivia-suncare/       ← worked demo using a real past client product
 ```

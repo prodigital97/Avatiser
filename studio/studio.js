@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 /* studio.js — avatiser. studio engine CLI
-   new <slug>     start a project from projects/_template
+   new <slug> [fashion]  start a project from projects/_template
+                  (or _template-fashion for a fashion-editorial campaign)
    compile <slug> sheets + templates -> output/prompts + render-plan.json
    render <slug>  execute the plan through lib/adapters (needs API keys in studio/.env)
    status <slug>  show plan progress
@@ -40,23 +41,34 @@ function copyDir(src, dst) {
 
 const commands = {
   new() {
-    if (!slug) die('usage: studio.js new <slug>');
+    if (!slug) die('usage: studio.js new <slug> [fashion]');
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(slug)) die('slug must be kebab-case: lowercase letters, digits and hyphens');
+    const kind = process.argv[4] || 'product';
+    if (!['product', 'fashion'].includes(kind)) die(`unknown project kind '${kind}' — use product (default) or fashion`);
     const dst = path.join(STUDIO, 'projects', slug);
     if (fs.existsSync(dst)) die(`project ${slug} already exists`);
-    copyDir(path.join(STUDIO, 'projects/_template'), dst);
-    console.log(`✓ created studio/projects/${slug}`);
-    console.log('  next: drop product photos in refs/product/, fill brief.json,');
-    console.log('  build the 3 sheets (prompts/sheets/*.md are the builder prompts),');
+    copyDir(path.join(STUDIO, kind === 'fashion' ? 'projects/_template-fashion' : 'projects/_template'), dst);
+    console.log(`✓ created studio/projects/${slug} (${kind})`);
+    if (kind === 'fashion') {
+      console.log('  next: fill brief.json, write campaign.md with the fashion-campaign-director');
+      console.log('  skill (or just run /campaign <brief> in Claude Code, which does all of this),');
+    } else {
+      console.log('  next: drop product photos in refs/product/, fill brief.json,');
+      console.log('  build the 3 sheets (prompts/sheets/*.md are the builder prompts),');
+    }
     console.log(`  then: node studio/studio.js compile ${slug}`);
   },
 
   compile() {
     if (!slug) die('usage: studio.js compile <slug>');
-    const { plan, missing } = compile(slug);
+    let res;
+    try { res = compile(slug); } catch (e) { die(e.message); }
+    const { plan, missing, skipped } = res;
     console.log(`✓ compiled ${plan.assets.length} assets → studio/projects/${slug}/output/`);
     for (const a of plan.assets) {
-      console.log(`  [${a.type}] ${a.campaign}/${a.id} → ${a.model} (${a.aspect}${a.duration_s ? `, ${a.duration_s}s` : ''}) ×${a.count}${a.depends_on ? `  ⇠ needs ${a.depends_on}` : ''}`);
+      console.log(`  [${a.type}] ${a.campaign}/${a.id}${a.shot ? ` "${a.shot}"` : ''} → ${a.model} (${a.aspect}${a.duration_s ? `, ${a.duration_s}s` : ''}) ×${a.count}${a.depends_on ? `  ⇠ needs ${a.depends_on}` : ''}`);
     }
+    if (skipped.length) console.log(`  (skipped optional, not in campaign.md: ${skipped.join(', ')})`);
     const gaps = Object.keys(missing);
     if (gaps.length) {
       console.log(`\n⚠ ${gaps.length} prompts have unfilled sheet fields (search ⚠MISSING in output/prompts/):`);
@@ -155,7 +167,7 @@ const commands = {
 };
 
 if (!commands[cmd]) {
-  console.log('avatiser. studio engine\n  usage: node studio/studio.js <new|compile|render|status> <slug>');
+  console.log('avatiser. studio engine\n  usage: node studio/studio.js <new|compile|render|status> <slug>  (new <slug> fashion for an editorial project)');
   process.exit(cmd ? 1 : 0);
 }
 commands[cmd]();

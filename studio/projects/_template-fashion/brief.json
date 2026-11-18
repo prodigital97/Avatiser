@@ -1,0 +1,11 @@
+{
+  "_howto": "Fashion editorial project. Fill brief from what the client gives you, then run the fashion-campaign-director skill (/campaign does everything: scaffold, brief, campaign.md, compile). Photos of real models go in refs/models/; a product to feature goes in refs/product/. Then: node studio/studio.js compile <slug>",
+  "client": "",
+  "brief": "the brief, pasted raw: location, models, vibe",
+  "location": "",
+  "models": [],
+  "vibe": "",
+  "campaigns": ["fashion-editorial"],
+  "target_tool": "",
+  "deadline": ""
+}

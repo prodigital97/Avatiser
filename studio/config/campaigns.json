@@ -1,5 +1,5 @@
 {
-  "_howto": "Each campaign = a deliverable matrix. brief.json lists campaign ids under 'campaigns'; compile expands every deliverable into a render-plan entry. 'route' must exist in models.json routing. 'template' points into studio/prompts/. 'count' = how many variants to generate for selection.",
+  "_howto": "Each campaign = a deliverable matrix. brief.json lists campaign ids under 'campaigns'; compile expands every deliverable into a render-plan entry. 'route' must exist in models.json routing. 'template' points into studio/prompts/. 'count' = how many variants to generate for selection. Optional: 'requires' lists the project inputs a campaign needs (product, character, scene, campaign; default product+character+scene). A deliverable with 'shot' compiles that shot from campaign.md ('optional': true skips it if the shot isn't there), and 'aspect' may be templated, e.g. {{shot.aspect}}, with 'aspect_default' as the fallback.",
   "campaigns": {
     "cinematic-ad-film": {
       "name": "Cinematic Ad Film",
@@ -47,6 +47,17 @@
       "deliverables": [
         { "id": "loop-keyframe", "type": "image", "route": "product.hero", "aspect": "16:9", "count": 3, "template": "image/keyframe-hero.md" },
         { "id": "hero-loop", "type": "video", "route": "video.hero-loop", "aspect": "16:9", "duration_s": 6, "count": 2, "template": "video/hero-loop.md", "depends_on": "loop-keyframe" }
+      ]
+    },
+    "fashion-editorial": {
+      "name": "Fashion Editorial",
+      "positioning": "a place, the people, a vibe → one controlling idea, shot as a hero frame plus 2–3 supporting frames; campaign.md is written by the fashion-campaign-director skill (/campaign)",
+      "requires": ["campaign"],
+      "deliverables": [
+        { "id": "hero", "shot": "hero", "type": "image", "route": "fashion.editorial", "aspect": "{{shot.aspect}}", "aspect_default": "4:5", "count": 4, "template": "image/fashion-editorial.md", "reference_rule": "none on the first run (or the Soul identity of each model, if already locked). If the brief includes a product, pass refs/product/* and never type its label.", "notes": "approve ONE — it locks the models' identities and the look for every supporting frame" },
+        { "id": "support-1", "shot": "support-1", "type": "image", "route": "fashion.editorial", "aspect": "{{shot.aspect}}", "aspect_default": "4:5", "count": 2, "template": "image/fashion-editorial.md", "reference_rule": "the approved hero render, for face identity, wardrobe, palette and light; plus refs/product/* if the brief includes a product.", "depends_on": "hero" },
+        { "id": "support-2", "shot": "support-2", "type": "image", "route": "fashion.editorial", "aspect": "{{shot.aspect}}", "aspect_default": "4:5", "count": 2, "template": "image/fashion-editorial.md", "reference_rule": "the approved hero render, for face identity, wardrobe, palette and light; plus refs/product/* if the brief includes a product.", "depends_on": "hero" },
+        { "id": "support-3", "shot": "support-3", "optional": true, "type": "image", "route": "fashion.editorial", "aspect": "{{shot.aspect}}", "aspect_default": "4:5", "count": 2, "template": "image/fashion-editorial.md", "reference_rule": "the approved hero render, for face identity, wardrobe, palette and light; plus refs/product/* if the brief includes a product.", "depends_on": "hero" }
       ]
     },
     "full-campaign": {

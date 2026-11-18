@@ -12,6 +12,9 @@ agents/        library of specialized AI agent personas (marketing, sales,
                agency — never deployed. Pulled in from
                github.com/msitarzewski/agency-agents; SOURCE_README.md,
                divisions.json and tools.json are that project's own index.
+.claude/       Claude Code skills + commands for this repo. /campaign runs
+               the fashion-campaign-director skill and feeds the studio
+               engine (see studio/README.md) — never deployed.
 ```
 
 **Why the split matters:** the deploy workflow publishes the contents of

@@ -1,0 +1,14 @@
+{
+  "_howto": "Worked demo: the example brief that ships with the fashion-campaign-director skill. campaign.md is that skill's output for it, unchanged.",
+  "client": "worked demo",
+  "brief": "Salt pans in Trapani, Sicily, late afternoon. Two models: a Sicilian woman in her 70s, small, sun-browned, white hair in a low bun; and a woman in her early 20s, tall, olive skin, dark curly hair cropped at the jaw. Vibe: sun-bleached, slow, a bit regal.",
+  "location": "Salt pans in Trapani, Sicily, late afternoon",
+  "models": [
+    "Sicilian woman in her 70s, small, sun-browned, white hair in a low bun",
+    "woman in her early 20s, tall, olive skin, dark curly hair cropped at the jaw"
+  ],
+  "vibe": "sun-bleached, slow, a bit regal",
+  "campaigns": ["fashion-editorial"],
+  "target_tool": "",
+  "deadline": "demo"
+}

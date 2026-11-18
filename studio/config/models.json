@@ -56,6 +56,7 @@
   "routing": {
     "character.identity": { "primary": "soul2", "fallback": null },
     "character.portrait": { "primary": "soul2", "fallback": null },
+    "fashion.editorial": { "primary": "soul2", "fallback": "nano-banana-pro", "notes": "people-led editorial frames; supporting shots pass the approved hero as identity + look reference" },
     "character.in-scene": { "primary": "nano-banana-pro", "fallback": "gpt-image-2", "notes": "composite Soul identity ref + product ref into scene" },
     "product.hero": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
     "product.lifestyle": { "primary": "nano-banana-pro", "fallback": "gpt-image-2" },
