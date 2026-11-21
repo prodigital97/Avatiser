@@ -166,6 +166,9 @@ Its synthesis is merged into `visual-language.md` §13–17. **Its campaign list
 First-hand evidence from Avatiser's own renders for the GYK and Nicobar test campaigns (`studio/projects/`):
 - **holding-water (GYK, stepwell):** heritage location, warm film grade and full-length framing read as fashion editorial. The product was about 2% of the frame, the murky water read as unhygienic, and the ochre fought the aqua packaging. Rejected.
 - **pool-blue (GYK, pool):** close crops, a palette from the packaging, clear water and crisp digital read as skincare. The first hero still produced an invented second product and spare lids, application at the lower eyelid (reads as eye drops, an unsafe use), garbled label text, dark cobalt capsules instead of light aqua, and a stray swimmer at the frame edge.
+- **Sea Miracle Seaweed Gel (anchor-first test, Nov 2026):** a Soul 2.0 anchor (model, bathroom set, light through blinds, a stand-in jar with the real silhouette) followed by Seedream 5.5 swaps and variations.
+  - **Worked:** the swap kept the light, grain and grip almost perfectly; large label type rendered correctly.
+  - **Failed:** fine print garbled in every frame; an embossed logo invented on a plain lid; the set drifted (ocean window, then a pool); water caustics appeared in a room lit through blinds; Seedream smoothed the grain; the casting didn't read clearly Indian for an Indian brand.
 - **walking-pace (Nicobar, fashion):**
   - Casting by skin tone and hair alone defaulted to the wrong ethnicity; nationality, city and specific cues fixed it.
   - A palette line naming accessories ("chartreuse only on the scarf and beanie") made the generator add both to everyone.

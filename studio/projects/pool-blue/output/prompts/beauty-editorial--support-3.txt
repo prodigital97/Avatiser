@@ -2,7 +2,7 @@
 
 PURPOSE: Product. All three products on wet tile, large in frame, and the capsule melting into skin.
 
-REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+REFERENCES: the approved hero anchor (or the shot's own style frame), the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
 Attach in this order and paste this key at the top of the prompt:
 - @image_1 — product photo: HBC Hydrating Boba Cream.
 - @image_2 — product photo: Hydracloud Infusion facial kit.

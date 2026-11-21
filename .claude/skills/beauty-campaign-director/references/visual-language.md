@@ -170,6 +170,11 @@ Describe the motion when there is one: "a fingertip drags a ribbon of cream acro
 | Signage and lettering in the set | Walking Pace, stepwell [T] | "No signs or lettering anywhere"; describe plain surfaces | Edit: blank the sign |
 | Product size drifting between frames | Pool Blue (jar size guessed) [T] | A `STRICT PRODUCT SCALE LOCK:` sentence (§14) | Re-roll with the lock; never resize in an edit |
 | Wrong use context (applied in water, on wet skin, or a non-SPF product in pool sun) | Pool Blue (HBC is applied to cleansed, dry skin, morning and night) [T] | Read "How to use"; stage application exactly as directed; water only as metaphor in non-use frames | Re-direct the shot |
+| Fine-print label text garbled (address, "Mktd. & Trademark", net weight) while the logo is right | Sea Miracle variations [T] | Never type label text; reference the product photo | Nano Banana lock naming the fine print too |
+| Invented embossing or logo on a plain lid | Sea Miracle (gold lid) [T] | "Lid exactly as in the product photo: plain, no embossing" | Lock pass |
+| Set drift between variations (new window views, a pool, a different room) | Sea Miracle (blinds → ocean window → pool) [T] | Fence the world: list the anchor's fixed set elements; "no new locations" | Re-roll with the fence |
+| Light the set can't produce (water caustics in a room lit through blinds) | Sea Miracle close-up [T] | Name the anchor's light and its exact pattern in every variation | Re-roll |
+| Film grain and skin texture smoothed away by Seedream | Sea Miracle swaps [T] | "Keep the film grain and unretouched skin texture of @image_1" | Add matched grain in post |
 | Stray people at frame edges | Pool Blue hero [T] | "No other people" | Edit: remove |
 | Fashion look instead of beauty | Stepwell [T] | Skincare codes (sections 1, 3–8) | Re-direct |
 

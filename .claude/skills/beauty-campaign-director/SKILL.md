@@ -123,16 +123,21 @@ Rules:
 - **Length:** 180–300 words is normal, because beauty prompts carry product, scale and skin detail; a two-person hero with product can reach about 400. Then cut set and background description before product, scale, casting or skin, and state the pack's size once (in the scale lock), not twice. Put the important information first, since generators lose detail near the end. Spend words on product, texture and skin, not adjectives. No filler words (stunning, flawless, 8k, masterpiece).
 - **Aspect ratio:** on its own line after the prompt (`Aspect ratio: 4:5`). Use 4:5 and 9:16 for social, 1:1 for e-commerce, 3:2 or 16:9 for web banners.
 
-### 7. Passes and references (Avatiser studio)
-Campaigns run as `beauty-editorial` (`node studio/studio.js new <slug> beauty`). There are three passes:
-1. **Seedream final.** Its clean commercial look suits skincare. It runs on every shot, with the shot's `*References:*` key pasted at the top of the prompt.
-2. **Soul 2.0 style frame, opt-in.**
-   - For skin-close portraits, add a bare `*Style frame:*` line after the shot; Soul renders the shot's own prompt with one casting photo.
-   - For an empty wide plate, add a `*Style frame:*` block with its own prompt; Seedream then inserts the people into it.
-   - Without a style frame, number the References key from the faces.
-3. **Nano Banana product lock.** Add a `*Product lock:*` block to every shot that shows packaging: an edit that replaces each generated product with the exact product photo at the same size and angle, relit to the scene, changing nothing else. Name each product by its attachment. If a product shows up only as a melted capsule or a swipe, the shot needs no lock.
+### 7. Passes and references (Avatiser studio): anchor first
+Campaigns run as `beauty-editorial` (`node studio/studio.js new <slug> beauty`). The flow, proven on the Sea Miracle Seaweed Gel test (Nov 2026):
 
-4. **Seedance motion, optional.** Add a `*Motion:*` block to the hero, and to any shot worth moving. It's an 8-second image-to-video prompt whose start frame is that shot's approved, label-locked still. Rules (visual-language §16):
+1. **Soul 2.0 anchor (the hero's `*Style frame:*` block).** One photograph that locks the model, the set, the light, the grade and the hand pose. Attach only the approved casting headshot (Soul takes one image); never a product photo, which flattens the light.
+   - **Stand-in pack:** the model holds a stand-in described physically, with the real pack's silhouette, size, colours, material and lid, and no label or text. The hand, scale and light then fit the real product before it exists in the frame.
+   - **Fix the anchor before anything else.** Every later frame inherits its face, set and light.
+2. **Seedream product swap (the hero's final).** @image_1 the approved anchor, @image_2 the real product photo or 3-panel sheet. Replace only the stand-in with the real pack at the same size, angle and grip. Keep 100% of the face, skin texture, film grain, light and set. Add the `STRICT PRODUCT SCALE LOCK:` sentence.
+3. **Seedream variations (the supporting shots' finals).** @image_1 the approved anchor (or the swapped hero), @image_2 the product photo, plus the casting headshot when the face matters. Each prompt must **fence the world**:
+   - "Same set as @image_1: [list its fixed elements], same light: [name the source and its exact pattern]. No new locations, windows, views or water."
+   - Never introduce light the set can't make. Blinds make stripes, not water caustics.
+   - "Keep the film grain and unretouched skin texture of @image_1", because Seedream smooths both.
+   - The `*Style frame:*` options still apply: a bare line for a skin-close Soul portrait, or its own block for an empty wide plate.
+4. **Nano Banana label lock.** Add a `*Product lock:*` block to every shot where packaging text is visible. Seedream gets the large type right and garbles the fine print: addresses, "Mktd. & Trademark" lines, net weight. The lock must name the fine print as well as the logo, and must keep lids and caps exactly as photographed (Seedream invents embossed logos on plain lids). If a product shows up only as a melted capsule or a swipe, the shot needs no lock.
+
+5. **Seedance motion, optional.** Add a `*Motion:*` block to the hero, and to any shot worth moving. It's an 8-second image-to-video prompt whose start frame is that shot's approved, label-locked still. Rules (visual-language §16):
    - **Camera:** one camera move only.
    - **Light:** the light pattern stays fixed while the subject moves through it.
    - **Action:** three beats (0–3 s breath and blink, 3–6 s one motivated product gesture, 6–8 s settle). Never write "frozen" or "still".

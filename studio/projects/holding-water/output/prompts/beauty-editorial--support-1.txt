@@ -2,7 +2,7 @@
 
 PURPOSE: Scale. The stepwell's vast geometry, and two small figures at the water it was built to keep.
 
-REFERENCES: the approved style frame where the shot has one, the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
+REFERENCES: the approved hero anchor (or the shot's own style frame), the casting headshots of the people in this frame, and the product reference sheet(s) for shape, scale and colour, in the order the shot's References key lists. The label is fixed in the lock pass, so don't chase it here.
 Attach in this order and paste this key at the top of the prompt:
 - @image_1 — base plate (the approved Soul style frame, rendered empty): keep it exactly, including the architecture, light, colour grade and grain. Only add the two women.
 - Attach nothing else: at this size faces and products don't read, and extra references pull the figures too large.
