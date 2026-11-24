@@ -1,0 +1,21 @@
+{
+  "name": "avatiser-reel",
+  "private": true,
+  "description": "Remotion template that turns approved campaign clips into a 9:16 shoot reel (studio/reel)",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts ShootReel"
+  },
+  "dependencies": {
+    "@fontsource/instrument-serif": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "@remotion/cli": "4.0.542",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.542"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
