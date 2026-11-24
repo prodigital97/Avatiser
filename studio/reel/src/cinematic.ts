@@ -41,8 +41,8 @@ export const skinbellCinematic: CineProps = {
     { clip: 'skinbell-cine/01-hero.mp4', from: 0.25, to: 2.85, speed: 0.6, move: { scale: [1.02, 1.12], origin: '52% 30%' } },
     // the blend: cream sinks in, no white cast
     { clip: 'skinbell-cine/02-reapply.mp4', from: 0.0, to: 2.95, speed: 0.8, move: { scale: [1.0, 1.06], x: [0, -12], origin: '38% 24%' } },
-    // texture macro on the fingertip
-    { clip: 'skinbell-cine/03-dispense.mp4', from: 0.2, to: 2.45, speed: 0.55, move: { scale: [1.0, 1.08], origin: '55% 22%' } },
+    // texture macro on the fingertip; stop before 1.5 s, where the source clip scrambles the label as the bottle turns
+    { clip: 'skinbell-cine/03-dispense.mp4', from: 0.1, to: 1.4, speed: 0.5, move: { scale: [1.0, 1.07], origin: '55% 22%' } },
   ],
   endStill: 'skinbell-cine/endframe.png',
   endFrames: 96,

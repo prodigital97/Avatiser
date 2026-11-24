@@ -108,7 +108,7 @@ export const CinematicAd: React.FC<CineProps> = ({ shots, endStill, endFrames })
         </Sequence>
         {/* gentle edge falloff for every shot, the grade's vignette carried over the virtual moves */}
         <AbsoluteFill
-          style={{ background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(10,6,2,0.28) 100%)' }}
+          style={{ background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 62%, rgba(10,6,2,0.12) 100%)' }}
         />
       </AbsoluteFill>
       <Grain />
