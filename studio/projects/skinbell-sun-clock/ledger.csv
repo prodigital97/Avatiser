@@ -1,0 +1,15 @@
+label,task,model,state,credits,usd,seconds
+A-sweep still,c3fca91787c96e5cb9c2e75dc9b4a4c1,seedream/5-5-image-to-image,success,9.18,0.0459,18
+B-ribbon still,4d19c8c572caa4f395dd483ffd059949,seedream/5-5-image-to-image,success,9.18,0.0459,25
+C-orange still,02fd90ae433f2a1c9d54b420286048f6,seedream/5-5-image-to-image,success,9.18,0.0459,28
+D-hand-before still,4c21bcf42145f6771c364b87b4aa98df,seedream/5-5-image-to-image,success,9.18,0.0459,25
+E-sundial still,d93bbb6762e97fa512d95ecd7ca595ca,seedream/5-5-image-to-image,success,9.18,0.0459,24
+D-hand-after still,bc659073b119096ea38bd6d53f5ad214,seedream/5-5-image-to-image,success,7.74,0.0387,20
+A-sweep lock,96cbbfb31648c919cb9a57f0ea660a4a,nano-banana-pro,success,18.0,0.09,45
+S1-blade still,b94f3a0d9668e896a678d45d516ebac2,seedream/5-5-image-to-image,success,7.74,0.0387,23
+S2-pump still,af3d599d82b0fc1b00f0fc1a8356e1f9,seedream/5-5-image-to-image,success,7.74,0.0387,24
+S3-splash still,19987d95b9c6d167feb1f50ab1799142,seedream/5-5-image-to-image,success,7.74,0.0387,25
+S4-glass still,b35af59656e282b0876166e01aeedf2d,seedream/5-5-image-to-image,success,7.74,0.0387,24
+S5-swatch-before still,57be0607227fe2af476c93faa56c0f94,seedream/5-5-image-to-image,success,7.74,0.0387,25
+S6-hero still,15e4906f1e031eeba6047a7babdd3f66,seedream/5-5-image-to-image,success,7.74,0.0387,24
+S5-swatch-after still,bf18f5d55fc0eb51e7f16a4efed93810,seedream/5-5-image-to-image,success,7.74,0.0387,21

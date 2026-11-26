@@ -185,6 +185,49 @@ def scan(video, b, step=0.2, drop=0.25):
         print("no glitch windows found")
 
 
+def run(jobs, b, cap, project, outdir):
+    """Preflight, refuse on errors or when the estimate exceeds the balance, then submit, poll,
+    download every result to OUTDIR/<label>.<ext>, write OUTDIR/results.json and record the ledger."""
+    import time
+    errors, warns, total = preflight(jobs, b, cap)
+    for e in errors: print("ERROR ", e)
+    for w in warns: print("WARN  ", w)
+    bal = kie("/chat/credit")["data"]
+    print(f"estimate {total:.1f} credits, balance {bal}")
+    if errors or total > bal:
+        sys.exit("refused: fix the errors above" if errors else "refused: estimate exceeds the balance")
+    os.makedirs(outdir, exist_ok=True)
+    tasks = {}
+    for j in jobs:
+        req = urllib.request.Request(KIE + "/jobs/createTask", data=json.dumps(j["body"]).encode(),
+                                     headers={**AUTH, "Content-Type": "application/json"})
+        r = json.load(urllib.request.urlopen(req, timeout=60))
+        if r.get("code") != 200:
+            print("SUBMIT FAILED", j["label"], r); continue
+        tasks[j["label"]] = r["data"]["taskId"]
+    results = {}
+    while len(results) < len(tasks):
+        time.sleep(8)
+        for lab, t in tasks.items():
+            if lab in results: continue
+            d = kie(f"/jobs/recordInfo?taskId={t}")["data"]
+            if d["state"] not in ("success", "fail"): continue
+            entry = {"task": t, "state": d["state"], "credits": d.get("creditsConsumed"), "error": d.get("failMsg")}
+            if d["state"] == "success":
+                url = json.loads(d["resultJson"])["resultUrls"][0]
+                path = os.path.join(outdir, re.sub(r"[^\w.-]+", "_", lab) + os.path.splitext(url.split("?")[0])[1])
+                urllib.request.urlretrieve(url, path)
+                entry.update(url=url, file=path)
+            results[lab] = entry
+            print(f"{d['state']:8} {entry['credits']} credits  {lab}")
+    json.dump(results, open(os.path.join(outdir, "results.json"), "w"), indent=1)
+    if project:
+        for lab, e in results.items():
+            ledger(project, lab, [e["task"]])
+    spent = sum(e["credits"] or 0 for e in results.values())
+    print(f"spent {spent:.2f} credits; balance {kie('/chat/credit')['data']}")
+
+
 def sheet(out, files):
     from PIL import Image, ImageDraw
     tiles = []
@@ -212,6 +255,8 @@ def main():
     p = sp.add_parser("ledger"); p.add_argument("project"); p.add_argument("label"); p.add_argument("tasks", nargs="+")
     p = sp.add_parser("scan"); p.add_argument("video"); p.add_argument("--brand", required=True)
     p = sp.add_parser("sheet"); p.add_argument("out"); p.add_argument("files", nargs="+")
+    p = sp.add_parser("run"); p.add_argument("jobs"); p.add_argument("--brand"); p.add_argument("--cap", type=float)
+    p.add_argument("--project"); p.add_argument("--out", required=True)
     a = ap.parse_args()
 
     if a.cmd == "preflight":
@@ -230,6 +275,8 @@ def main():
         scan(a.video, brand(a.brand))
     if a.cmd == "sheet":
         sheet(a.out, a.files)
+    if a.cmd == "run":
+        run(json.load(open(a.jobs)), brand(a.brand), a.cap, a.project, a.out)
 
 
 if __name__ == "__main__":
