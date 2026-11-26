@@ -1,0 +1,20 @@
+label,task,model,state,credits,usd,seconds
+video-test kling4 hero,0377013a7206b8cf5861bc3b49fe5ec1,kling-4.0/keyframe-to-video,success,127.5,0.6375,342
+video-test wan3 hero,45d5c6b9cc5c5c76763c06262b35d910,wan/3-0-video,success,96.0,0.48,108
+reels wan3 reapply v0 (rejected: white patch),d67cf34708db4c347a79ffee5ba842e8,wan/3-0-video,success,96.0,0.48,120
+reels wan3 parapet,0f912d776c4af576d969d5c6c5e2e737,wan/3-0-video,success,96.0,0.48,124
+reels wan3 dispense,ec3625ad4ec2cca7ae97f122b582e290,wan/3-0-video,success,96.0,0.48,105
+reels wan3 walk,53edfc676a2a403f6f118d85ac110580,wan/3-0-video,success,96.0,0.48,128
+reels wan3 reapply v1 (rejected: white patch),4887cb70594d8b6f82b0d2007b56e6ae,wan/3-0-video,success,96.0,0.48,94
+reels wan3 reapply v2 (rejected: white patch),97a9ba86b26fe50251a57913dbc27564,wan/3-0-video,success,96.0,0.48,108
+reels nbpro reapply last-frame,40c63cb2560d4e1266db49238cb01307,nano-banana-pro,success,18.0,0.09,46
+reels wan3 reapply v3 first+last (used),764907cac99a75ccf4a856aa38cb818b,wan/3-0-video,success,96.0,0.48,114
+creatives-r1 seedream55_A-orange-light,a648cb7150982db9049f6ac338912a5a,seedream/5-5-image-to-image,success,9.18,0.0459,24
+creatives-r1 nbpro_A-orange-light,bfddaa35c04c1edf0e15122fba67aaab,nano-banana-pro,success,18.0,0.09,50
+creatives-r1 seedream55_B-shoulder,19e63529d41642a0a05e68a82723f56c,seedream/5-5-image-to-image,success,9.18,0.0459,24
+creatives-r1 nbpro_B-shoulder,28d51db1806b773ca3c90fe95f69a568,nano-banana-pro,success,18.0,0.09,50
+creatives-r1 seedream55_C-overhead,144efc31b1201193e65ac1ad5c25aa8e,seedream/5-5-image-to-image,success,9.18,0.0459,40
+creatives-r1 nbpro_C-overhead,fbff8d285e70270a63673eff1cb23bd7,nano-banana-pro,success,18.0,0.09,45
+creatives-r1 seedream55_D-against-sky,7a54748c84186b84d62c96e65cc7b08c,seedream/5-5-image-to-image,success,9.18,0.0459,26
+creatives-r1 nbpro_D-against-sky,0a4a5a5a34dcd4002366ba8c42c86071,nano-banana-pro,success,18.0,0.09,84
+creatives-r2 (4 images: 2 Seedream 5.5 + 2 Kling 4.0 Image 4K; task ids not kept),-,mixed,success,54.36,0.2718,

@@ -1,0 +1,14 @@
+{
+  "_source": "kie.ai model pages, read 2026-11-24/26. 1 credit = $0.005. Update when Kie changes prices.",
+  "usd_per_credit": 0.005,
+  "image": {
+    "seedream/5-5-image-to-image": { "per_image": { "1K": 3.6, "1.5K": 3.6, "2K": 6.3 }, "per_ref": 1.44, "size_field": "size" },
+    "nano-banana-pro":             { "per_image": { "1K": 18, "2K": 18, "4K": 24 }, "per_ref": 0, "size_field": "resolution" },
+    "kling-4-0/image":             { "per_image": { "2k": 11.3, "4k": 17, "8k": 28.3 }, "per_ref": 0.5, "size_field": "resolution" }
+  },
+  "video": {
+    "wan/3-0-video":               { "per_second": { "480P": 8, "720P": 16, "1080P": 32 }, "min_s": 2, "res_field": "resolution" },
+    "kling-4.0/keyframe-to-video": { "per_second": { "720p": 28.5, "1080p": 42.5 }, "min_s": 3, "res_field": "resolution" },
+    "magi-2/image-to-video":       { "per_second": { "1080p": 17.6 }, "min_s": 4, "res_field": "resolution" }
+  }
+}
