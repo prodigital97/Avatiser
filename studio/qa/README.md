@@ -38,6 +38,22 @@ python3 studio/qa/qa.py ledger <project> "<label>" <taskId> ...    # real credit
   - **Tested on** the Skinbell dispense clip: it flagged 1.6–1.8 s and 2.2–2.4 s and proposed 0–1.6 s, which matches the manual call.
   - **Limitation:** OCR is a *relative* signal only. Its absolute score can't pass or fail a single still; a garbled label once scored higher than a clean one. So stills go to the human gate.
 
+## Label restore (free fix for scrambled labels in video)
+
+MAGI-2 (Nov 2026) garbles label fine print in almost every clip. It even rendered "SPF 20a" for SPF 50+. It also sometimes shifts the pack slightly from the start frame. When the start still's label is correct, fix the clip with `studio/tools/label_restore.py` instead of paying for a regeneration.
+
+The tool tracks the move, warps the still's label onto each frame, and replaces only the text detail, so the clip's own light sweeps, flares and shadows survive.
+
+| Case | Flags |
+|---|---|
+| Camera push-ins | default ECC tracking |
+| The model shifted the pack, or liquids cross it | `--sift X0,Y0,X1,Y1`, anchored on the cap |
+| Locked-off camera | `--static` |
+| A finger or lotion passes over the label | `--protect` |
+
+- **Box:** give the label box by hand (`--box`) in warm monochrome sets, where auto-detection can't tell the label from orange props.
+- **Check:** always look at the restored frames. In the Skinbell Liquid Sun ad, all five label-forward clips were fixed this way with no extra credits.
+
 ## Human gate (about 30 s per asset, before the next paid step)
 
 Check each item against the review sheet:

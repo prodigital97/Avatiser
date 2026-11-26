@@ -19,22 +19,32 @@ export const FC_FPS = 30;
 export const WHIP = 5; // frames each side of a whip
 
 export const cutFrames = (c: Cut) => Math.max(1, Math.round(((c.to - c.from) / (c.speed ?? 1)) * FC_FPS));
-export const fastCutDuration = (p: FastCutProps) => p.cuts.reduce((n, c) => n + cutFrames(c), 0) + p.tailFrames;
+/* a whip overlaps the two cuts by WHIP frames: the next shot slides in while this one slides out */
+export const cutStarts = (p: FastCutProps) => {
+  let at = 0;
+  return p.cuts.map((c) => { const s = at; at += cutFrames(c) - (c.whipOut ? WHIP : 0); return s; });
+};
+export const fastCutDuration = (p: FastCutProps) => {
+  const last = p.cuts.length - 1;
+  return cutStarts(p)[last] + cutFrames(p.cuts[last]) + p.tailFrames;
+};
 
 const C = (n: string) => `skinbell-ys/${n}.mp4`;
 
-/* "Liquid Sun": SkinBell UltraSmart SPF 50+ PA+++. Times are filled in after QA of each MAGI clip. */
+/* "Liquid Sun": SkinBell UltraSmart SPF 50+ PA+++. MAGI-2 clips (4 s, 25 fps), labels restored from
+   the stills with studio/tools/label_restore.py, graded, then cut here. Story: light reveals the
+   pack -> lotion -> vitamin-C orange splash -> heat -> the lotion goes sheer (no white cast) -> hero. */
 export const skinbellLiquidSun: FastCutProps = {
   tailFrames: 18,
   cuts: [
-    { clip: C('S1-blade'), from: 0.3, to: 1.9, push: [1.0, 1.04], whipOut: 'left' },
-    { clip: C('S2-pump'), from: 0.4, to: 1.5, whipOut: 'down' },
-    { clip: C('S3-splash'), from: 0.2, to: 1.2, speed: 0.6 },
-    { clip: C('S4-glass'), from: 0.5, to: 1.6, push: [1.0, 1.05], whipOut: 'up' },
-    { clip: C('S2-pump'), from: 2.2, to: 3.2 },
-    { clip: C('S5-swatch'), from: 0.6, to: 3.4, speed: 1.3, whipOut: 'right' },
-    { clip: C('S3-splash'), from: 2.0, to: 2.9, speed: 0.6, whipOut: 'down' },
-    { clip: C('S1-blade'), from: 2.6, to: 3.6, push: [1.03, 1.08] },
-    { clip: C('S6-hero'), from: 0.2, to: 3.9, push: [1.0, 1.05] },
+    { clip: C('S1-blade'), from: 0.3, to: 1.9, push: [1.0, 1.04], volume: 0.9, whipOut: 'left' },   // light blade reveals the label
+    { clip: C('S2-pump'), from: 0.4, to: 1.5, volume: 1.0, whipOut: 'down' },                        // press, ribbon starts
+    { clip: C('S3-splash'), from: 0.0, to: 1.0, speed: 0.6, volume: 0.8 },                            // juice crown rises
+    { clip: C('S4-glass'), from: 0.5, to: 1.6, push: [1.0, 1.05], volume: 0.7, whipOut: 'up' },      // hot frosted glass
+    { clip: C('S2-pump'), from: 2.2, to: 3.2, volume: 1.0 },                                          // coil builds
+    { clip: C('S5-swatch'), from: 1.2, to: 3.4, speed: 1.5, volume: 0.9, whipOut: 'right' },          // thick swipe -> sheer film
+    { clip: C('S3-splash'), from: 1.6, to: 2.4, speed: 0.6, volume: 0.7, whipOut: 'down' },          // droplets fall
+    { clip: C('S1-blade'), from: 2.6, to: 3.6, push: [1.03, 1.08], volume: 0.6 },                    // fully lit label
+    { clip: C('S6-hero'), from: 0.6, to: 3.6, push: [1.0, 1.05], volume: 0.7 },                      // flare blooms on the hero
   ],
 };

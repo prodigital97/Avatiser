@@ -1,5 +1,5 @@
 import { AbsoluteFill, OffthreadVideo, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Cut, FC_FPS, FastCutProps, WHIP, Whip, cutFrames } from './fastcut';
+import { Cut, FC_FPS, FastCutProps, WHIP, Whip, cutFrames, cutStarts } from './fastcut';
 import { Grain } from './components/Grain';
 
 /* Directional motion blur: an SVG blur along one axis plus a fast slide, so a whip reads like a
@@ -53,8 +53,7 @@ const CutLayer: React.FC<{ cut: Cut; index: number; whipIn?: Whip }> = ({ cut, i
 export const FastCut: React.FC<FastCutProps> = ({ cuts, tailFrames }) => {
   const f = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
-  let at = 0;
-  const starts = cuts.map((c) => { const s = at; at += cutFrames(c); return s; });
+  const starts = cutStarts({ cuts, tailFrames });
   const last = cuts.length - 1;
   const fade = interpolate(f, [0, 6, durationInFrames - 14, durationInFrames], [0, 1, 1, 0], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',

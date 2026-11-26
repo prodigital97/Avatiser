@@ -13,3 +13,9 @@ S4-glass still,b35af59656e282b0876166e01aeedf2d,seedream/5-5-image-to-image,succ
 S5-swatch-before still,57be0607227fe2af476c93faa56c0f94,seedream/5-5-image-to-image,success,7.74,0.0387,25
 S6-hero still,15e4906f1e031eeba6047a7babdd3f66,seedream/5-5-image-to-image,success,7.74,0.0387,24
 S5-swatch-after still,bf18f5d55fc0eb51e7f16a4efed93810,seedream/5-5-image-to-image,success,7.74,0.0387,21
+S2-pump magi,7aee202867876507d624750815c8970d,magi-2/image-to-video,success,70.4,0.352,730
+S4-glass magi,215be7b7794cfed8877c6021731148fd,magi-2/image-to-video,success,70.4,0.352,739
+S5-swatch magi,58d08617936348c2a4866b887b023628,magi-2/image-to-video,success,70.4,0.352,738
+S3-splash magi,e7398cfd4f6e21382d8ec865efaeb2cc,magi-2/image-to-video,success,70.4,0.352,749
+S1-blade magi,5b6a75d438bbb32a2c6e096abb201177,magi-2/image-to-video,success,70.4,0.352,760
+S6-hero magi,bcf0638b1c0cfa52c1bc06152aae47c0,magi-2/image-to-video,success,70.4,0.352,759
